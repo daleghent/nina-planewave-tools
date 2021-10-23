@@ -1,0 +1,21 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="DaleGhent.NINA.PlaneWaveTools.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="UpgradeSettings" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="Pwi3ExePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Program Files (x86)\PlaneWave Instruments\PWI3\PWI3.exe</Value>
+    </Setting>
+    <Setting Name="Pwi3IpAddress" Type="System.String" Scope="User">
+      <Value Profile="(Default)">127.0.0.1</Value>
+    </Setting>
+    <Setting Name="Pwi3Port" Type="System.UInt16" Scope="User">
+      <Value Profile="(Default)">55555</Value>
+    </Setting>
+    <Setting Name="Pwi3ClientId" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+  </Settings>
+</SettingsFile>
