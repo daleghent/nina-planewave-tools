@@ -13,12 +13,12 @@
 using System.ComponentModel.Composition;
 using System.Windows;
 
-namespace DaleGhent.NINA.PlaneWaveTools.FansOnOff {
+namespace DaleGhent.NINA.PlaneWaveTools.Fans {
 
     [Export(typeof(ResourceDictionary))]
-    public partial class FansOnOffTemplate : ResourceDictionary {
+    public partial class FanControlTemplate : ResourceDictionary {
 
-        public FansOnOffTemplate() {
+        public FanControlTemplate() {
             InitializeComponent();
         }
     }

@@ -18,20 +18,21 @@ using NINA.Sequencer.Container;
 using NINA.Sequencer.SequenceItem;
 using NINA.Sequencer.Validations;
 using System;
-using System.Collections.Generic;
+using System.ComponentModel;
 using System.Net.Http;
-using System.Text.RegularExpressions;
+using System.Net.Sockets;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web;
 
-namespace DaleGhent.NINA.PlaneWaveTools {
+namespace DaleGhent.NINA.PlaneWaveTools.Utility {
 
     public class Utilities {
+
         public static async Task<bool> HttpGetRequestAsync(string host, ushort port, string url, CancellationToken ct) {
             bool success = false;
             var uri = new Uri($"http://{host}:{port}{url}");
-            
+
             if (!uri.IsWellFormedOriginalString()) {
                 throw new SequenceEntityFailedException($"Invalid or malformed URL: {uri}");
             }
@@ -43,12 +44,31 @@ namespace DaleGhent.NINA.PlaneWaveTools {
             response = await client.GetAsync(uri, ct);
             Logger.Debug($"Response: {response}");
 
-            if ((int)response.StatusCode < 400) {
-                success = true;
-            }
+            success = (int)response.StatusCode < 400
+                ? true
+                : throw new SequenceEntityFailedException($"API server returned error code {(int)response.StatusCode}");
 
             response.Dispose();
             client.Dispose();
+
+            return success;
+        }
+
+        public static async Task<bool> TestTcpPort(string host, ushort port) {
+            bool success = false;
+            Socket s = null;
+
+            try {
+                s = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                await s.ConnectAsync(host, port);
+                s.Disconnect(true);
+                success = true;
+            } catch {
+                throw;
+            } finally {
+                s.Close();
+                s.Dispose();
+            }
 
             return success;
         }

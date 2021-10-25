@@ -76,6 +76,51 @@ namespace DaleGhent.NINA.PlaneWaveTools {
             }
         }
 
+        public string Pwi4ExePath {
+            get => Properties.Settings.Default.Pwi4ExePath;
+            set {
+                Properties.Settings.Default.Pwi4ExePath = value;
+                Properties.Settings.Default.Save();
+                RaisePropertyChanged();
+            }
+        }
+
+        public string Pwi4IpAddress {
+            get => Properties.Settings.Default.Pwi4IpAddress;
+            set {
+                Properties.Settings.Default.Pwi4IpAddress = value;
+                Properties.Settings.Default.Save();
+                RaisePropertyChanged();
+            }
+        }
+
+        public ushort Pwi4Port {
+            get => Properties.Settings.Default.Pwi4Port;
+            set {
+                Properties.Settings.Default.Pwi4Port = value;
+                Properties.Settings.Default.Save();
+                RaisePropertyChanged();
+            }
+        }
+
+        public int DeltaTDefaultPrimaryPowerLevel {
+            get => Properties.Settings.Default.DeltaTDefaultPrimaryPowerLevel;
+            set {
+                Properties.Settings.Default.DeltaTDefaultPrimaryPowerLevel = value;
+                Properties.Settings.Default.Save();
+                RaisePropertyChanged();
+            }
+        }
+
+        public int DeltaTDefaultSecondaryPowerLevel {
+            get => Properties.Settings.Default.DeltaTDefaultSecondaryPowerLevel;
+            set {
+                Properties.Settings.Default.DeltaTDefaultSecondaryPowerLevel = value;
+                Properties.Settings.Default.Save();
+                RaisePropertyChanged();
+            }
+        }
+
         private void OpenPwi3ExePathDialog(object obj) {
             Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog {
                 FileName = string.Empty,

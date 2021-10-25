@@ -10,6 +10,7 @@
 
 #endregion "copyright"
 
+using DaleGhent.NINA.PlaneWaveTools.Utility;
 using Newtonsoft.Json;
 using NINA.Core.Model;
 using NINA.Core.Utility;
@@ -54,18 +55,17 @@ namespace DaleGhent.NINA.PlaneWaveTools.StartStopPwi3 {
                 RunPwi3();
             } else {
                 Logger.Info("PWI3 is already running!");
+                return;
             }
 
             short timeout = 30;
-            var s = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
             for (int i = 0; i < timeout; i++) {
                 try {
-                    s.Connect(Pwi3IpAddress, Pwi3Port);
-
-                    Logger.Debug($"Was able to connect to PWI3 after {i} seconds");
-                    s.Disconnect(true);
-                    break;
+                    if (await Utilities.TestTcpPort(Pwi3IpAddress, Pwi3Port)) {
+                        Logger.Debug($"Was able to connect to PWI3 after {i} seconds");
+                        break;
+                    }
                 } catch (SocketException e) {
                     Logger.Debug($"Failed to connect to PWI3: {e.Message}");
                 } catch (Exception e) {
@@ -83,9 +83,6 @@ namespace DaleGhent.NINA.PlaneWaveTools.StartStopPwi3 {
 
             // Wait 5 seconds for PWI3 to connect to eqipment
             await Task.Delay(TimeSpan.FromSeconds(5), ct);
-
-            s.Close();
-            s.Dispose();
         }
 
         public override object Clone() {

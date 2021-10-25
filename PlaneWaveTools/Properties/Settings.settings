@@ -17,5 +17,20 @@
     <Setting Name="Pwi3ClientId" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="DeltaTDefaultPrimaryPowerLevel" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">70</Value>
+    </Setting>
+    <Setting Name="DeltaTDefaultSecondaryPowerLevel" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">30</Value>
+    </Setting>
+    <Setting Name="Pwi4ExePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Program Files (x86)\PlaneWave Instruments\PlaneWave Interface 4\PWI4.exe</Value>
+    </Setting>
+    <Setting Name="Pwi4IpAddress" Type="System.String" Scope="User">
+      <Value Profile="(Default)">127.0.0.1</Value>
+    </Setting>
+    <Setting Name="Pwi4Port" Type="System.UInt16" Scope="User">
+      <Value Profile="(Default)">8220</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

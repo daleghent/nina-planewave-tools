@@ -6,35 +6,41 @@
     file, You can obtain one at http://mozilla.org/MPL/2.0/
 -->
 <ResourceDictionary
-    x:Class="DaleGhent.NINA.PlaneWaveTools.FansOnOff.FansOnOffTemplate"
+    x:Class="DaleGhent.NINA.PlaneWaveTools.Fans.FanControlTemplate"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:DaleGhent.NINA.PlaneWaveTools.FansOnOff"
+    xmlns:local="clr-namespace:DaleGhent.NINA.PlaneWaveTools.Fans"
     xmlns:mini="clr-namespace:NINA.View.Sequencer.MiniSequencer;assembly=NINA.Sequencer"
     xmlns:nina="clr-namespace:NINA.View.Sequencer;assembly=NINA.Sequencer">
-    <GeometryGroup x:Key="FanOn_SVG">
+    
+    <GeometryGroup x:Key="FanControl_SVG">
         <PathGeometry Figures="M563.9 5000.3c-174-42.5-332.5-174-415.6-340.2l-48.3-96.6V108.1v-4455.4l48.3-96.6c59.9-123.7 175.9-239.7 299.6-299.6l96.6-48.3H5000h4455.4l96.7 48.3c123.7 59.9 239.7 175.9 299.6 299.6l48.3 96.6V108.1v4455.4l-48.3 96.6c-59.9 123.7-175.9 239.7-299.6 299.6l-96.7 48.3l-4416.8 3.9C2608.9 5011.9 596.8 5008.1 563.9 5000.3z M1134.1 4590.5c355.7-160.4 380.8-626.3 44.5-823.4c-172-100.5-409.8-63.8-550.9 85.1c-177.8 187.5-174 448.4 13.5 634C786.2 4633.1 962.1 4669.8 1134.1 4590.5z M9248.6 4559.6c50.3-30.9 116-92.8 148.8-137.2c48.3-71.5 58-106.3 63.8-226.2c7.7-127.6 1.9-152.7-46.4-243.5c-230-419.4-858.2-259-858.2 220.4C8556.6 4526.8 8949 4745.2 9248.6 4559.6z M5427.2 4437.8c997.4-98.6 1934.9-543.2 2646.2-1256.4c351.8-351.8 599.2-695.9 821.5-1150.1c291.9-591.5 427.2-1125 448.4-1778.3C9411-1668.3 8199-3409.9 6372.4-4016.8c-775.1-259-1637.2-293.8-2418.1-96.6C2900.8-3850.6 1975-3197.3 1373.8-2294.6C749.5-1355.2 513.6-174.2 728.2 931.5c191.4 976.1 724.9 1884.6 1472.9 2505.1C3113.4 4194.3 4269.4 4551.9 5427.2 4437.8z M1130.3-3460.1c88.9-36.7 189.4-131.4 235.8-220.4c154.6-301.5-65.7-661.1-404-661.1c-485.2 0-645.6 645.6-210.7 862.1C869.3-3421.5 1018.1-3411.8 1130.3-3460.1z M9182.9-3456.3c92.8-38.7 206.8-145 245.5-233.9c48.3-102.4 46.4-284.1 0-386.6c-137.2-293.8-541.2-355.7-753.8-116c-116 133.4-146.9 284.1-94.7 462c29 96.6 172 245.5 266.7 276.4C8943.2-3423.4 9107.5-3425.4 9182.9-3456.3z" FillRule="NonZero"/>
         <PathGeometry Figures="M4596 4028.1c-98.6-9.7-193.3-23.2-206.8-30.9c-21.3-11.6-7.7-40.6 54.1-119.8c303.5-402 547-881.4 661.1-1310.5l48.3-177.8h-148.8c-170.1 0-469.7-42.5-612.7-85c-52.2-15.5-96.6-27.1-96.6-25.1c-73.4 117.9-274.5 390.5-376.9 510.3c-220.4 257.1-568.3 535.4-835 663l-88.9 44.5l-90.8-52.2c-177.8-104.4-487.1-353.7-686.2-552.8c-338.3-336.3-620.5-744.2-813.8-1179.1c-50.3-112.1-88.9-204.9-85-208.8c3.9-3.9 108.2 3.9 233.9 15.5c278.3 29 864 15.5 1086.3-27.1c87-15.5 228.1-48.3 313.1-71.5l152.7-40.6l-58-98.6c-92.8-156.6-152.7-297.7-220.4-506.4l-61.9-193.3l-197.2-13.5c-496.8-32.9-1018.7-191.4-1380.1-419.4c-146.9-94.7-141.1-71.5-110.2-390.5c73.4-742.2 328.6-1414.9 757.7-1992.9l116-156.6l139.2 288c162.4 332.4 291.9 550.9 467.8 775.1c131.4 166.2 363.4 411.7 390.4 411.7c9.7 0 36.7-36.7 61.9-81.2c79.3-145 216.5-330.5 344.1-462l121.8-129.5l-87-172c-102.5-204.9-203-489-260.9-732.6c-48.3-208.8-81.2-577.9-65.7-732.6l11.6-108.2l218.4-106.3c612.7-295.8 1333.7-433 2002.5-376.9c162.4 11.6 303.5 29 318.9 36.7c19.3 11.6 3.9 42.5-56.1 119.8c-303.5 402.1-547 881.4-661.1 1310.5l-48.3 177.8h148.8c170.1 0 469.7 42.5 612.7 85c52.2 15.5 96.7 27.1 96.7 25.1c73.4-117.9 274.5-390.5 376.9-510.3c220.4-257.1 568.3-535.4 835-663l88.9-44.5l90.8 52.2c177.8 106.3 487.1 353.7 686.2 552.8c340.2 340.2 620.5 746.1 813.8 1179.1c50.3 112.1 88.9 206.8 85.1 210.7c-3.9 1.9-116-5.8-251.3-17.4c-293.8-29-840.8-15.4-1068.9 27.1c-87 15.5-228.1 48.3-313.1 71.5l-152.7 40.6l58 98.6c92.8 156.6 152.7 297.7 220.4 506.4l61.9 193.3l191.3 13.5c514.2 36.7 1028.3 193.3 1405.3 431c125.6 79.3 119.8 56 90.8 367.3c-67.7 734.5-326.7 1424.6-757.7 2004.5l-116 156.6l-139.2-288c-162.4-332.5-291.9-550.9-467.8-775.1c-131.5-166.2-363.4-411.7-390.5-411.7c-9.7 0-36.7 36.7-61.9 83.1c-79.2 143-216.5 328.6-342.1 460L6527 1803.3l94.7 201c112.1 232 216.5 539.3 262.9 761.6c36.7 175.9 61.9 508.4 52.2 672.7l-7.7 112.1l-218.4 106.3C6065 3968.1 5330.5 4097.7 4596 4028.1z M5429.1 1791.7c626.3-162.4 1107.6-655.3 1266.1-1291.2c44.5-179.8 44.5-605 0-784.8c-160.4-647.5-655.3-1142.4-1302.8-1302.8c-179.8-44.5-605-44.5-784.8 0c-647.5 160.4-1140.4 653.3-1302.8 1302.8c-50.2 199.1-44.5 624.3 11.6 827.3c179.8 663 703.6 1148.2 1380.1 1277.7C4884 1855.4 5235.8 1841.9 5429.1 1791.7z" FillRule="NonZero"/>
         <PathGeometry Figures="M4719.7 1434.1c-491-116-854.4-444.6-1010.9-914.3c-44.5-133.4-50.3-181.7-50.3-411.7c0-230 5.8-278.3 50.3-411.7c139.2-417.5 462-740.3 879.5-879.5c131.4-44.5 183.6-50.2 411.7-50.2c235.8 0 276.4 3.8 415.6 54.1c429.1 148.8 722.9 442.6 871.7 871.8c50.3 139.2 54.1 179.8 54.1 415.6c0 228.1-5.8 280.3-50.3 411.7c-139.2 417.5-467.8 744.2-879.5 877.6C5224.2 1457.3 4897.6 1474.7 4719.7 1434.1z" FillRule="NonZero"/>
     </GeometryGroup>
 
-    <DataTemplate DataType="{x:Type local:FansOn}">
+    <DataTemplate DataType="{x:Type local:FanControl}">
         <nina:SequenceBlockView DataContext="{Binding}">
+            <nina:SequenceBlockView.SequenceItemContent>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock VerticalAlignment="Center" Text="Fans" />
+                    <CheckBox
+                        Margin="5,0,0,0"
+                        VerticalAlignment="Center"
+                        IsChecked="{Binding FanState, UpdateSourceTrigger=PropertyChanged}" />
+
+                </StackPanel>
+            </nina:SequenceBlockView.SequenceItemContent>
         </nina:SequenceBlockView>
     </DataTemplate>
 
-    <DataTemplate x:Key="DaleGhent.NINA.PlaneWaveTools.FansOnOffTemplate.FansOn_Mini">
+    <DataTemplate x:Key="DaleGhent.NINA.PlaneWaveTools.Fans.FanControl_Mini">
         <mini:MiniSequenceItem>
-        </mini:MiniSequenceItem>
-    </DataTemplate>
-
-    <DataTemplate DataType="{x:Type local:FansOff}">
-        <nina:SequenceBlockView DataContext="{Binding}">
-        </nina:SequenceBlockView>
-    </DataTemplate>
-
-    <DataTemplate x:Key="DaleGhent.NINA.PlaneWaveTools.FansOnOffTemplate.FansOff_Mini">
-        <mini:MiniSequenceItem>
+            <mini:MiniSequenceItem.SequenceItemContent>
+                <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
+                    <TextBlock VerticalAlignment="Center" Text="{Binding FanState, Converter={StaticResource BoolToLabelConverter}, ConverterParameter=LblOn|LblOff}" />
+                </StackPanel>
+            </mini:MiniSequenceItem.SequenceItemContent>
         </mini:MiniSequenceItem>
     </DataTemplate>
 </ResourceDictionary>

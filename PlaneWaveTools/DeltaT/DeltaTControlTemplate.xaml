@@ -1,0 +1,60 @@
+﻿<!--
+    Copyright Dale Ghent <daleg@elemental.org>
+
+    This Source Code Form is subject to the terms of the Mozilla Public
+    License, v. 2.0. If a copy of the MPL was not distributed with this
+    file, You can obtain one at http://mozilla.org/MPL/2.0/
+-->
+<ResourceDictionary
+    x:Class="DaleGhent.NINA.PlaneWaveTools.DeltaT.DeltaTControlTemplate"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ninactrl="clr-namespace:NINACustomControlLibrary;assembly=NINACustomControlLibrary"
+    xmlns:local="clr-namespace:DaleGhent.NINA.PlaneWaveTools.DeltaT"
+    xmlns:util="clr-namespace:DaleGhent.NINA.PlaneWaveTools.Utility"
+    xmlns:mini="clr-namespace:NINA.View.Sequencer.MiniSequencer;assembly=NINA.Sequencer"
+    xmlns:nina="clr-namespace:NINA.View.Sequencer;assembly=NINA.Sequencer">
+
+    <GeometryGroup x:Key="DeltaT_SVG">
+        <PathGeometry Figures="M 78.44069 96.308334 H 63.557877 l 7.788672 -17.20205 z M 75.513737 95.291342 70.565201 83.298276 65.10817 95.291342 Z" FillRule="NonZero"/>
+        <PathGeometry Figures="m 76.869721 92.074997 2.240685 -10.740409 h -3.97701 l 0.289387 -1.380791 h 9.541518 l -0.289387 1.380791 H 80.730976 L 78.49029 92.074997 Z" FillRule="NonZero"/>
+    </GeometryGroup>
+
+    <DataTemplate DataType="{x:Type local:DeltaTControl}">
+        <nina:SequenceBlockView DataContext="{Binding}">
+            <nina:SequenceBlockView.SequenceItemContent>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock VerticalAlignment="Center" Text="Heater" />
+                    <ComboBox
+                        MinWidth="40"
+                        Margin="5,0,0,0"
+                        VerticalAlignment="Center"
+                        ItemsSource="{Binding Source={util:EnumBindingSource {x:Type util:DeltaTHeatersEnum}}}"
+                        SelectedItem="{Binding DeltaTHeater}" />
+
+                    <TextBlock VerticalAlignment="Center" Margin="10,0,0,0" Text="|" />
+
+                    <TextBlock VerticalAlignment="Center" Margin="10,0,0,0" Text="Mode" />
+                    <ComboBox
+                        MinWidth="40"
+                        Margin="5,0,0,0"
+                        VerticalAlignment="Center"
+                        ItemsSource="{Binding Source={util:EnumBindingSource {x:Type util:DeltaTHeaterModesEnum}}}"
+                        SelectedItem="{Binding DeltaTHeaterMode}" />
+                </StackPanel>
+            </nina:SequenceBlockView.SequenceItemContent>
+        </nina:SequenceBlockView>
+    </DataTemplate>
+
+    <DataTemplate x:Key="DaleGhent.NINA.PlaneWaveTools.DeltaT.DeltaTControl_Mini">
+        <mini:MiniSequenceItem>
+            <mini:MiniSequenceItem.SequenceItemContent>
+                <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
+                    <TextBlock VerticalAlignment="Center" Text="{Binding DeltaTHeater}" />
+                    <TextBlock VerticalAlignment="Center" Margin="5,0,5,0" Text="=" />
+                    <TextBlock VerticalAlignment="Center" Text="{Binding DeltaTHeaterMode}" />
+                </StackPanel>
+            </mini:MiniSequenceItem.SequenceItemContent>
+        </mini:MiniSequenceItem>
+    </DataTemplate>
+</ResourceDictionary>

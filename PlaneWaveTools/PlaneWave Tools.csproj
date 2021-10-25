@@ -124,40 +124,40 @@
       <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="nikoncswrapper, Version=1.8.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NINA.Equipment.1.11.0.1167-nightly\lib\net48\nikoncswrapper.dll</HintPath>
+      <HintPath>..\packages\NINA.Equipment.1.11.0.1170-nightly2\lib\net48\nikoncswrapper.dll</HintPath>
     </Reference>
-    <Reference Include="NINA.Astrometry, Version=1.11.0.1167, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NINA.Astrometry.1.11.0.1167-nightly\lib\net48\NINA.Astrometry.dll</HintPath>
+    <Reference Include="NINA.Astrometry, Version=1.11.0.1170, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NINA.Astrometry.1.11.0.1170-nightly2\lib\net48\NINA.Astrometry.dll</HintPath>
     </Reference>
-    <Reference Include="NINA.Core, Version=1.11.0.1167, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NINA.Core.1.11.0.1167-nightly\lib\net48\NINA.Core.dll</HintPath>
+    <Reference Include="NINA.Core, Version=1.11.0.1170, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NINA.Core.1.11.0.1170-nightly2\lib\net48\NINA.Core.dll</HintPath>
     </Reference>
-    <Reference Include="NINA.Equipment, Version=1.11.0.1167, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NINA.Equipment.1.11.0.1167-nightly\lib\net48\NINA.Equipment.dll</HintPath>
+    <Reference Include="NINA.Equipment, Version=1.11.0.1170, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NINA.Equipment.1.11.0.1170-nightly2\lib\net48\NINA.Equipment.dll</HintPath>
     </Reference>
-    <Reference Include="NINA.Image, Version=1.11.0.1167, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NINA.Image.1.11.0.1167-nightly\lib\net48\NINA.Image.dll</HintPath>
+    <Reference Include="NINA.Image, Version=1.11.0.1170, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NINA.Image.1.11.0.1170-nightly2\lib\net48\NINA.Image.dll</HintPath>
     </Reference>
-    <Reference Include="NINA.MGEN, Version=1.11.0.1167, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NINA.MGEN.1.11.0.1167-nightly\lib\net48\NINA.MGEN.dll</HintPath>
+    <Reference Include="NINA.MGEN, Version=1.11.0.1170, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NINA.MGEN.1.11.0.1170-nightly2\lib\net48\NINA.MGEN.dll</HintPath>
     </Reference>
-    <Reference Include="NINA.PlateSolving, Version=1.11.0.1167, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NINA.PlateSolving.1.11.0.1167-nightly\lib\net48\NINA.PlateSolving.dll</HintPath>
+    <Reference Include="NINA.PlateSolving, Version=1.11.0.1170, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NINA.PlateSolving.1.11.0.1170-nightly2\lib\net48\NINA.PlateSolving.dll</HintPath>
     </Reference>
-    <Reference Include="NINA.Plugin, Version=1.11.0.1167, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NINA.Plugin.1.11.0.1167-nightly\lib\net48\NINA.Plugin.dll</HintPath>
+    <Reference Include="NINA.Plugin, Version=1.11.0.1170, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NINA.Plugin.1.11.0.1170-nightly2\lib\net48\NINA.Plugin.dll</HintPath>
     </Reference>
-    <Reference Include="NINA.Profile, Version=1.11.0.1167, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NINA.Profile.1.11.0.1167-nightly\lib\net48\NINA.Profile.dll</HintPath>
+    <Reference Include="NINA.Profile, Version=1.11.0.1170, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NINA.Profile.1.11.0.1170-nightly2\lib\net48\NINA.Profile.dll</HintPath>
     </Reference>
-    <Reference Include="NINA.Sequencer, Version=1.11.0.1167, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NINA.Sequencer.1.11.0.1167-nightly\lib\net48\NINA.Sequencer.dll</HintPath>
+    <Reference Include="NINA.Sequencer, Version=1.11.0.1170, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NINA.Sequencer.1.11.0.1170-nightly2\lib\net48\NINA.Sequencer.dll</HintPath>
     </Reference>
-    <Reference Include="NINA.WPF.Base, Version=1.11.0.1167, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NINA.WPF.Base.1.11.0.1167-nightly\lib\net48\NINA.WPF.Base.dll</HintPath>
+    <Reference Include="NINA.WPF.Base, Version=1.11.0.1170, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NINA.WPF.Base.1.11.0.1170-nightly2\lib\net48\NINA.WPF.Base.dll</HintPath>
     </Reference>
-    <Reference Include="NINACustomControlLibrary, Version=1.11.0.1167, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NINACustomControlLibrary.1.11.0.1167-nightly\lib\net48\NINACustomControlLibrary.dll</HintPath>
+    <Reference Include="NINACustomControlLibrary, Version=1.11.0.1170, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NINACustomControlLibrary.1.11.0.1170-nightly2\lib\net48\NINACustomControlLibrary.dll</HintPath>
     </Reference>
     <Reference Include="Nito.AsyncEx.Context, Version=5.1.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Nito.AsyncEx.Context.5.1.2\lib\net461\Nito.AsyncEx.Context.dll</HintPath>
@@ -269,11 +269,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FansOnOff\FansOn.cs" />
-    <Compile Include="FansOnOff\FansOnOffTemplate.xaml.cs">
-      <DependentUpon>FansOnOffTemplate.xaml</DependentUpon>
+    <Compile Include="PluginSettingsTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PluginSettingsTemplate.tt</DependentUpon>
     </Compile>
-    <Compile Include="FansOnOff\FansOff.cs" />
+    <Compile Include="Utility\DeltaTHeatersEnum.cs" />
+    <Compile Include="Utility\DeltaTHeaterModesEnum.cs" />
+    <Compile Include="Utility\EnumBindingSourceExtension.cs" />
+    <Compile Include="DeltaT\DeltaTControlTemplate.xaml.cs">
+      <DependentUpon>DeltaTControlTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DeltaT\DeltaTControl.cs" />
+    <Compile Include="Fans\FanControl.cs" />
+    <Compile Include="Fans\FanControlTemplate.xaml.cs">
+      <DependentUpon>FanControlTemplate.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PlaneWaveTools.cs" />
     <Compile Include="Options.xaml.cs">
       <DependentUpon>Options.xaml</DependentUpon>
@@ -289,10 +300,14 @@
       <DependentUpon>StartStopPwi3Template.xaml</DependentUpon>
     </Compile>
     <Compile Include="StartStopPwi3\StopPwi3.cs" />
-    <Compile Include="Utilities.cs" />
+    <Compile Include="Utility\Utilities.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="FansOnOff\FansOnOffTemplate.xaml">
+    <Page Include="DeltaT\DeltaTControlTemplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Fans\FanControlTemplate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -305,7 +320,15 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="PluginSettingsTemplate.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PluginSettingsTemplate.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

@@ -10,6 +10,7 @@
 
 #endregion "copyright"
 
+using DaleGhent.NINA.PlaneWaveTools.Utility;
 using Newtonsoft.Json;
 using NINA.Core.Model;
 using NINA.Core.Utility;
@@ -20,21 +21,24 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace DaleGhent.NINA.PlaneWaveTools.FansOnOff {
+namespace DaleGhent.NINA.PlaneWaveTools.Fans {
 
-    [ExportMetadata("Name", "Fans on")]
-    [ExportMetadata("Description", "Turns OTA cooling fans on via PWI3")]
-    [ExportMetadata("Icon", "FanOn_SVG")]
+    [ExportMetadata("Name", "Fan Control")]
+    [ExportMetadata("Description", "Turns OTA cooling fans on or off via PWI3")]
+    [ExportMetadata("Icon", "FanControl_SVG")]
     [ExportMetadata("Category", "PlaneWave Tools")]
     [Export(typeof(ISequenceItem))]
     [JsonObject(MemberSerialization.OptIn)]
-    public class FansOn : SequenceItem, IValidatable, INotifyPropertyChanged {
+    public class FanControl : SequenceItem, IValidatable, INotifyPropertyChanged {
+        private bool fanState = false;
+        private readonly string pwi3UrlBase = "/?device=fans";
 
         [ImportingConstructor]
-        public FansOn() {
+        public FanControl() {
             Pwi3IpAddress = Properties.Settings.Default.Pwi3IpAddress;
             Pwi3Port = Properties.Settings.Default.Pwi3Port;
             Pwi3ClientId = Properties.Settings.Default.Pwi3ClientId;
@@ -42,12 +46,22 @@ namespace DaleGhent.NINA.PlaneWaveTools.FansOnOff {
             Properties.Settings.Default.PropertyChanged += SettingsChanged;
         }
 
-        private FansOn(FansOn copyMe) : this() {
+        [JsonProperty]
+        public bool FanState {
+            get => fanState;
+            set {
+                fanState = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private FanControl(FanControl copyMe) : this() {
             CopyMetaData(copyMe);
         }
 
         public override async Task Execute(IProgress<ApplicationStatus> progress, CancellationToken token) {
-            string url = $"/?device=fans&mode=normal&clientId={Pwi3ClientId}";
+            string url = $"{pwi3UrlBase}&clientId={Pwi3ClientId}";
+            url += $"&mode={(FanState ? "normal" : "off")}";
 
             try {
                 await Utilities.HttpGetRequestAsync(Pwi3IpAddress, Pwi3Port, url, token);
@@ -59,11 +73,17 @@ namespace DaleGhent.NINA.PlaneWaveTools.FansOnOff {
         }
 
         public override object Clone() {
-            return new FansOn(this);
+            return new FanControl(this) {
+                Icon = Icon,
+                Name = Name,
+                Category = Category,
+                Description = Description,
+                FanState = FanState,
+            };
         }
 
         public override string ToString() {
-            return $"Category: {Category}, Item: {nameof(FansOn)}";
+            return $"Category: {Category}, Item: {nameof(FanControl)}";
         }
 
         public IList<string> Issues { get; set; } = new ObservableCollection<string>();

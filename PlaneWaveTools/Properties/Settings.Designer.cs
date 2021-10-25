@@ -82,5 +82,65 @@ namespace DaleGhent.NINA.PlaneWaveTools.Properties {
                 this["Pwi3ClientId"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("70")]
+        public int DeltaTDefaultPrimaryPowerLevel {
+            get {
+                return ((int)(this["DeltaTDefaultPrimaryPowerLevel"]));
+            }
+            set {
+                this["DeltaTDefaultPrimaryPowerLevel"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("30")]
+        public int DeltaTDefaultSecondaryPowerLevel {
+            get {
+                return ((int)(this["DeltaTDefaultSecondaryPowerLevel"]));
+            }
+            set {
+                this["DeltaTDefaultSecondaryPowerLevel"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Program Files (x86)\\PlaneWave Instruments\\PlaneWave Interface 4\\PWI4.exe")]
+        public string Pwi4ExePath {
+            get {
+                return ((string)(this["Pwi4ExePath"]));
+            }
+            set {
+                this["Pwi4ExePath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("127.0.0.1")]
+        public string Pwi4IpAddress {
+            get {
+                return ((string)(this["Pwi4IpAddress"]));
+            }
+            set {
+                this["Pwi4IpAddress"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("8220")]
+        public ushort Pwi4Port {
+            get {
+                return ((ushort)(this["Pwi4Port"]));
+            }
+            set {
+                this["Pwi4Port"] = value;
+            }
+        }
     }
 }
