@@ -6,13 +6,13 @@ using System.Runtime.InteropServices;
 
 // [MANDATORY] The assembly versioning
 //Should be incremented for each new release build of a plugin
-[assembly: AssemblyVersion("0.2.0.0")]
-[assembly: AssemblyFileVersion("0.2.0.0")]
+[assembly: AssemblyVersion("0.3.0.0")]
+[assembly: AssemblyFileVersion("0.3.0.0")]
 
 // [MANDATORY] The name of your plugin
 [assembly: AssemblyTitle("PlaneWave Tools")]
 // [MANDATORY] A short description of your plugin
-[assembly: AssemblyDescription("A collection of useful tools for managing PlaneWave OTA and mount systems")]
+[assembly: AssemblyDescription("A collection of useful tools for managing PlaneWave telescope systems")]
 
 
 // The following attributes are not required for the plugin per se, but are required by the official manifest meta data
@@ -24,7 +24,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCopyright("Copyright © 2021 Dale Ghent")]
 
 // The minimum Version of N.I.N.A. that this plugin is compatible with
-[assembly: AssemblyMetadata("MinimumApplicationVersion", "1.11.0.1125")]
+[assembly: AssemblyMetadata("MinimumApplicationVersion", "1.11.0.1170")]
 
 // The license your plugin code is using
 [assembly: AssemblyMetadata("License", "MPL-2.0")]
@@ -52,7 +52,17 @@ using System.Runtime.InteropServices;
 //[Optional] An additional url to an example example screenshot of your plugin in action
 [assembly: AssemblyMetadata("AltScreenshotURL", "")]
 //[Optional] An in-depth description of your plugin
-[assembly: AssemblyMetadata("LongDescription", @"PlaneWave Tools provides several instructions for controlling the EFA fans and Delta T heater controller via PWI3
+[assembly: AssemblyMetadata("LongDescription", @"PlaneWave Tools provides several instructions for controlling the EFA fans and Delta T heater controller via PlaneWave's PWI3 app.
+
+# Requirements #
+
+* PWI3 >= 3.5.0 for fan control
+* PWI3 >= 3.5.3 for fan and DeltaT control
+
+# Sequence Instructions #
+
+* Fan Control - Turns the OTA fans on or off
+* DeltaT Control - Sets the per-heater operating modes of the Delta T heater controller
 
 # Getting help #
 
