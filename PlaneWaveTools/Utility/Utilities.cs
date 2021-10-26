@@ -42,7 +42,9 @@ namespace DaleGhent.NINA.PlaneWaveTools.Utility {
 
             Logger.Debug($"Querying: {uri}");
             response = await client.GetAsync(uri, ct);
-            Logger.Debug($"Response: {response}");
+
+            Logger.Debug($"Response header: {response.Headers}");
+            Logger.Debug($"Response body: {response.Content}");
 
             success = (int)response.StatusCode < 400
                 ? true

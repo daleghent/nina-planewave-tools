@@ -71,8 +71,24 @@ namespace DaleGhent.NINA.PlaneWaveTools.DeltaT {
         }
 
         public override async Task Execute(IProgress<ApplicationStatus> progress, CancellationToken token) {
+            string mode = "off";
             string url = $"{pwi3UrlBase}&clientId={Pwi3ClientId}";
-            url += $"&index={(int)DeltaTHeater}&mode={(int)DeltaTHeaterMode}";
+
+            switch (DeltaTHeaterMode) {
+                case DeltaTHeaterModesEnum.On:
+                    mode = "on";
+                    break;
+
+                case DeltaTHeaterModesEnum.Control:
+                    mode = "control";
+                    break;
+
+                case DeltaTHeaterModesEnum.OnWhenLessThan:
+                    mode = "on_when_less_than";
+                    break;
+            }
+
+            url += $"&index={(int)DeltaTHeater}&mode={mode}";
 
             try {
                 await Utilities.HttpGetRequestAsync(Pwi3IpAddress, Pwi3Port, url, token);
