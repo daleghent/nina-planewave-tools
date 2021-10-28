@@ -6,8 +6,8 @@ using System.Runtime.InteropServices;
 
 // [MANDATORY] The assembly versioning
 //Should be incremented for each new release build of a plugin
-[assembly: AssemblyVersion("0.3.0.0")]
-[assembly: AssemblyFileVersion("0.3.0.0")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]
 
 // [MANDATORY] The name of your plugin
 [assembly: AssemblyTitle("PlaneWave Tools")]
@@ -24,7 +24,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCopyright("Copyright © 2021 Dale Ghent")]
 
 // The minimum Version of N.I.N.A. that this plugin is compatible with
-[assembly: AssemblyMetadata("MinimumApplicationVersion", "1.11.0.1170")]
+[assembly: AssemblyMetadata("MinimumApplicationVersion", "1.11.0.1171")]
 
 // The license your plugin code is using
 [assembly: AssemblyMetadata("License", "MPL-2.0")]
@@ -63,6 +63,8 @@ using System.Runtime.InteropServices;
 
 * Fan Control - Turns the OTA fans on or off
 * DeltaT Control - Sets the per-heater operating modes of the Delta T heater controller
+
+Open to ideas for additional controls!
 
 # Getting help #
 

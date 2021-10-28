@@ -30,7 +30,7 @@ namespace DaleGhent.NINA.PlaneWaveTools {
             if (Properties.Settings.Default.UpgradeSettings) {
                 Properties.Settings.Default.Upgrade();
                 Properties.Settings.Default.UpgradeSettings = false;
-                Properties.Settings.Default.Save();
+                CoreUtil.SaveSettings(Properties.Settings.Default);
             }
 
             if (string.IsNullOrEmpty(Pwi3ClientId) || string.IsNullOrWhiteSpace(Pwi3ClientId)) {
@@ -44,7 +44,7 @@ namespace DaleGhent.NINA.PlaneWaveTools {
             get => Properties.Settings.Default.Pwi3ExePath;
             set {
                 Properties.Settings.Default.Pwi3ExePath = value;
-                Properties.Settings.Default.Save();
+                CoreUtil.SaveSettings(Properties.Settings.Default);
                 RaisePropertyChanged();
             }
         }
@@ -53,7 +53,7 @@ namespace DaleGhent.NINA.PlaneWaveTools {
             get => Properties.Settings.Default.Pwi3IpAddress;
             set {
                 Properties.Settings.Default.Pwi3IpAddress = value;
-                Properties.Settings.Default.Save();
+                CoreUtil.SaveSettings(Properties.Settings.Default);
                 RaisePropertyChanged();
             }
         }
@@ -62,7 +62,7 @@ namespace DaleGhent.NINA.PlaneWaveTools {
             get => Properties.Settings.Default.Pwi3Port;
             set {
                 Properties.Settings.Default.Pwi3Port = value;
-                Properties.Settings.Default.Save();
+                CoreUtil.SaveSettings(Properties.Settings.Default);
                 RaisePropertyChanged();
             }
         }
@@ -71,7 +71,7 @@ namespace DaleGhent.NINA.PlaneWaveTools {
             get => Properties.Settings.Default.Pwi3ClientId;
             set {
                 Properties.Settings.Default.Pwi3ClientId = value;
-                Properties.Settings.Default.Save();
+                CoreUtil.SaveSettings(Properties.Settings.Default);
                 RaisePropertyChanged();
             }
         }
@@ -80,7 +80,7 @@ namespace DaleGhent.NINA.PlaneWaveTools {
             get => Properties.Settings.Default.Pwi4ExePath;
             set {
                 Properties.Settings.Default.Pwi4ExePath = value;
-                Properties.Settings.Default.Save();
+                CoreUtil.SaveSettings(Properties.Settings.Default);
                 RaisePropertyChanged();
             }
         }
@@ -89,7 +89,7 @@ namespace DaleGhent.NINA.PlaneWaveTools {
             get => Properties.Settings.Default.Pwi4IpAddress;
             set {
                 Properties.Settings.Default.Pwi4IpAddress = value;
-                Properties.Settings.Default.Save();
+                CoreUtil.SaveSettings(Properties.Settings.Default);
                 RaisePropertyChanged();
             }
         }
@@ -98,7 +98,7 @@ namespace DaleGhent.NINA.PlaneWaveTools {
             get => Properties.Settings.Default.Pwi4Port;
             set {
                 Properties.Settings.Default.Pwi4Port = value;
-                Properties.Settings.Default.Save();
+                CoreUtil.SaveSettings(Properties.Settings.Default);
                 RaisePropertyChanged();
             }
         }
@@ -107,7 +107,7 @@ namespace DaleGhent.NINA.PlaneWaveTools {
             get => Properties.Settings.Default.DeltaTDefaultPrimaryPowerLevel;
             set {
                 Properties.Settings.Default.DeltaTDefaultPrimaryPowerLevel = value;
-                Properties.Settings.Default.Save();
+                CoreUtil.SaveSettings(Properties.Settings.Default);
                 RaisePropertyChanged();
             }
         }
@@ -116,7 +116,7 @@ namespace DaleGhent.NINA.PlaneWaveTools {
             get => Properties.Settings.Default.DeltaTDefaultSecondaryPowerLevel;
             set {
                 Properties.Settings.Default.DeltaTDefaultSecondaryPowerLevel = value;
-                Properties.Settings.Default.Save();
+                CoreUtil.SaveSettings(Properties.Settings.Default);
                 RaisePropertyChanged();
             }
         }
