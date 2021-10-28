@@ -61,6 +61,7 @@ using System.Runtime.InteropServices;
 
 # Sequence Instructions #
 
+* Start PWI3, Stop PWI3 - Starts and stops the PWI3.exe application
 * Fan Control - Turns the OTA fans on or off
 * DeltaT Control - Sets the per-heater operating modes of the Delta T heater controller
 
