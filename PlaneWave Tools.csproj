@@ -269,11 +269,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PluginSettingsTemplate.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PluginSettingsTemplate.tt</DependentUpon>
-    </Compile>
     <Compile Include="Utility\DeltaTHeatersEnum.cs" />
     <Compile Include="Utility\DeltaTHeaterModesEnum.cs" />
     <Compile Include="Utility\EnumBindingSourceExtension.cs" />
@@ -322,12 +317,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="PluginSettingsTemplate.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>PluginSettingsTemplate.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
