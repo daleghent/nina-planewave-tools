@@ -15,13 +15,13 @@ using NINA.Plugin;
 using NINA.Plugin.Interfaces;
 using NINA.Profile.Interfaces;
 using System;
-using System.IO;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
 namespace DaleGhent.NINA.PlaneWaveTools {
+
     [Export(typeof(IPluginManifest))]
     public class PlaneWaveTools : PluginBase, ISettings, INotifyPropertyChanged {
 

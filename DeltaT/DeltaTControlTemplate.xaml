@@ -16,8 +16,8 @@
     xmlns:nina="clr-namespace:NINA.View.Sequencer;assembly=NINA.Sequencer">
 
     <GeometryGroup x:Key="DeltaT_SVG">
-        <PathGeometry Figures="M 78.44069 96.308334 H 63.557877 l 7.788672 -17.20205 z M 75.513737 95.291342 70.565201 83.298276 65.10817 95.291342 Z" FillRule="NonZero"/>
-        <PathGeometry Figures="m 76.869721 92.074997 2.240685 -10.740409 h -3.97701 l 0.289387 -1.380791 h 9.541518 l -0.289387 1.380791 H 80.730976 L 78.49029 92.074997 Z" FillRule="NonZero"/>
+        <PathGeometry Figures="M 78.44069 96.308334 H 63.557877 l 7.788672 -17.20205 z M 75.513737 95.291342 70.565201 83.298276 65.10817 95.291342 Z" FillRule="NonZero" />
+        <PathGeometry Figures="m 76.869721 92.074997 2.240685 -10.740409 h -3.97701 l 0.289387 -1.380791 h 9.541518 l -0.289387 1.380791 H 80.730976 L 78.49029 92.074997 Z" FillRule="NonZero" />
     </GeometryGroup>
 
     <DataTemplate DataType="{x:Type local:DeltaTControl}">
@@ -26,21 +26,21 @@
                 <StackPanel Orientation="Horizontal">
                     <TextBlock VerticalAlignment="Center" Text="Heater" />
                     <ComboBox
-                        MinWidth="40"
+                        MinWidth="120"
                         Margin="5,0,0,0"
                         VerticalAlignment="Center"
-                        ItemsSource="{Binding Source={util:EnumBindingSource {x:Type util:DeltaTHeatersEnum}}}"
-                        SelectedItem="{Binding DeltaTHeater}" />
+                        ItemsSource="{Binding DeltaTHeaters}"
+                        SelectedIndex="{Binding DeltaTHeater}" />
 
                     <TextBlock VerticalAlignment="Center" Margin="10,0,0,0" Text="|" />
 
                     <TextBlock VerticalAlignment="Center" Margin="10,0,0,0" Text="Mode" />
                     <ComboBox
-                        MinWidth="40"
+                        MinWidth="120"
                         Margin="5,0,0,0"
                         VerticalAlignment="Center"
-                        ItemsSource="{Binding Source={util:EnumBindingSource {x:Type util:DeltaTHeaterModesEnum}}}"
-                        SelectedItem="{Binding DeltaTHeaterMode}" />
+                        ItemsSource="{Binding DeltaTHeaterModes}"
+                        SelectedIndex="{Binding DeltaTHeaterMode}" />
                 </StackPanel>
             </nina:SequenceBlockView.SequenceItemContent>
         </nina:SequenceBlockView>

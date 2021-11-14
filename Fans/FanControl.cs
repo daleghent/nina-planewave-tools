@@ -21,7 +21,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
-using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -83,7 +82,7 @@ namespace DaleGhent.NINA.PlaneWaveTools.Fans {
         }
 
         public override string ToString() {
-            return $"Category: {Category}, Item: {nameof(FanControl)}";
+            return $"Category: {Category}, Item: {nameof(FanControl)}, FanState: {FanState}";
         }
 
         public IList<string> Issues { get; set; } = new ObservableCollection<string>();
@@ -96,14 +95,16 @@ namespace DaleGhent.NINA.PlaneWaveTools.Fans {
         private string Pwi3IpAddress { get; set; }
         private ushort Pwi3Port { get; set; }
 
-        void SettingsChanged(object sender, PropertyChangedEventArgs e) {
+        private void SettingsChanged(object sender, PropertyChangedEventArgs e) {
             switch (e.PropertyName) {
                 case "Pwi3ClientId":
                     Pwi3ClientId = Properties.Settings.Default.Pwi3ClientId;
                     break;
+
                 case "Pwi3IpAddress":
                     Pwi3IpAddress = Properties.Settings.Default.Pwi3IpAddress;
                     break;
+
                 case "Pwi3Port":
                     Pwi3Port = Properties.Settings.Default.Pwi3Port;
                     break;
