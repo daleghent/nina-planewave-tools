@@ -40,10 +40,8 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <None Include="Accord.dll.config" />
     <None Include="app.config" />
     <None Include="CHANGELOG.md" />
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -124,40 +122,52 @@
       <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="nikoncswrapper, Version=1.8.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NINA.Equipment.1.11.0.1172-nightly\lib\net48\nikoncswrapper.dll</HintPath>
+      <HintPath>packages\NINA.Equipment.2.0.0.2001-beta\lib\net48\nikoncswrapper.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="NINA.Astrometry, Version=1.11.0.1172, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NINA.Astrometry.1.11.0.1172-nightly\lib\net48\NINA.Astrometry.dll</HintPath>
+      <HintPath>packages\NINA.Astrometry.2.0.0.2001-beta\lib\net48\NINA.Astrometry.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="NINA.Core, Version=1.11.0.1172, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NINA.Core.1.11.0.1172-nightly\lib\net48\NINA.Core.dll</HintPath>
+      <HintPath>packages\NINA.Core.2.0.0.2001-beta\lib\net48\NINA.Core.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="NINA.Equipment, Version=1.11.0.1172, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NINA.Equipment.1.11.0.1172-nightly\lib\net48\NINA.Equipment.dll</HintPath>
+      <HintPath>packages\NINA.Equipment.2.0.0.2001-beta\lib\net48\NINA.Equipment.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="NINA.Image, Version=1.11.0.1172, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NINA.Image.1.11.0.1172-nightly\lib\net48\NINA.Image.dll</HintPath>
+      <HintPath>packages\NINA.Image.2.0.0.2001-beta\lib\net48\NINA.Image.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="NINA.MGEN, Version=1.11.0.1172, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NINA.MGEN.1.11.0.1172-nightly\lib\net48\NINA.MGEN.dll</HintPath>
+      <HintPath>packages\NINA.MGEN.2.0.0.2001-beta\lib\net48\NINA.MGEN.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="NINA.PlateSolving, Version=1.11.0.1172, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NINA.PlateSolving.1.11.0.1172-nightly\lib\net48\NINA.PlateSolving.dll</HintPath>
+      <HintPath>packages\NINA.PlateSolving.2.0.0.2001-beta\lib\net48\NINA.PlateSolving.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="NINA.Plugin, Version=1.11.0.1172, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NINA.Plugin.1.11.0.1172-nightly\lib\net48\NINA.Plugin.dll</HintPath>
+      <HintPath>packages\NINA.Plugin.2.0.0.2001-beta\lib\net48\NINA.Plugin.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="NINA.Profile, Version=1.11.0.1172, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NINA.Profile.1.11.0.1172-nightly\lib\net48\NINA.Profile.dll</HintPath>
+      <HintPath>packages\NINA.Profile.2.0.0.2001-beta\lib\net48\NINA.Profile.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="NINA.Sequencer, Version=1.11.0.1172, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NINA.Sequencer.1.11.0.1172-nightly\lib\net48\NINA.Sequencer.dll</HintPath>
+      <HintPath>packages\NINA.Sequencer.2.0.0.2001-beta\lib\net48\NINA.Sequencer.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="NINA.WPF.Base, Version=1.11.0.1172, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NINA.WPF.Base.1.11.0.1172-nightly\lib\net48\NINA.WPF.Base.dll</HintPath>
+      <HintPath>packages\NINA.WPF.Base.2.0.0.2001-beta\lib\net48\NINA.WPF.Base.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="NINACustomControlLibrary, Version=1.11.0.1172, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NINACustomControlLibrary.1.11.0.1172-nightly\lib\net48\NINACustomControlLibrary.dll</HintPath>
+      <HintPath>packages\NINACustomControlLibrary.2.0.0.2001-beta\lib\net48\NINACustomControlLibrary.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Nito.AsyncEx.Context, Version=5.1.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Nito.AsyncEx.Context.5.1.2\lib\net461\Nito.AsyncEx.Context.dll</HintPath>
@@ -317,6 +327,14 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Dirkster.AvalonDock">
+      <Version>4.60.0</Version>
+    </PackageReference>
+    <PackageReference Include="NINA.Plugin">
+      <Version>2.0.0.2001-beta</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
