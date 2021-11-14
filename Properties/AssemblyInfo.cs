@@ -31,7 +31,7 @@ using System.Runtime.InteropServices;
 // The url to the license
 [assembly: AssemblyMetadata("LicenseURL", "https://www.mozilla.org/en-US/MPL/2.0/")]
 // The repository where your pluggin is hosted
-[assembly: AssemblyMetadata("Repository", "https://github.com/daleghent/nina-plugins")]
+[assembly: AssemblyMetadata("Repository", "https://github.com/daleghent/nina-planewave-tools")]
 
 
 // The following attributes are optional for the official manifest meta data
@@ -69,7 +69,7 @@ Open to ideas for additional controls!
 
 # Getting help #
 
-Help for this plugin may be found in the **#plugin-discussions** channel on the NINA project [Discord chat server](https://discord.com/invite/rWRbVbw) or by filing an issue report at this plugin's [Github repository](https://github.com/daleghent/nina-plugins/issues).")]
+Help for this plugin may be found in the **#plugin-discussions** channel on the NINA project [Discord chat server](https://discord.com/invite/rWRbVbw) or by filing an issue report at this plugin's [Github repository](https://github.com/daleghent/nina-planewave-tools/issues).")]
 
 // Setting ComVisible to false makes the types in this assembly not visible
 // to COM components.  If you need to access a type in this assembly from

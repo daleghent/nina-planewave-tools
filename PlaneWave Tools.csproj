@@ -336,6 +336,9 @@
       <Version>2.0.0.2001-beta</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="README.md" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
