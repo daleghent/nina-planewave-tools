@@ -1,0 +1,42 @@
+﻿<!--
+    Copyright Dale Ghent <daleg@elemental.org>
+
+    This Source Code Form is subject to the terms of the Mozilla Public
+    License, v. 2.0. If a copy of the MPL was not distributed with this
+    file, You can obtain one at http://mozilla.org/MPL/2.0/
+-->
+<ResourceDictionary
+    x:Class="DaleGhent.NINA.PlaneWaveTools.StartStopPwi4.StartStopPwi4Template"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:DaleGhent.NINA.PlaneWaveTools.StartStopPwi4"
+    xmlns:mini="clr-namespace:NINA.View.Sequencer.MiniSequencer;assembly=NINA.Sequencer"
+    xmlns:nina="clr-namespace:NINA.View.Sequencer;assembly=NINA.Sequencer">
+
+    <GeometryGroup x:Key="PWI4_SVG">
+        <PathGeometry Figures="M 24,8.792C 24,10.0827 23.7707,11.3547 23.312,12.604C 22.864,13.844 22.2187,14.8853 21.3747,15.7293C 20.208,16.8853 18.9067,17.7493 17.4787,18.3333C 16.0627,18.916 14.292,19.208 12.1667,19.208L 7.5,19.208L 7.5,28.688L 0,28.688L 0,-0.395996L 12.3547,-0.395996C 14.1973,-0.395996 15.7547,-0.234657 17.0213,0.0826721C 18.2973,0.40667 19.4213,0.885338 20.396,1.52133C 21.5627,2.28667 22.448,3.27067 23.0627,4.47867C 23.688,5.67734 24,7.11466 24,8.792 Z M 16.2507,8.95867C 16.2507,8.14001 16.0267,7.43734 15.584,6.85467C 15.136,6.26 14.6253,5.844 14.0413,5.604C 13.26,5.28667 12.5,5.11466 11.7507,5.08267C 11.0107,5.05733 10.0267,5.04133 8.792,5.04133L 7.5,5.04133L 7.5,13.7493L 9.64533,13.7493C 10.9213,13.7493 11.9693,13.6773 12.792,13.5213C 13.6253,13.3547 14.3227,13.0413 14.896,12.5827C 15.364,12.1667 15.708,11.6667 15.9173,11.0827C 16.136,10.5 16.2507,9.792 16.2507,8.95867 Z " />
+        <PathGeometry Figures="M 69.4587,-0.395996L 61.6253,28.688L 53.312,28.688L 48.104,9.74934L 43.0213,28.688L 34.7293,28.688L 26.896,-0.395996L 34.7293,-0.395996L 39.208,19.6253L 44.5413,-0.395996L 52.0213,-0.395996L 57.1253,19.6253L 61.812,-0.395996" />
+        <PathGeometry Figures="M 90.1773,28.688L 73.136,28.688L 73.136,23.5213L 77.9067,23.5213L 77.9067,4.77067L 73.136,4.77067L 73.136,-0.395996L 90.1773,-0.395996L 90.1773,4.77067L 85.4067,4.77067L 85.4067,23.5213L 90.1773,23.5213" />
+        <PathGeometry Figures="M 64.6613,73.1453L 58.3067,73.1453L 58.3067,84L 46.8493,84L 46.8493,73.1453L 24.3067,73.1453L 24.3067,64.3333L 46.0987,37.3333L 58.3067,37.3333L 58.3067,64.6453L 64.6613,64.6453M 46.8493,64.6453L 46.8493,47.8333L 33.3067,64.6453" />
+    </GeometryGroup>
+
+    <DataTemplate DataType="{x:Type local:StartPwi4}">
+        <nina:SequenceBlockView>
+        </nina:SequenceBlockView>
+    </DataTemplate>
+
+    <DataTemplate x:Key="DaleGhent.NINA.PlaneWaveTools.StartStopPwi4.StartPwi4_Mini">
+        <mini:MiniSequenceItem>
+        </mini:MiniSequenceItem>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type local:StopPwi4}">
+        <nina:SequenceBlockView>
+        </nina:SequenceBlockView>
+    </DataTemplate>
+
+    <DataTemplate x:Key="DaleGhent.NINA.PlaneWaveTools.StartStopPwi4.StopPwi4_Mini">
+        <mini:MiniSequenceItem>
+        </mini:MiniSequenceItem>
+    </DataTemplate>
+</ResourceDictionary>

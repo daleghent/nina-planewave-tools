@@ -19,9 +19,11 @@ using NINA.Sequencer.SequenceItem;
 using NINA.Sequencer.Validations;
 using System;
 using System.ComponentModel;
+using System.Net;
 using System.Net.Http;
 using System.Net.Sockets;
 using System.Reflection;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -29,31 +31,53 @@ namespace DaleGhent.NINA.PlaneWaveTools.Utility {
 
     public class Utilities {
 
-        public static async Task<bool> HttpGetRequestAsync(string host, ushort port, string url, CancellationToken ct) {
-            bool success = false;
+        public static async Task<HttpResponseMessage> HttpRequestAsync(string host, ushort port, string url, HttpMethod method, string body, CancellationToken ct) {
             var uri = new Uri($"http://{host}:{port}{url}");
 
             if (!uri.IsWellFormedOriginalString()) {
                 throw new SequenceEntityFailedException($"Invalid or malformed URL: {uri}");
             }
 
+            var request = new HttpRequestMessage(method, uri);
+
+            if (!string.IsNullOrEmpty(body)) {
+                request.Content = new StringContent(body, Encoding.UTF8, "application/json");
+            }
+
+            Logger.Debug($"Request URL: {request.Method} {request.RequestUri}");
+            if (request.Method != HttpMethod.Get && request.Method != HttpMethod.Head) {
+                Logger.Trace($"Request body:{Environment.NewLine}{request.Content?.ReadAsStringAsync().Result}");
+            }
+
             var client = new HttpClient();
-            var response = new HttpResponseMessage();
+            HttpResponseMessage response = null;
+            int i = 1;
 
-            Logger.Debug($"Querying: {uri}");
-            response = await client.GetAsync(uri, ct);
+            try {
+                response = await client.SendAsync(request, ct);
+            } catch (WebException ex) {
+                while (i < 4) {
+                    await Task.Delay(TimeSpan.FromSeconds(1), ct);
+                    Logger.Error($"HTTP request to {request.RequestUri} failed: {ex.Message}. Retry attempt {i}");
 
-            Logger.Debug($"Response header: {response.Headers}");
-            Logger.Debug($"Response body: {response.Content}");
+                    response = await client.SendAsync(request, ct);
+                    i++;
+                }
+            }
 
-            success = (int)response.StatusCode < 400
-                ? true
-                : throw new SequenceEntityFailedException($"API server returned error code {(int)response.StatusCode}");
-
-            response.Dispose();
             client.Dispose();
 
-            return success;
+            Logger.Debug($"Response status code: {response.StatusCode}");
+            Logger.Trace($"Response body:{Environment.NewLine}{response.Content?.ReadAsStringAsync().Result}");
+
+            return response;
+        }
+
+        public static async Task<bool> Pwi4CheckMountConnected(string host, ushort port, CancellationToken ct) {
+            var response = await HttpRequestAsync(host, port, "/status", HttpMethod.Get, null, ct);
+            string status = await response.Content.ReadAsStringAsync();
+
+            return status.Contains("mount.is_connected=true");
         }
 
         public static async Task<bool> TestTcpPort(string host, ushort port) {

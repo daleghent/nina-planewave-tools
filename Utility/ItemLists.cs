@@ -27,5 +27,28 @@ namespace DaleGhent.NINA.PlaneWaveTools.Utility {
             "Primary backplate",
             "Secondary mirror",
         };
+
+        public static readonly IList<string> AxisNames = new List<string> {
+            "Azimuth",
+            "Altitude",
+        };
+
+        public static readonly IList<string> AxisStates = new List<string> {
+            "Disable",
+            "Enable",
+        };
+
+        public static readonly IList<string> Mirrors = new List<string> {
+            "Primary mirror",
+            "Primary mirror backplate",
+            "Secondary mirror",
+        };
+
+        public static readonly IList<string> AmbientTemperatureSources = new List<string> {
+            "Delta-T ambient sensor",
+            "EFA ambient sensor",
+            "ASCOM Focuser sensor",
+            "N.I.N.A. weather source",
+        };
     }
 }

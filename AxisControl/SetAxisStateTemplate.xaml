@@ -1,0 +1,70 @@
+﻿<!--
+    Copyright Dale Ghent <daleg@elemental.org>
+
+    This Source Code Form is subject to the terms of the Mozilla Public
+    License, v. 2.0. If a copy of the MPL was not distributed with this
+    file, You can obtain one at http://mozilla.org/MPL/2.0/
+-->
+<ResourceDictionary
+    x:Class="DaleGhent.NINA.PlaneWaveTools.AxisControl.SetAxisStateTemplate"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ninactrl="clr-namespace:NINACustomControlLibrary;assembly=NINACustomControlLibrary"
+    xmlns:local="clr-namespace:DaleGhent.NINA.PlaneWaveTools.AxisControl"
+    xmlns:util="clr-namespace:DaleGhent.NINA.PlaneWaveTools.Utility"
+    xmlns:mini="clr-namespace:NINA.View.Sequencer.MiniSequencer;assembly=NINA.Sequencer"
+    xmlns:nina="clr-namespace:NINA.View.Sequencer;assembly=NINA.Sequencer">
+
+    <GeometryGroup x:Key="AltAz_SVG">
+        <PathGeometry Figures="M 42.2973,52.9213C 30.584,54.224 20.636,56.26 13.312,58.9267C 9.65067,60.26 6.636,61.728 4.28133,63.5773C 1.92667,65.4267 0,67.9733 0,71.1293C 0,73.3067 0.973333,75.2907 2.292,76.8067C 3.60933,78.328 5.28133,79.5307 7.25067,80.624C 11.188,82.8227 16.4013,84.588 22.74,86.0827C 35.4267,89.0773 52.5787,90.8693 71.536,90.8693C 90.5,90.8693 107.651,89.0773 120.339,86.0827C 126.677,84.588 131.891,82.8227 135.828,80.624C 137.797,79.5307 139.469,78.328 140.787,76.8067C 142.104,75.2907 143.079,73.3067 143.079,71.1293C 143.079,68.14 141.323,65.672 139.161,63.8747C 137,62.0773 134.24,60.6507 130.901,59.3533C 124.213,56.7547 115.156,54.7387 104.417,53.3587L 103.464,60.796C 113.803,62.124 122.437,64.1093 128.177,66.3427C 131.052,67.4573 133.188,68.6613 134.364,69.64C 135.547,70.6187 135.579,71.088 135.579,71.1293C 135.579,71.1613 135.609,71.328 135.12,71.8947C 134.631,72.4573 133.636,73.26 132.177,74.0773C 129.255,75.708 124.541,77.3853 118.615,78.7853C 106.76,81.5827 90.0213,83.3693 71.536,83.3693C 53.0573,83.3693 36.3173,81.5827 24.464,78.7853C 18.536,77.3853 13.8227,75.708 10.9013,74.0773C 9.44267,73.26 8.448,72.4573 7.95867,71.8947C 7.46933,71.328 7.5,71.1613 7.5,71.1293C 7.5,71.088 7.56267,70.5413 8.91733,69.4733C 10.2707,68.4107 12.6827,67.14 15.88,65.9733C 22.2813,63.64 31.812,61.6347 43.1253,60.3747" />
+        <PathGeometry Figures="M 49.1613,56.276L 30.9587,47.296L 32.4733,69.2027" />
+        <PathGeometry Figures="M 71.5307,-0.411987C 69.3493,-0.411987 67.3693,0.566681 65.8493,1.88535C 64.3333,3.19734 63.1307,4.86934 62.0307,6.83867C 59.8333,10.776 58.068,15.9893 56.5733,22.3333C 53.5787,35.0147 51.7867,52.172 51.7867,71.1293C 51.7867,90.088 53.5787,107.239 56.5733,119.927C 58.068,126.265 59.8333,131.479 62.0307,135.416C 63.1307,137.385 64.3333,139.057 65.8493,140.375C 67.3693,141.692 69.3493,142.667 71.5307,142.667C 74.5627,142.667 77.052,140.869 78.864,138.656C 80.6773,136.448 82.1147,133.624 83.4267,130.197C 86.0413,123.353 88.0627,114.061 89.4213,103.067L 81.9733,102.151C 80.6667,112.744 78.6773,121.609 76.4213,127.52C 75.292,130.473 74.068,132.676 73.068,133.9C 72.0627,135.124 71.5787,135.167 71.5307,135.167C 71.5,135.167 71.328,135.197 70.7653,134.708C 70.1973,134.219 69.396,133.228 68.5787,131.765C 66.948,128.843 65.2707,124.129 63.8747,118.203C 61.0787,106.348 59.2867,89.6093 59.2867,71.1293C 59.2867,52.6507 61.0787,35.9053 63.8747,24.0573C 65.2707,18.1293 66.948,13.416 68.5787,10.4947C 69.396,9.03067 70.1973,8.03601 70.7653,7.552C 71.328,7.06134 71.5,7.08801 71.5307,7.08801C 71.5733,7.08801 72.1973,7.18668 73.344,8.71867C 74.4893,10.2547 75.828,12.9373 77.036,16.4627C 79.4587,23.52 81.4733,33.9373 82.636,46.192L 90.0987,45.484C 88.9013,32.828 86.86,22 84.1307,14.0307C 82.7653,10.0467 81.2547,6.776 79.3547,4.23334C 77.4587,1.69202 74.844,-0.411987 71.5307,-0.411987 Z " />
+        <PathGeometry Figures="M 86.4787,52.156L 96.2653,34.3747L 74.312,34.9" />
+    </GeometryGroup>
+
+    <DataTemplate DataType="{x:Type local:SetAxisState}">
+        <nina:SequenceBlockView>
+            <nina:SequenceBlockView.SequenceItemContent>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock VerticalAlignment="Center" Text="Axis" />
+                    <ComboBox
+                        MinWidth="120"
+                        Margin="5,0,0,0"
+                        VerticalAlignment="Center"
+                        ItemsSource="{Binding AxisNames}"
+                        SelectedIndex="{Binding Axis}" />
+
+                    <TextBlock VerticalAlignment="Center" Margin="10,0,0,0" Text="|" />
+
+                    <TextBlock VerticalAlignment="Center" Margin="10,0,0,0" Text="State" />
+                    <ComboBox
+                        MinWidth="120"
+                        Margin="5,0,0,0"
+                        VerticalAlignment="Center"
+                        ItemsSource="{Binding AxisStates}"
+                        SelectedIndex="{Binding AxisState}" />
+
+                    <TextBlock VerticalAlignment="Center" Margin="10,0,0,0" Text="|" />
+
+                    <TextBlock VerticalAlignment="Center" Margin="10,0,0,0" Text="Connect PWI4 to mount first" />
+                    <CheckBox
+                        Margin="5,0,0,0"
+                        VerticalAlignment="Center"
+                        IsChecked="{Binding ConnectMount, UpdateSourceTrigger=PropertyChanged}" />
+                </StackPanel>
+            </nina:SequenceBlockView.SequenceItemContent>
+        </nina:SequenceBlockView>
+    </DataTemplate>
+
+    <DataTemplate x:Key="DaleGhent.NINA.PlaneWaveTools.AxisControl.SetAxisState_Mini">
+        <mini:MiniSequenceItem>
+            <mini:MiniSequenceItem.SequenceItemContent>
+                <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
+                    <TextBlock VerticalAlignment="Center" Text="{Binding Axis}" />
+                    <TextBlock VerticalAlignment="Center" Margin="5,0,5,0" Text="=" />
+                    <TextBlock VerticalAlignment="Center" Text="{Binding AxisState}" />
+                </StackPanel>
+            </mini:MiniSequenceItem.SequenceItemContent>
+        </mini:MiniSequenceItem>
+    </DataTemplate>
+</ResourceDictionary>

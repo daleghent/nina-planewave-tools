@@ -21,6 +21,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -71,7 +72,7 @@ namespace DaleGhent.NINA.PlaneWaveTools.DeltaT {
             CopyMetaData(copyMe);
         }
 
-        public override async Task Execute(IProgress<ApplicationStatus> progress, CancellationToken token) {
+        public override async Task Execute(IProgress<ApplicationStatus> progress, CancellationToken ct) {
             string mode = "off";
             string url = $"{pwi3UrlBase}&clientId={Pwi3ClientId}";
 
@@ -92,7 +93,7 @@ namespace DaleGhent.NINA.PlaneWaveTools.DeltaT {
             url += $"&index={DeltaTHeater}&mode={mode}";
 
             try {
-                await Utilities.HttpGetRequestAsync(Pwi3IpAddress, Pwi3Port, url, token);
+                await Utilities.HttpRequestAsync(Pwi3IpAddress, Pwi3Port, url, HttpMethod.Get, string.Empty, ct);
             } catch {
                 throw;
             }
@@ -102,10 +103,6 @@ namespace DaleGhent.NINA.PlaneWaveTools.DeltaT {
 
         public override object Clone() {
             return new DeltaTControl(this) {
-                Icon = Icon,
-                Name = Name,
-                Category = Category,
-                Description = Description,
                 DeltaTHeater = DeltaTHeater,
                 DeltaTHeaterMode = DeltaTHeaterMode,
             };

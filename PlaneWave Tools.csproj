@@ -65,6 +65,16 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AxisControl\SetAxisState.cs" />
+    <Compile Include="AxisControl\SetAxisStateTemplate.xaml.cs">
+      <DependentUpon>SetAxisStateTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="StartStopPwi4\StartPwi4.cs" />
+    <Compile Include="StartStopPwi4\StartStopPwi4Template.xaml.cs">
+      <DependentUpon>StartStopPwi4Template.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="StartStopPwi4\StopPwi4.cs" />
+    <Compile Include="Utility\Pwi3Status.cs" />
     <Compile Include="Utility\ItemLists.cs" />
     <Compile Include="DeltaT\DeltaTControlTemplate.xaml.cs">
       <DependentUpon>DeltaTControlTemplate.xaml</DependentUpon>
@@ -100,7 +110,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="AxisControl\SetAxisStateTemplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Options.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="StartStopPwi4\StartStopPwi4Template.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -114,34 +132,34 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="NINA.Astrometry">
-      <Version>2.0.0.2011-beta</Version>
+      <Version>2.0.0.2031-beta</Version>
     </PackageReference>
     <PackageReference Include="NINA.Core">
-      <Version>2.0.0.2011-beta</Version>
+      <Version>2.0.0.2031-beta</Version>
     </PackageReference>
     <PackageReference Include="NINA.Equipment">
-      <Version>2.0.0.2011-beta</Version>
+      <Version>2.0.0.2031-beta</Version>
     </PackageReference>
     <PackageReference Include="NINA.Image">
-      <Version>2.0.0.2011-beta</Version>
+      <Version>2.0.0.2031-beta</Version>
     </PackageReference>
     <PackageReference Include="NINA.MGEN">
-      <Version>2.0.0.2011-beta</Version>
+      <Version>2.0.0.2031-beta</Version>
     </PackageReference>
     <PackageReference Include="NINA.PlateSolving">
-      <Version>2.0.0.2011-beta</Version>
+      <Version>2.0.0.2031-beta</Version>
     </PackageReference>
     <PackageReference Include="NINA.Plugin">
-      <Version>2.0.0.2011-beta</Version>
+      <Version>2.0.0.2031-beta</Version>
     </PackageReference>
     <PackageReference Include="NINA.Profile">
-      <Version>2.0.0.2011-beta</Version>
+      <Version>2.0.0.2031-beta</Version>
     </PackageReference>
     <PackageReference Include="NINA.Sequencer">
-      <Version>2.0.0.2011-beta</Version>
+      <Version>2.0.0.2031-beta</Version>
     </PackageReference>
     <PackageReference Include="NINA.WPF.Base">
-      <Version>2.0.0.2011-beta</Version>
+      <Version>2.0.0.2031-beta</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
@@ -149,18 +167,18 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>
-			if not exist "%25localappdata%25\NINA\Plugins" (
-			echo "Creating $(PlatformName) Plugins folder"
-			mkdir  "%25localappdata%25\NINA\Plugins"
-			)
-			if not exist "%25localappdata%25\NINA\Plugin\$(TargetName)" (
-			echo "Creating $(PlatformName) Plugins $(TargetName) folder"
-			mkdir  "%25localappdata%25\NINA\Plugins\$(TargetName)"
-			)
+    <PostBuildEvent>if not exist "%25localappdata%25\NINA\Plugins" (
+    echo "Creating $(PlatformName) Plugins folder"
+    mkdir  "%25localappdata%25\NINA\Plugins"
+)
 
-			echo "Copying $(PlatformName) $(TargetFileName)"
-			xcopy "$(TargetPath)" "%25localappdata%25\NINA\Plugins\$(TargetName)" /h/i/c/k/e/r/y
+if not exist "%25localappdata%25\NINA\Plugin\$(TargetName)" (
+    echo "Creating $(PlatformName) Plugins $(TargetName) folder"
+    mkdir  "%25localappdata%25\NINA\Plugins\$(TargetName)"
+)
+
+echo "Copying $(PlatformName) $(TargetFileName)"
+xcopy "$(TargetPath)" "%25localappdata%25\NINA\Plugins\$(TargetName)" /h/i/c/k/e/r/y
 		</PostBuildEvent>
   </PropertyGroup>
 </Project>

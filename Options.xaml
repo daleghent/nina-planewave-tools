@@ -16,7 +16,7 @@
 
             <!--
             <TabItem Header="DeltaT Settings" Name="DeltaT">
-                <StackPanel DataContext="{Binding}" Orientation="Vertical" Margin="0,10,0,0">
+                <StackPanel Orientation="Vertical" Margin="0,10,0,0">
 
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
                         <TextBlock
@@ -57,13 +57,12 @@
                             </TextBox.Text>
                         </ninactrl:UnitTextBox>
                     </StackPanel>
-
                 </StackPanel>
             </TabItem>
             -->
-                
+
             <TabItem Header="Global Settings" Name="Global">
-                <StackPanel DataContext="{Binding}" Orientation="Vertical" Margin="0,10,0,0">
+                <StackPanel Orientation="Vertical" Margin="0,10,0,0">
 
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
                         <TextBlock
@@ -243,10 +242,8 @@
                         </StackPanel>
                     </GroupBox>
                     -->
-                    
                 </StackPanel>
             </TabItem>
-
         </TabControl>
     </DataTemplate>
 </ResourceDictionary>
