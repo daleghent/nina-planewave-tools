@@ -162,7 +162,6 @@
                         </StackPanel>
                     </GroupBox>
 
-                    <!--
                     <GroupBox Header="PWI4">
                         <StackPanel Orientation="Vertical" Margin="0,0,0,5">
                             <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
@@ -241,7 +240,6 @@
                             </StackPanel>
                         </StackPanel>
                     </GroupBox>
-                    -->
                 </StackPanel>
             </TabItem>
         </TabControl>
