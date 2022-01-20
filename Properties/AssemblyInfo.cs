@@ -6,8 +6,8 @@ using System.Runtime.InteropServices;
 
 // [MANDATORY] The assembly versioning
 //Should be incremented for each new release build of a plugin
-[assembly: AssemblyVersion("1.0.5.0")]
-[assembly: AssemblyFileVersion("1.0.5.0")]
+[assembly: AssemblyVersion("1.1.0.0")]
+[assembly: AssemblyFileVersion("1.1.0.0")]
 
 // [MANDATORY] The name of your plugin
 [assembly: AssemblyTitle("PlaneWave Tools")]
@@ -54,8 +54,7 @@ using System.Runtime.InteropServices;
 
 # Requirements #
 
-* PWI3 >= 3.5.0 for fan control
-* PWI3 >= 3.5.3 for fan and DeltaT control
+* PWI3 >= 3.5.3
 * PWI4 >= 4.0.11 beta 9
 
 # Sequence Instructions #
@@ -70,7 +69,7 @@ Open to ideas for additional controls!
 
 # Getting help #
 
-Help for this plugin may be found in the **#plugin-discussions** channel on the NINA project [Discord chat server](https://discord.com/invite/rWRbVbw) or by filing an issue report at this plugin's [Github repository](https://github.com/daleghent/nina-planewave-tools/issues).")]
+Help for this plugin may be found in the **#plugin-discussions** channel on the NINA project [Discord chat server](https://discord.gg/nighttime-imaging) or by filing an issue report at this plugin's [Github repository](https://github.com/daleghent/nina-planewave-tools/issues).")]
 
 // Setting ComVisible to false makes the types in this assembly not visible
 // to COM components.  If you need to access a type in this assembly from
