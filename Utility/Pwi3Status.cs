@@ -22,12 +22,12 @@ namespace DaleGhent.NINA.PlaneWaveTools.Utility {
         public Pwi3Status() {
         }
 
-        public System DeserializeStatus(string xml) {
+        public Pwi3Status.System DeserializeStatus(string xml) {
             XmlSerializer serializer = new XmlSerializer(typeof(System));
 
             using (TextReader textReader = new StringReader(xml)) {
                 var xmlReader = XmlReader.Create(textReader);
-                return (System)serializer.Deserialize(xmlReader);
+                return (Pwi3Status.System)serializer.Deserialize(xmlReader);
             }
         }
 

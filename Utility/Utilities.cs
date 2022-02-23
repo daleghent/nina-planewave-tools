@@ -73,6 +73,13 @@ namespace DaleGhent.NINA.PlaneWaveTools.Utility {
             return response;
         }
 
+        public static async Task<Pwi3Status.System> Pwi3GetStatus(string host, ushort port, CancellationToken ct) {
+            var response = await HttpRequestAsync(host, port, "/", HttpMethod.Get, string.Empty, ct);
+            var pwi3Status = new Pwi3Status();
+
+            return pwi3Status.DeserializeStatus(await response.Content.ReadAsStringAsync());
+        }
+
         public static async Task<bool> Pwi4CheckMountConnected(string host, ushort port, CancellationToken ct) {
             var response = await HttpRequestAsync(host, port, "/status", HttpMethod.Get, null, ct);
             string status = await response.Content.ReadAsStringAsync();

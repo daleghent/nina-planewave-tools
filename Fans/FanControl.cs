@@ -61,10 +61,34 @@ namespace DaleGhent.NINA.PlaneWaveTools.Fans {
 
         public override async Task Execute(IProgress<ApplicationStatus> progress, CancellationToken ct) {
             string url = $"{pwi3UrlBase}&clientId={Pwi3ClientId}";
-            url += $"&mode={(FanState ? "normal" : "off")}";
+            var fanStateString = FanState ? "normal" : "off";
+            url += $"&mode={fanStateString}";
 
             try {
                 await Utilities.HttpRequestAsync(Pwi3IpAddress, Pwi3Port, url, HttpMethod.Get, string.Empty, ct);
+                byte attempts = 0;
+
+                do {
+                    if (attempts > 10) {
+                        throw new SequenceEntityFailedException($"Waited too long for fans to change state to {fanStateString}");
+                    }
+
+                    await Task.Delay(TimeSpan.FromSeconds(1), ct);
+
+                    var pwi3Status = await Utilities.Pwi3GetStatus(Pwi3IpAddress, Pwi3Port, ct);
+
+                    if (string.IsNullOrEmpty(pwi3Status.Status.Fans)) {
+                        throw new SequenceEntityFailedException($"Attempted to set fans to {fanStateString} but no fans appear to be connected in PWI3");
+                    }
+
+                    if (pwi3Status.Status.Fans.Equals(fanStateString)) {
+                        Logger.Info($"PWI3 fans have been set to {fanStateString}");
+                        break;
+                    }
+
+                    Logger.Debug($"PWI3 fan state: Requested = {fanStateString}, PWI3 = {pwi3Status.Status.Fans}");
+                    attempts++;
+                } while (true);
             } catch {
                 throw;
             }

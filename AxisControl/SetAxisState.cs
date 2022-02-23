@@ -116,6 +116,8 @@ namespace DaleGhent.NINA.PlaneWaveTools.AxisControl {
                 if (!response.IsSuccessStatusCode) {
                     throw new SequenceEntityFailedException($"PWI4 returned status {response.StatusCode} for {url}");
                 }
+
+                await Task.Delay(TimeSpan.FromSeconds(5), ct);
             } catch {
                 throw;
             }

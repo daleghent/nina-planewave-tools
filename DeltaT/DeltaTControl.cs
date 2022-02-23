@@ -94,6 +94,7 @@ namespace DaleGhent.NINA.PlaneWaveTools.DeltaT {
 
             try {
                 await Utilities.HttpRequestAsync(Pwi3IpAddress, Pwi3Port, url, HttpMethod.Get, string.Empty, ct);
+                await Task.Delay(TimeSpan.FromSeconds(5), ct);
             } catch {
                 throw;
             }

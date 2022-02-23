@@ -1,5 +1,8 @@
 ﻿# PlaneWave Tools
 
+## 1.2.0.0 - 2022-02-23
+* Added a check and paused after issuing commands to PWI3 and PWI4 to allow them to process the request before moving on to the next instruction
+
 ## 1.1.0.0 - 2022-01-20
 * Added Start/Stop PWI4 instructions
 * Added **Set Axis State** instruction for enabling and disabling mount axes via PWI4
