@@ -1,5 +1,8 @@
 ﻿# PlaneWave Tools
 
+## 2.0.0.0 - 2022-11-12
+* Ported plugin to .NET 7 for NINA 3.0 compatibility
+
 ## 1.2.0.0 - 2022-02-23
 * Added a check and paused after issuing commands to PWI3 and PWI4 to allow them to process the request before moving on to the next instruction
 
