@@ -10,20 +10,16 @@
 
 #endregion "copyright"
 
-using NINA.Astrometry;
-using NINA.Core.Enum;
 using NINA.Core.Model;
 using NINA.Core.Utility;
-using NINA.Sequencer.Container;
-using NINA.Sequencer.SequenceItem;
-using NINA.Sequencer.Validations;
 using System;
-using System.ComponentModel;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Sockets;
-using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -46,7 +42,7 @@ namespace DaleGhent.NINA.PlaneWaveTools.Utility {
 
             Logger.Debug($"Request URL: {request.Method} {request.RequestUri}");
             if (request.Method != HttpMethod.Get && request.Method != HttpMethod.Head) {
-                Logger.Trace($"Request body:{Environment.NewLine}{request.Content?.ReadAsStringAsync().Result}");
+                Logger.Trace($"Request body:{Environment.NewLine}{request.Content?.ReadAsStringAsync(ct).Result}");
             }
 
             var client = new HttpClient();
@@ -68,7 +64,7 @@ namespace DaleGhent.NINA.PlaneWaveTools.Utility {
             client.Dispose();
 
             Logger.Debug($"Response status code: {response.StatusCode}");
-            Logger.Trace($"Response body:{Environment.NewLine}{response.Content?.ReadAsStringAsync().Result}");
+            Logger.Trace($"Response body:{Environment.NewLine}{response.Content?.ReadAsStringAsync(ct).Result}");
 
             return response;
         }
@@ -77,14 +73,27 @@ namespace DaleGhent.NINA.PlaneWaveTools.Utility {
             var response = await HttpRequestAsync(host, port, "/", HttpMethod.Get, string.Empty, ct);
             var pwi3Status = new Pwi3Status();
 
-            return pwi3Status.DeserializeStatus(await response.Content.ReadAsStringAsync());
+            return pwi3Status.DeserializeStatus(await response.Content.ReadAsStringAsync(ct));
         }
 
-        public static async Task<bool> Pwi4CheckMountConnected(string host, ushort port, CancellationToken ct) {
-            var response = await HttpRequestAsync(host, port, "/status", HttpMethod.Get, null, ct);
-            string status = await response.Content.ReadAsStringAsync();
+        public static async Task<Dictionary<string, string>> Pwi4GetStatus(string host, ushort port, CancellationToken ct) {
+            var response = await HttpRequestAsync(host, port, "/status", HttpMethod.Get, string.Empty, ct);
+            var status = await response.Content.ReadAsStringAsync(ct);
 
-            return status.Contains("mount.is_connected=true");
+            var dic = new Regex(@"^(.*)=(.*)$", RegexOptions.Multiline).Matches(status).Cast<Match>().ToDictionary(x => x.Groups[1].Value.Trim(), x => x.Groups[2].Value.Trim());
+            Logger.Trace(string.Join(Environment.NewLine, dic.Select(pair => $"{pair.Key} => {pair.Value}")));
+
+            return dic;
+        }
+
+        public static bool Pwi4CheckMountConnected(string host, ushort port, CancellationToken ct) {
+            var status = new Dictionary<string, string>();
+
+            Task.Run(async () => {
+                var status = await Pwi4GetStatus(host, port, ct);
+            }, ct).Wait(ct);
+
+            return Convert.ToBoolean(status["mount.is_connected"]);
         }
 
         public static async Task<bool> TestTcpPort(string host, ushort port) {

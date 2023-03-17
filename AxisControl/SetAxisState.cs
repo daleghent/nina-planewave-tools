@@ -83,7 +83,7 @@ namespace DaleGhent.NINA.PlaneWaveTools.AxisControl {
         public override async Task Execute(IProgress<ApplicationStatus> progress, CancellationToken ct) {
             string url = string.Empty;
 
-            if (!await Utilities.Pwi4CheckMountConnected(Pwi4IpAddress, Pwi4Port, ct) && ConnectMount) {
+            if (!Utilities.Pwi4CheckMountConnected(Pwi4IpAddress, Pwi4Port, ct) && ConnectMount) {
                 try {
                     url = "/mount/connect";
                     var response = await Utilities.HttpRequestAsync(Pwi4IpAddress, Pwi4Port, url, HttpMethod.Get, string.Empty, ct);
