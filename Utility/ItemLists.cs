@@ -51,9 +51,9 @@ namespace DaleGhent.NINA.PlaneWaveTools.Utility {
             "N.I.N.A. weather source",
         };
 
-        public static readonly IList<string> M3Ports = new List<string> {
-            "1",
-            "2",
+        public static readonly IList<short> M3Ports = new List<short> {
+            1,
+            2,
         };
     }
 }
