@@ -6,8 +6,8 @@ using System.Runtime.InteropServices;
 
 // [MANDATORY] The assembly versioning
 //Should be incremented for each new release build of a plugin
-[assembly: AssemblyVersion("1.2.0.0")]
-[assembly: AssemblyFileVersion("1.2.0.0")]
+[assembly: AssemblyVersion("1.3.0.0")]
+[assembly: AssemblyFileVersion("1.3.0.0")]
 
 // [MANDATORY] The name of your plugin
 [assembly: AssemblyTitle("PlaneWave Tools")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCompany("Dale Ghent")]
 // The product name that this plugin is part of
 [assembly: AssemblyProduct("PlaneWave Tools")]
-[assembly: AssemblyCopyright("Copyright © 2021 Dale Ghent")]
+[assembly: AssemblyCopyright("Copyright © 2023 Dale Ghent")]
 
 // The minimum Version of N.I.N.A. that this plugin is compatible with
 [assembly: AssemblyMetadata("MinimumApplicationVersion", "2.0.0.2031")]
@@ -64,6 +64,7 @@ using System.Runtime.InteropServices;
 * Axis Control - Enable or disable mount axes
 * Fan Control - Turns the OTA fans on or off
 * DeltaT Control - Sets the per-heater operating modes of the Delta T heater controller
+* M3 Control - Sets the postions of the M3 Nasmyth port mirror
 
 Open to ideas for additional controls!
 
@@ -80,4 +81,4 @@ Help for this plugin may be found in the **#plugin-discussions** channel on the 
 // [Unused]
 [assembly: AssemblyTrademark("")]
 // [Unused]
-[assembly: AssemblyCulture("")] 
+[assembly: AssemblyCulture("")]
