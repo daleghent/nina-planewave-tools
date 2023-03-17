@@ -69,6 +69,10 @@
     <Compile Include="AxisControl\SetAxisStateTemplate.xaml.cs">
       <DependentUpon>SetAxisStateTemplate.xaml</DependentUpon>
     </Compile>
+    <Compile Include="M3\M3Control.cs" />
+    <Compile Include="M3\M3ControlTemplate.xaml.cs">
+      <DependentUpon>M3ControlTemplate.xaml</DependentUpon>
+    </Compile>
     <Compile Include="StartStopPwi4\StartPwi4.cs" />
     <Compile Include="StartStopPwi4\StartStopPwi4Template.xaml.cs">
       <DependentUpon>StartStopPwi4Template.xaml</DependentUpon>
@@ -111,6 +115,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="AxisControl\SetAxisStateTemplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="M3\M3ControlTemplate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

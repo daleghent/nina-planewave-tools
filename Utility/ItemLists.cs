@@ -50,5 +50,10 @@ namespace DaleGhent.NINA.PlaneWaveTools.Utility {
             "ASCOM Focuser sensor",
             "N.I.N.A. weather source",
         };
+
+        public static readonly IList<string> M3Ports = new List<string> {
+            "1",
+            "2",
+        };
     }
 }
