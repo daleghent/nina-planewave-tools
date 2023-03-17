@@ -16,6 +16,7 @@ using NINA.Core.Model;
 using NINA.Core.Utility;
 using NINA.Sequencer.SequenceItem;
 using NINA.Sequencer.Validations;
+using Nito.AsyncEx;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -36,7 +37,7 @@ namespace DaleGhent.NINA.PlaneWaveTools.M3 {
     [Export(typeof(ISequenceItem))]
     [JsonObject(MemberSerialization.OptIn)]
     public class M3Control : SequenceItem, IValidatable, INotifyPropertyChanged {
-        private short m3Port = 0;
+        private short m3Port = 1;
 
         [ImportingConstructor]
         public M3Control() {
@@ -70,6 +71,8 @@ namespace DaleGhent.NINA.PlaneWaveTools.M3 {
 
                 // Send API call to change the active M3 Nasmyth port
                 string url = $"/m3/goto?port={M3Port}";
+
+                progress?.Report(new ApplicationStatus() { Status = $"Moving M3 to port {M3Port}" });
                 var response = await Utilities.HttpRequestAsync(Pwi4IpAddress, Pwi4Port, url, HttpMethod.Get, string.Empty, ct);
 
                 if (!response.IsSuccessStatusCode) {
@@ -92,12 +95,14 @@ namespace DaleGhent.NINA.PlaneWaveTools.M3 {
                 } while (portStatus != M3Port);
             } catch {
                 throw;
+            } finally {
+                progress?.Report(new ApplicationStatus() { Status = string.Empty });
             }
 
             return;
         }
 
-        public IList<string> M3Ports => ItemLists.M3Ports;
+        public IList<short> M3Ports => ItemLists.M3Ports;
 
         private M3Control(M3Control copyMe) : this() {
             CopyMetaData(copyMe);

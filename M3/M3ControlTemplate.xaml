@@ -23,7 +23,7 @@
                         Margin="5,0,0,0"
                         VerticalAlignment="Center"
                         ItemsSource="{Binding M3Ports}"
-                        SelectedIndex="{Binding M3Port}" />
+                        SelectedItem="{Binding M3Port}" />
                 </StackPanel>
             </nina:SequenceBlockView.SequenceItemContent>
         </nina:SequenceBlockView>
