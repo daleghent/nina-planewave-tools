@@ -1,5 +1,8 @@
 ﻿# PlaneWave Tools
 
+## 2.1.0.0 - 2023-03-16
+* Add **M3 Control** instruction to set the position of the M3 Nasmyth port mirror
+
 ## 2.0.0.0 - 2022-11-12
 * Ported plugin to .NET 7 for NINA 3.0 compatibility
 
