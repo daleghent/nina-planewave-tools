@@ -16,7 +16,6 @@ using NINA.Core.Model;
 using NINA.Core.Utility;
 using NINA.Sequencer.SequenceItem;
 using NINA.Sequencer.Validations;
-using Nito.AsyncEx;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -102,7 +101,7 @@ namespace DaleGhent.NINA.PlaneWaveTools.M3 {
             return;
         }
 
-        public IList<short> M3Ports => ItemLists.M3Ports;
+        public static IList<short> M3Ports => ItemLists.M3Ports;
 
         private M3Control(M3Control copyMe) : this() {
             CopyMetaData(copyMe);
@@ -161,7 +160,7 @@ namespace DaleGhent.NINA.PlaneWaveTools.M3 {
         private ushort Pwi4Port { get; set; }
 
         private short GetM3PortStatus(CancellationToken ct) {
-            Dictionary<string, string> status = new Dictionary<string, string>();
+            Dictionary<string, string> status = new();
 
             Task.Run(async () => {
                 status = await Utilities.Pwi4GetStatus(Pwi4IpAddress, Pwi4Port, ct);

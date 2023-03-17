@@ -25,7 +25,7 @@ using System.Threading.Tasks;
 
 namespace DaleGhent.NINA.PlaneWaveTools.Utility {
 
-    public class Utilities {
+    public partial class Utilities {
 
         public static async Task<HttpResponseMessage> HttpRequestAsync(string host, ushort port, string url, HttpMethod method, string body, CancellationToken ct) {
             var uri = new Uri($"http://{host}:{port}{url}");
@@ -80,7 +80,7 @@ namespace DaleGhent.NINA.PlaneWaveTools.Utility {
             var response = await HttpRequestAsync(host, port, "/status", HttpMethod.Get, string.Empty, ct);
             var status = await response.Content.ReadAsStringAsync(ct);
 
-            var dic = new Regex(@"^(.*)=(.*)$", RegexOptions.Multiline).Matches(status).Cast<Match>().ToDictionary(x => x.Groups[1].Value.Trim(), x => x.Groups[2].Value.Trim());
+            var dic = StatusRegex().Matches(status).Cast<Match>().ToDictionary(x => x.Groups[1].Value.Trim(), x => x.Groups[2].Value.Trim());
             Logger.Trace(string.Join(Environment.NewLine, dic.Select(pair => $"{pair.Key} => {pair.Value}")));
 
             return dic;
@@ -114,5 +114,8 @@ namespace DaleGhent.NINA.PlaneWaveTools.Utility {
 
             return success;
         }
+
+        [GeneratedRegex("^(.*)=(.*)$", RegexOptions.Multiline)]
+        private static partial Regex StatusRegex();
     }
 }
