@@ -32,7 +32,7 @@ using System.Web;
 
 namespace DaleGhent.NINA.PlaneWaveTools.Tracking {
 
-    [ExportMetadata("Name", "Set tracking")]
+    [ExportMetadata("Name", "Set Tracking")]
     [ExportMetadata("Description", "Start or stop tracking")]
     [ExportMetadata("Icon", "SpeedometerSVG")]
     [ExportMetadata("Category", "PlaneWave Tools")]

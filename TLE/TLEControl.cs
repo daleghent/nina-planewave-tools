@@ -131,7 +131,7 @@ namespace DaleGhent.NINA.PlaneWaveTools.TLE {
                     if (Math.Abs(axis0Distance) > 5 || Math.Abs(axis1Distance) > 5)
                         _tracking = DateTime.Now;
                     if (_timeout.AddMinutes(1) < DateTime.Now)
-                        throw new SequenceEntityFailedException("Timed out after 1 minute.");
+                        throw new SequenceEntityFailedException("Timed out after 1 minute trying to follow the target.");
                 } while (_tracking.AddSeconds(3) > DateTime.Now);
             } catch {
                 // Stop tracking for safety
@@ -143,8 +143,6 @@ namespace DaleGhent.NINA.PlaneWaveTools.TLE {
 
             return;
         }
-
-        public IList<short> M3Ports => ItemLists.M3Ports;
 
         private TLEControl(TLEControl copyMe) : this() {
             CopyMetaData(copyMe);

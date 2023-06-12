@@ -20,11 +20,11 @@
                     <TextBlock VerticalAlignment="Center" Text="Satellite" />
                     <StackPanel Orientation="Horizontal">
                         <TextBlock VerticalAlignment="Center" Text="Line1" />
-                        <TextBox Margin="10,0,0,0" VerticalAlignment="Center" Text="{Binding Line1}" />
+                        <TextBox MinWidth="200" Margin="10,0,0,0" VerticalAlignment="Center" Text="{Binding Line1}" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock VerticalAlignment="Center" Text="Line2" />
-                        <TextBox Margin="10,0,0,0" VerticalAlignment="Center" Text="{Binding Line2}" />
+                        <TextBox MinWidth="200" Margin="10,0,0,0" VerticalAlignment="Center" Text="{Binding Line2}" />
                     </StackPanel>
                 </StackPanel>
             </nina:SequenceBlockView.SequenceItemContent>
