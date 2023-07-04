@@ -59,6 +59,7 @@
     <Reference Include="System.Numerics" />
     <Reference Include="System.Printing" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
@@ -78,6 +79,14 @@
       <DependentUpon>StartStopPwi4Template.xaml</DependentUpon>
     </Compile>
     <Compile Include="StartStopPwi4\StopPwi4.cs" />
+    <Compile Include="TLE\TLEControl.cs" />
+    <Compile Include="TLE\TLEControlTemplate.xaml.cs">
+      <DependentUpon>TLEControlTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tracking\TrackingTemplate.xaml.cs">
+      <DependentUpon>TrackingTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tracking\Tracking.cs" />
     <Compile Include="Utility\Pwi3Status.cs" />
     <Compile Include="Utility\ItemLists.cs" />
     <Compile Include="DeltaT\DeltaTControlTemplate.xaml.cs">
@@ -131,6 +140,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="StartStopPwi3\StartStopPwi3Template.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TLE\TLEControlTemplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Tracking\TrackingTemplate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
