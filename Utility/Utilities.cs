@@ -14,6 +14,7 @@ using NINA.Core.Model;
 using NINA.Core.Utility;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -77,6 +78,10 @@ namespace DaleGhent.NINA.PlaneWaveTools.Utility {
         }
 
         public static async Task<Dictionary<string, string>> Pwi4GetStatus(string host, ushort port, CancellationToken ct) {
+            if (Process.GetProcessesByName("PWI4").Length < 1) {
+                throw new Exception("PWI4 is not running");
+            }
+
             var response = await HttpRequestAsync(host, port, "/status", HttpMethod.Get, string.Empty, ct);
             var status = await response.Content.ReadAsStringAsync(ct);
 

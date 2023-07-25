@@ -140,7 +140,40 @@ namespace DaleGhent.NINA.PlaneWaveTools.AxisControl {
         public IList<string> Issues { get; set; } = new ObservableCollection<string>();
 
         public bool Validate() {
-            return true;
+            var i = new List<string>();
+            var status = new Dictionary<string, string>();
+
+            Task.Run(async () => {
+                try {
+                    status = await Utilities.Pwi4GetStatus(Pwi4IpAddress, Pwi4Port, CancellationToken.None);
+                } catch (HttpRequestException) {
+                    i.Add("Could not communicate with PWI4");
+                } catch (Exception ex) {
+                    i.Add($"{ex.Message}");
+                }
+            }).Wait();
+
+            if (i.Count > 0) {
+                goto end;
+            }
+
+            if (!bool.TryParse(status["mount.is_connected"], out bool mountConnected)) {
+                i.Add("Unable to determine mount connection status");
+                goto end;
+            }
+
+            if (!mountConnected) {
+                i.Add("PWI4 is not connected to the mount");
+                goto end;
+            }
+
+        end:
+            if (i != Issues) {
+                Issues = i;
+                RaisePropertyChanged(nameof(Issues));
+            }
+
+            return i.Count == 0;
         }
 
         private string Pwi4IpAddress { get; set; }
