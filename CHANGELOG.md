@@ -1,7 +1,10 @@
 ﻿# PlaneWave Tools
 
+## 2.2.0.0 - 2023-07-??
+* Added **TLE** and PlaneWave-specific **Set Tracking** instructions to enable the input and tracking of objects via Two-Line Element ephemeris definitions. Thanks to Nick Hardy for providing these.
+
 ## 2.1.0.0 - 2023-03-16
-* Add **M3 Control** instruction to set the position of the M3 Nasmyth port mirror
+* Added **M3 Control** instruction to set the position of the M3 Nasmyth port mirror
 
 ## 2.0.0.0 - 2022-11-12
 * Ported plugin to .NET 7 for NINA 3.0 compatibility
