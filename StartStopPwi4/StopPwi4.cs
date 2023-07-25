@@ -62,10 +62,21 @@ namespace DaleGhent.NINA.PlaneWaveTools.StartStopPwi4 {
         public IList<string> Issues { get; set; } = new ObservableCollection<string>();
 
         public bool Validate() {
-            return true;
+            var i = new List<string>();
+
+            if (Process.GetProcessesByName("PWI4").Length < 1) {
+                i.Add("PWI4 is not running");
+            }
+
+            if (i != Issues) {
+                Issues = i;
+                RaisePropertyChanged(nameof(Issues));
+            }
+
+            return i.Count == 0;
         }
 
-        private void KillPwi4() {
+        private static void KillPwi4() {
             var apcc = Process.GetProcessesByName("PWI4");
 
             try {
