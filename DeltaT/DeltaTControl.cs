@@ -64,8 +64,8 @@ namespace DaleGhent.NINA.PlaneWaveTools.DeltaT {
             }
         }
 
-        public IList<string> DeltaTHeaters => ItemLists.DeltaTHeaters;
-        public IList<string> DeltaTHeaterModes => ItemLists.DeltaTHeaterModes;
+        public static IList<string> DeltaTHeaters => ItemLists.DeltaTHeaters;
+        public static IList<string> DeltaTHeaterModes => ItemLists.DeltaTHeaterModes;
 
         private DeltaTControl(DeltaTControl copyMe) : this() {
             CopyMetaData(copyMe);

@@ -73,8 +73,8 @@ namespace DaleGhent.NINA.PlaneWaveTools.AxisControl {
             }
         }
 
-        public IList<string> AxisNames => ItemLists.AxisNames;
-        public IList<string> AxisStates => ItemLists.AxisStates;
+        public static IList<string> AxisNames => ItemLists.AxisNames;
+        public static IList<string> AxisStates => ItemLists.AxisStates;
 
         private SetAxisState(SetAxisState copyMe) : this() {
             CopyMetaData(copyMe);

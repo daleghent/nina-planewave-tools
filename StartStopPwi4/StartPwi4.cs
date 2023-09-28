@@ -96,14 +96,18 @@ namespace DaleGhent.NINA.PlaneWaveTools.StartStopPwi4 {
         public IList<string> Issues { get; set; } = new ObservableCollection<string>();
 
         public bool Validate() {
-            bool passes = true;
+            var i = new List<string>();
 
             if (string.IsNullOrEmpty(Pwi4ExePath) || !File.Exists(Pwi4ExePath)) {
-                Issues.Add("Invalid location for PWI3.exe");
-                passes = false;
+                i.Add("Invalid location for PWI4.exe");
             }
 
-            return passes;
+            if (i != Issues) {
+                Issues = i;
+                RaisePropertyChanged(nameof(Issues));
+            }
+
+            return i.Count == 0;
         }
 
         private string Pwi4ExePath { get; set; }
@@ -111,10 +115,10 @@ namespace DaleGhent.NINA.PlaneWaveTools.StartStopPwi4 {
         private ushort Pwi4Port { get; set; }
 
         private void RunPwi3() {
-            var appm = new ProcessStartInfo(Pwi4ExePath);
+            var proc = new ProcessStartInfo(Pwi4ExePath);
 
             try {
-                var cmd = Process.Start(appm);
+                var cmd = Process.Start(proc);
                 Logger.Info($"{Pwi4ExePath} started with PID {cmd.Id}");
             } catch (Exception ex) {
                 throw new SequenceEntityFailedException(ex.Message);
@@ -125,15 +129,15 @@ namespace DaleGhent.NINA.PlaneWaveTools.StartStopPwi4 {
 
         private void SettingsChanged(object sender, PropertyChangedEventArgs e) {
             switch (e.PropertyName) {
-                case "Pwi4ExePath":
+                case nameof(Pwi4ExePath):
                     Pwi4ExePath = Properties.Settings.Default.Pwi4ExePath;
                     break;
 
-                case "Pwi4IpAddress":
+                case nameof(Pwi4IpAddress):
                     Pwi4IpAddress = Properties.Settings.Default.Pwi4IpAddress;
                     break;
 
-                case "Pwi4Port":
+                case nameof(Pwi4Port):
                     Pwi4Port = Properties.Settings.Default.Pwi4Port;
                     break;
             }
