@@ -56,6 +56,7 @@ using System.Runtime.InteropServices;
 
 * PWI3 >= 3.5.3
 * PWI4 >= 4.0.12
+* PlaneWave Shutter Control >= 1.12.0
 
 # Sequence Instructions #
 
@@ -65,6 +66,8 @@ using System.Runtime.InteropServices;
 * Fan Control - Turns the OTA fans on or off
 * DeltaT Control - Sets the per-heater operating modes of the Delta T heater controller
 * M3 Control - Sets the postions of the M3 Nasmyth port mirror
+* Shutter Control - Controls CDK700 and PW1000 shutters via the PlaneWave Shutter Control app
+* TLE Follow, Set Tracking - Programs the mount to follow a two-line element ephemeris definition and start tracking along it
 
 Open to ideas for additional controls!
 

@@ -55,5 +55,10 @@ namespace DaleGhent.NINA.PlaneWaveTools.Utility {
             1,
             2,
         };
+
+        public static readonly IList<string> ShutterActions = new List<string> {
+            "Open",
+            "Close",
+        };
     }
 }

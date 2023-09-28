@@ -12,7 +12,7 @@ namespace DaleGhent.NINA.PlaneWaveTools.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.0.3.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.7.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -140,6 +140,43 @@ namespace DaleGhent.NINA.PlaneWaveTools.Properties {
             }
             set {
                 this["Pwi4Port"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("127.0.0.1")]
+        public string PwscIpAddress {
+            get {
+                return ((string)(this["PwscIpAddress"]));
+            }
+            set {
+                this["PwscIpAddress"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("9897")]
+        public ushort PwscPort {
+            get {
+                return ((ushort)(this["PwscPort"]));
+            }
+            set {
+                this["PwscPort"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Program Files (x86)\\PlaneWave Instruments\\PlaneWave Shutter Control\\PWShutter." +
+            "exe")]
+        public string PwscExePath {
+            get {
+                return ((string)(this["PwscExePath"]));
+            }
+            set {
+                this["PwscExePath"] = value;
             }
         }
     }

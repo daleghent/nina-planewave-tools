@@ -38,6 +38,8 @@ namespace DaleGhent.NINA.PlaneWaveTools {
             }
 
             Pwi3ExePathDialogCommand = new RelayCommand(OpenPwi3ExePathDialog);
+            Pwi4ExePathDialogCommand = new RelayCommand(OpenPwi4ExePathDialog);
+            PwscExePathDialogCommand = new RelayCommand(OpenPwscExePathDialog);
         }
 
         public string Pwi3ExePath {
@@ -103,6 +105,33 @@ namespace DaleGhent.NINA.PlaneWaveTools {
             }
         }
 
+        public string PwscExePath {
+            get => Properties.Settings.Default.PwscExePath;
+            set {
+                Properties.Settings.Default.PwscExePath = value;
+                CoreUtil.SaveSettings(Properties.Settings.Default);
+                RaisePropertyChanged();
+            }
+        }
+
+        public string PwscIpAddress {
+            get => Properties.Settings.Default.PwscIpAddress;
+            set {
+                Properties.Settings.Default.PwscIpAddress = value;
+                CoreUtil.SaveSettings(Properties.Settings.Default);
+                RaisePropertyChanged();
+            }
+        }
+
+        public ushort PwscPort {
+            get => Properties.Settings.Default.PwscPort;
+            set {
+                Properties.Settings.Default.PwscPort = value;
+                CoreUtil.SaveSettings(Properties.Settings.Default);
+                RaisePropertyChanged();
+            }
+        }
+
         public int DeltaTDefaultPrimaryPowerLevel {
             get => Properties.Settings.Default.DeltaTDefaultPrimaryPowerLevel;
             set {
@@ -122,7 +151,7 @@ namespace DaleGhent.NINA.PlaneWaveTools {
         }
 
         private void OpenPwi3ExePathDialog(object obj) {
-            Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog {
+            Microsoft.Win32.OpenFileDialog dialog = new() {
                 FileName = string.Empty,
                 InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86),
                 Filter = "Any Program|*.exe"
@@ -133,7 +162,33 @@ namespace DaleGhent.NINA.PlaneWaveTools {
             }
         }
 
+        private void OpenPwi4ExePathDialog(object obj) {
+            Microsoft.Win32.OpenFileDialog dialog = new() {
+                FileName = string.Empty,
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86),
+                Filter = "Any Program|*.exe"
+            };
+
+            if (dialog.ShowDialog() == true) {
+                Pwi4ExePath = dialog.FileName;
+            }
+        }
+
+        private void OpenPwscExePathDialog(object obj) {
+            Microsoft.Win32.OpenFileDialog dialog = new() {
+                FileName = string.Empty,
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86),
+                Filter = "Any Program|*.exe"
+            };
+
+            if (dialog.ShowDialog() == true) {
+                PwscExePath = dialog.FileName;
+            }
+        }
+
         public ICommand Pwi3ExePathDialogCommand { get; private set; }
+        public ICommand Pwi4ExePathDialogCommand { get; private set; }
+        public ICommand PwscExePathDialogCommand { get; private set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

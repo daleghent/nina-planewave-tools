@@ -240,6 +240,85 @@
                             </StackPanel>
                         </StackPanel>
                     </GroupBox>
+
+                    <GroupBox Header="Shutter Control">
+                        <StackPanel Orientation="Vertical" Margin="0,0,0,5">
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Right"
+                                    Width="110">
+                                    <TextBlock.Text>PWSC host</TextBlock.Text>
+                                    <TextBlock.ToolTip>PlaneWave Shutter Control hostname or IP</TextBlock.ToolTip>
+                                </TextBlock>
+                                <TextBox
+                                    Margin="5,0,0,0"
+                                    Width="400"
+                                    VerticalAlignment="Center"
+                                    VerticalContentAlignment="Center">
+                                    <TextBox.Text>
+                                        <Binding Path="PwscIpAddress" />
+                                    </TextBox.Text>
+                                </TextBox>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Right"
+                                    Width="110">
+                                    <TextBlock.Text>PWSC port</TextBlock.Text>
+                                    <TextBlock.ToolTip>PlaneWave Shutter Control service port</TextBlock.ToolTip>
+                                </TextBlock>
+                                <TextBox
+                                    Margin="5,0,0,0"
+                                    Width="75"
+                                    VerticalAlignment="Center"
+                                    VerticalContentAlignment="Center">
+                                    <TextBox.Text>
+                                        <Binding Path="PwscPort" />
+                                    </TextBox.Text>
+                                </TextBox>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    Width="110">
+                                    <TextBlock.Text>PWSC location</TextBlock.Text>
+                                    <TextBlock.ToolTip>The location of PWShutter.exe if it is somewhere other than its default location</TextBlock.ToolTip>
+                                </TextBlock>
+
+                                <TextBox
+                                    Margin="5,0,0,0"
+                                    Width="500"
+                                    VerticalAlignment="Center"
+                                    VerticalContentAlignment="Center">
+                                    <TextBox.Text>
+                                        <Binding Path="PwscExePath" UpdateSourceTrigger="LostFocus">
+                                            <Binding.ValidationRules>
+                                                <rules:FileExistsRule />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+
+                                <Button
+                                    Width="30"
+                                    Height="30"
+                                    Margin="5,0,0,0"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Command="{Binding PwscExePathDialogCommand}">
+                                    <Path
+                                        Margin="4,17,4,4"
+                                        Data="{StaticResource DotsSVG}"
+                                        Fill="{StaticResource ButtonForegroundBrush}"
+                                        Stretch="Uniform" />
+                                </Button>
+                            </StackPanel>
+                        </StackPanel>
+                    </GroupBox>
                 </StackPanel>
             </TabItem>
         </TabControl>
