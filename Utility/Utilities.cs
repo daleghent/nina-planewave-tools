@@ -71,6 +71,10 @@ namespace DaleGhent.NINA.PlaneWaveTools.Utility {
         }
 
         public static async Task<Pwi3Status.System> Pwi3GetStatus(string host, ushort port, CancellationToken ct) {
+            if (Process.GetProcessesByName("PWI3").Length < 1) {
+                throw new Exception("PWI3 is not running");
+            }
+
             var response = await HttpRequestAsync(host, port, "/", HttpMethod.Get, string.Empty, ct);
             var pwi3Status = new Pwi3Status();
 
