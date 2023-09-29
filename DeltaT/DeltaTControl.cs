@@ -13,7 +13,6 @@
 using DaleGhent.NINA.PlaneWaveTools.Utility;
 using Newtonsoft.Json;
 using NINA.Core.Model;
-using NINA.Core.Utility;
 using NINA.Sequencer.SequenceItem;
 using NINA.Sequencer.Validations;
 using System;
@@ -116,7 +115,31 @@ namespace DaleGhent.NINA.PlaneWaveTools.DeltaT {
         public IList<string> Issues { get; set; } = new ObservableCollection<string>();
 
         public bool Validate() {
-            return true;
+            var i = new List<string>();
+            var status = new Pwi3Status.System();
+
+            Task.Run(async () => {
+                try {
+                    status = await Utilities.Pwi3GetStatus(Pwi3IpAddress, Pwi3Port, CancellationToken.None);
+                } catch (HttpRequestException) {
+                    i.Add("Could not communicate with PWI3");
+                } catch (Exception ex) {
+                    i.Add($"{ex.Message}");
+                }
+            }).Wait();
+
+            if (i.Count > 0) {
+                goto end;
+            }
+
+        end:
+
+            if (i != Issues) {
+                Issues = i;
+                RaisePropertyChanged(nameof(Issues));
+            }
+
+            return i.Count == 0;
         }
 
         private string Pwi3ClientId { get; set; }

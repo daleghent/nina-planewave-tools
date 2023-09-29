@@ -181,11 +181,11 @@ namespace DaleGhent.NINA.PlaneWaveTools.AxisControl {
 
         private void SettingsChanged(object sender, PropertyChangedEventArgs e) {
             switch (e.PropertyName) {
-                case "Pwi4IpAddress":
+                case nameof(Pwi4IpAddress):
                     Pwi4IpAddress = Properties.Settings.Default.Pwi4IpAddress;
                     break;
 
-                case "Pwi4Port":
+                case nameof(Pwi4Port):
                     Pwi4Port = Properties.Settings.Default.Pwi4Port;
                     break;
             }

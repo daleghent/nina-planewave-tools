@@ -109,7 +109,31 @@ namespace DaleGhent.NINA.PlaneWaveTools.Fans {
         public IList<string> Issues { get; set; } = new ObservableCollection<string>();
 
         public bool Validate() {
-            return true;
+            var i = new List<string>();
+            var status = new Pwi3Status.System();
+
+            Task.Run(async () => {
+                try {
+                    status = await Utilities.Pwi3GetStatus(Pwi3IpAddress, Pwi3Port, CancellationToken.None);
+                } catch (HttpRequestException) {
+                    i.Add("Could not communicate with PWI3");
+                } catch (Exception ex) {
+                    i.Add($"{ex.Message}");
+                }
+            }).Wait();
+
+            if (i.Count > 0) {
+                goto end;
+            }
+
+        end:
+
+            if (i != Issues) {
+                Issues = i;
+                RaisePropertyChanged(nameof(Issues));
+            }
+
+            return i.Count == 0;
         }
 
         private string Pwi3ClientId { get; set; }
@@ -118,15 +142,15 @@ namespace DaleGhent.NINA.PlaneWaveTools.Fans {
 
         private void SettingsChanged(object sender, PropertyChangedEventArgs e) {
             switch (e.PropertyName) {
-                case "Pwi3ClientId":
+                case nameof(Pwi3ClientId):
                     Pwi3ClientId = Properties.Settings.Default.Pwi3ClientId;
                     break;
 
-                case "Pwi3IpAddress":
+                case nameof(Pwi3IpAddress):
                     Pwi3IpAddress = Properties.Settings.Default.Pwi3IpAddress;
                     break;
 
-                case "Pwi3Port":
+                case nameof(Pwi3Port):
                     Pwi3Port = Properties.Settings.Default.Pwi3Port;
                     break;
             }
