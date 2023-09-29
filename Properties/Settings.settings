@@ -32,5 +32,14 @@
     <Setting Name="Pwi4Port" Type="System.UInt16" Scope="User">
       <Value Profile="(Default)">8220</Value>
     </Setting>
+    <Setting Name="PwscExePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Program Files (x86)\PlaneWave Instruments\PlaneWave Shutter Control\PWShutter.exe</Value>
+    </Setting>
+    <Setting Name="PwscIpAddress" Type="System.String" Scope="User">
+      <Value Profile="(Default)">127.0.0.1</Value>
+    </Setting>
+    <Setting Name="PwscPort" Type="System.UInt16" Scope="User">
+      <Value Profile="(Default)">9897</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
