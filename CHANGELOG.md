@@ -1,7 +1,7 @@
 ﻿# PlaneWave Tools
 
 ## 1.4.0.0 - 2023-09-30
-* *Added **TLE Follow** and PlaneWave-specific **Set Tracking** instructions to enable the input and tracking of objects via Two-Line Element ephemeris definitions. Thanks to Nick Hardy for providing these.
+* Added **TLE Follow** and PlaneWave-specific **Set Tracking** instructions to enable the input and tracking of objects via Two-Line Element ephemeris definitions. Thanks to Nick Hardy for providing these.
 * Added **Shutter Control** instructions to control CDK700 and PW1000 shutters via PlaneWave Shutter Control
 * Various small fixes and code cleanups to validation logic
 
