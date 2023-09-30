@@ -1,7 +1,9 @@
 ﻿# PlaneWave Tools
 
-## 2.2.0.0 - 2023-07-??
-* Added **TLE** and PlaneWave-specific **Set Tracking** instructions to enable the input and tracking of objects via Two-Line Element ephemeris definitions. Thanks to Nick Hardy for providing these.
+## 2.2.0.0 - 2023-09-30
+* Added **TLE Follow** and PlaneWave-specific **Set Tracking** instructions to enable the input and tracking of objects via Two-Line Element ephemeris definitions. Thanks to Nick Hardy for providing these.
+* Added **Shutter Control** instructions to control CDK700 and PW1000 shutters via PlaneWave Shutter Control
+* Various small fixes and code cleanups to validation logic
 
 ## 2.1.0.0 - 2023-03-16
 * Added **M3 Control** instruction to set the position of the M3 Nasmyth port mirror
