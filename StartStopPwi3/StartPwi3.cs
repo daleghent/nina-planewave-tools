@@ -96,14 +96,18 @@ namespace DaleGhent.NINA.PlaneWaveTools.StartStopPwi3 {
         public IList<string> Issues { get; set; } = new ObservableCollection<string>();
 
         public bool Validate() {
-            bool passes = true;
+            var i = new List<string>();
 
             if (string.IsNullOrEmpty(Pwi3ExePath) || !File.Exists(Pwi3ExePath)) {
-                Issues.Add("Invalid location for PWI3.exe");
-                passes = false;
+                i.Add("Invalid location for PWI3.exe");
             }
 
-            return passes;
+            if (i != Issues) {
+                Issues = i;
+                RaisePropertyChanged(nameof(Issues));
+            }
+
+            return i.Count == 0;
         }
 
         private string Pwi3ExePath { get; set; }
@@ -122,19 +126,21 @@ namespace DaleGhent.NINA.PlaneWaveTools.StartStopPwi3 {
 
             return;
         }
-        void SettingsChanged(object sender, PropertyChangedEventArgs e) {
+
+        private void SettingsChanged(object sender, PropertyChangedEventArgs e) {
             switch (e.PropertyName) {
                 case "Pwi3ExePath":
                     Pwi3ExePath = Properties.Settings.Default.Pwi3ExePath;
                     break;
+
                 case "Pwi3IpAddress":
                     Pwi3IpAddress = Properties.Settings.Default.Pwi3IpAddress;
                     break;
+
                 case "Pwi3Port":
                     Pwi3Port = Properties.Settings.Default.Pwi3Port;
                     break;
             }
         }
-
     }
 }

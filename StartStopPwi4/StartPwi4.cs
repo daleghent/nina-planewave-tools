@@ -52,7 +52,7 @@ namespace DaleGhent.NINA.PlaneWaveTools.StartStopPwi4 {
 
         public override async Task Execute(IProgress<ApplicationStatus> progress, CancellationToken ct) {
             if (Process.GetProcessesByName("PWI4").Length == 0) {
-                RunPwi3();
+                RunPwi4();
             } else {
                 Logger.Info("PWI4 is already running!");
                 return;
@@ -96,21 +96,25 @@ namespace DaleGhent.NINA.PlaneWaveTools.StartStopPwi4 {
         public IList<string> Issues { get; set; } = new ObservableCollection<string>();
 
         public bool Validate() {
-            bool passes = true;
+            var i = new List<string>();
 
             if (string.IsNullOrEmpty(Pwi4ExePath) || !File.Exists(Pwi4ExePath)) {
-                Issues.Add("Invalid location for PWI3.exe");
-                passes = false;
+                i.Add("Invalid location for PWI4.exe");
             }
 
-            return passes;
+            if (i != Issues) {
+                Issues = i;
+                RaisePropertyChanged(nameof(Issues));
+            }
+
+            return i.Count == 0;
         }
 
         private string Pwi4ExePath { get; set; }
         private string Pwi4IpAddress { get; set; }
         private ushort Pwi4Port { get; set; }
 
-        private void RunPwi3() {
+        private void RunPwi4() {
             var appm = new ProcessStartInfo(Pwi4ExePath);
 
             try {
