@@ -137,12 +137,12 @@ namespace DaleGhent.NINA.PlaneWaveTools.M3 {
                 goto end;
             }
 
-            if (!bool.TryParse(status["mount.is_connected"], out bool mountConnected)) {
+            if (!status.ContainsKey("mount.is_connected")) {
                 i.Add("Unable to determine mount connection status");
                 goto end;
             }
 
-            if (!mountConnected) {
+            if (!Utilities.Pwi4BoolStringToBoolean(status["mount.is_connected"])) {
                 i.Add("PWI4 is not connected to the mount");
                 goto end;
             }

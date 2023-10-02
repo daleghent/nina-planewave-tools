@@ -81,7 +81,7 @@ namespace DaleGhent.NINA.PlaneWaveTools.AxisControl {
         }
 
         public override async Task Execute(IProgress<ApplicationStatus> progress, CancellationToken ct) {
-            string url = string.Empty;
+            string url;
 
             if (!Utilities.Pwi4CheckMountConnected(Pwi4IpAddress, Pwi4Port, ct) && ConnectMount) {
                 try {
@@ -117,7 +117,7 @@ namespace DaleGhent.NINA.PlaneWaveTools.AxisControl {
                     throw new SequenceEntityFailedException($"PWI4 returned status {response.StatusCode} for {url}");
                 }
 
-                await Task.Delay(TimeSpan.FromSeconds(5), ct);
+                await Task.Delay(TimeSpan.FromSeconds(1), ct);
             } catch {
                 throw;
             }
@@ -134,7 +134,7 @@ namespace DaleGhent.NINA.PlaneWaveTools.AxisControl {
         }
 
         public override string ToString() {
-            return $"Category: {Category}, Item: {nameof(SetAxisState)}, Axis: {AxisNames[Axis]}, DeltaTHeaterMode: {AxisStates[AxisState]}";
+            return $"Category: {Category}, Item: {nameof(SetAxisState)}, Axis: {AxisNames[Axis]}, AxisState: {AxisStates[AxisState]}, ConnectMount: {ConnectMount}";
         }
 
         public IList<string> Issues { get; set; } = new ObservableCollection<string>();
@@ -157,12 +157,12 @@ namespace DaleGhent.NINA.PlaneWaveTools.AxisControl {
                 goto end;
             }
 
-            if (!bool.TryParse(status["mount.is_connected"], out bool mountConnected)) {
+            if (!status.ContainsKey("mount.is_connected")) {
                 i.Add("Unable to determine mount connection status");
                 goto end;
             }
 
-            if (!mountConnected) {
+            if (!Utilities.Pwi4BoolStringToBoolean(status["mount.is_connected"]) && !ConnectMount) {
                 i.Add("PWI4 is not connected to the mount");
                 goto end;
             }
