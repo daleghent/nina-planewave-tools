@@ -102,7 +102,11 @@ namespace DaleGhent.NINA.PlaneWaveTools.Utility {
                 status = await Pwi4GetStatus(host, port, ct);
             }, ct).Wait(ct);
 
-            return Convert.ToBoolean(status["mount.is_connected"]);
+            return Pwi4BoolStringToBoolean(status["mount.is_connected"]);
+        }
+
+        public static bool Pwi4BoolStringToBoolean(string pwi4BoolString) {
+            return pwi4BoolString.Equals("true", StringComparison.OrdinalIgnoreCase);
         }
 
         public static async Task<bool> TestTcpPort(string host, ushort port) {
