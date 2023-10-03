@@ -1,5 +1,9 @@
 ﻿# PlaneWave Tools
 
+## 2.3.0.0 - 2023-10-03
+* Fixed parsing of boolean key:value pairs in the PWI4 API status response
+* Enhanced validation of M3 device presence in the **M3 Control** instruction
+
 ## 2.2.0.0 - 2023-09-30
 * Added **TLE Follow** and PlaneWave-specific **Set Tracking** instructions to enable the input and tracking of objects via Two-Line Element ephemeris definitions. Thanks to Nick Hardy for providing these.
 * Added **Shutter Control** instructions to control CDK700 and PW1000 shutters via PlaneWave Shutter Control

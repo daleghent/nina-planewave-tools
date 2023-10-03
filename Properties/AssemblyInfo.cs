@@ -6,8 +6,8 @@ using System.Runtime.InteropServices;
 
 // [MANDATORY] The assembly versioning
 //Should be incremented for each new release build of a plugin
-[assembly: AssemblyVersion("2.2.0.0")]
-[assembly: AssemblyFileVersion("2.2.0.0")]
+[assembly: AssemblyVersion("2.3.0.0")]
+[assembly: AssemblyFileVersion("2.3.0.0")]
 
 // [MANDATORY] The name of your plugin
 [assembly: AssemblyTitle("PlaneWave Tools")]
@@ -55,7 +55,7 @@ using System.Runtime.InteropServices;
 # Requirements #
 
 * PWI3 >= 3.5.3
-* PWI4 >= 4.0.12
+* PWI4 >= 4.0.99 beta 27
 * PlaneWave Shutter Control >= 1.12.0
 
 # Sequence Instructions #
