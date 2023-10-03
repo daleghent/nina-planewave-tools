@@ -147,6 +147,10 @@ namespace DaleGhent.NINA.PlaneWaveTools.M3 {
                 goto end;
             }
 
+            if (!M3PortExists(CancellationToken.None)) {
+                i.Add("M3 ports do not exist on this system");
+            }
+
         end:
             if (i != Issues) {
                 Issues = i;
@@ -169,6 +173,16 @@ namespace DaleGhent.NINA.PlaneWaveTools.M3 {
             return !short.TryParse(status["m3.port"], CultureInfo.InvariantCulture, out short port)
                 ? throw new SequenceEntityFailedException("Unable to determine M3 port status")
                 : port;
+        }
+
+        private bool M3PortExists(CancellationToken ct) {
+            Dictionary<string, string> status = new();
+
+            Task.Run(async () => {
+                status = await Utilities.Pwi4GetStatus(Pwi4IpAddress, Pwi4Port, ct);
+            }, ct).Wait(ct);
+
+            return short.Parse(status["m3.exists"], CultureInfo.InvariantCulture) != 0;
         }
 
         private void SettingsChanged(object sender, PropertyChangedEventArgs e) {
