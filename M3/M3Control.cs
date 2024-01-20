@@ -147,7 +147,7 @@ namespace DaleGhent.NINA.PlaneWaveTools.M3 {
                 goto end;
             }
 
-            if (!M3PortExists(CancellationToken.None)) {
+            if (!M3PortExists(status)) {
                 i.Add("M3 ports do not exist on this system");
             }
 
@@ -164,7 +164,7 @@ namespace DaleGhent.NINA.PlaneWaveTools.M3 {
         private ushort Pwi4Port { get; set; }
 
         private short GetM3PortStatus(CancellationToken ct) {
-            Dictionary<string, string> status = new();
+            Dictionary<string, string> status = [];
 
             Task.Run(async () => {
                 status = await Utilities.Pwi4GetStatus(Pwi4IpAddress, Pwi4Port, ct);
@@ -175,13 +175,7 @@ namespace DaleGhent.NINA.PlaneWaveTools.M3 {
                 : port;
         }
 
-        private bool M3PortExists(CancellationToken ct) {
-            Dictionary<string, string> status = new();
-
-            Task.Run(async () => {
-                status = await Utilities.Pwi4GetStatus(Pwi4IpAddress, Pwi4Port, ct);
-            }, ct).Wait(ct);
-
+        private static bool M3PortExists(Dictionary<string, string> status) {
             return short.Parse(status["m3.exists"], CultureInfo.InvariantCulture) != 0;
         }
 

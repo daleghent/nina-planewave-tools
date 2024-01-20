@@ -129,15 +129,15 @@ namespace DaleGhent.NINA.PlaneWaveTools.StartStopPwi4 {
 
         private void SettingsChanged(object sender, PropertyChangedEventArgs e) {
             switch (e.PropertyName) {
-                case "Pwi4ExePath":
+                case nameof(Pwi4ExePath):
                     Pwi4ExePath = Properties.Settings.Default.Pwi4ExePath;
                     break;
 
-                case "Pwi4IpAddress":
+                case nameof(Pwi4IpAddress):
                     Pwi4IpAddress = Properties.Settings.Default.Pwi4IpAddress;
                     break;
 
-                case "Pwi4Port":
+                case nameof(Pwi4Port):
                     Pwi4Port = Properties.Settings.Default.Pwi4Port;
                     break;
             }
