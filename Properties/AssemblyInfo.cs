@@ -6,8 +6,8 @@ using System.Runtime.InteropServices;
 
 // [MANDATORY] The assembly versioning
 //Should be incremented for each new release build of a plugin
-[assembly: AssemblyVersion("2.4.0.0")]
-[assembly: AssemblyFileVersion("2.4.0.0")]
+[assembly: AssemblyVersion("2.5.0.0")]
+[assembly: AssemblyFileVersion("2.5.0.0")]
 
 // [MANDATORY] The name of your plugin
 [assembly: AssemblyTitle("PlaneWave Tools")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCompany("Dale Ghent")]
 // The product name that this plugin is part of
 [assembly: AssemblyProduct("PlaneWave Tools")]
-[assembly: AssemblyCopyright("Copyright © 2023 Dale Ghent")]
+[assembly: AssemblyCopyright("Copyright © 2024 Dale Ghent")]
 
 // The minimum Version of N.I.N.A. that this plugin is compatible with
 [assembly: AssemblyMetadata("MinimumApplicationVersion", "3.0.0.2001")]
@@ -38,7 +38,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyMetadata("Homepage", "https://daleghent.com/planewave-tools")]
 
 //[Optional] Common tags that quickly describe your plugin
-[assembly: AssemblyMetadata("Tags", "planewave,pw3,delta-t,sequencer,fans")]
+[assembly: AssemblyMetadata("Tags", "planewave,pwi4,delta-t,sequencer,fans")]
 
 //[Optional] A link that will show a log of all changes in between your plugin's versions
 [assembly: AssemblyMetadata("ChangelogURL", "https://github.com/daleghent/nina-planewave-tools/blob/main/CHANGELOG.md")]
@@ -54,9 +54,10 @@ using System.Runtime.InteropServices;
 
 # Requirements #
 
-* PWI3 >= 3.5.3
-* PWI4 >= 4.0.99 beta 27
+* PWI >= 4.1
 * PlaneWave Shutter Control >= 1.12.0
+
+Support for PWI 3.x is deprecated as of plugin verison 2.5 and the instructions related to it will be removed in a future version. Fan and Delta-T controls are now available in PWI 4.1.
 
 # Sequence Instructions #
 
