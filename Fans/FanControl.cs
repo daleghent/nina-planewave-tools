@@ -27,7 +27,7 @@ using System.Threading.Tasks;
 
 namespace DaleGhent.NINA.PlaneWaveTools.Fans {
 
-    [ExportMetadata("Name", "Fan Control")]
+    [ExportMetadata("Name", "Fan Control (PWI3)")]
     [ExportMetadata("Description", "Turns OTA cooling fans on or off via PWI3")]
     [ExportMetadata("Icon", "FanControl_SVG")]
     [ExportMetadata("Category", "PlaneWave Tools")]

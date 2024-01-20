@@ -26,8 +26,8 @@ using System.Threading.Tasks;
 
 namespace DaleGhent.NINA.PlaneWaveTools.DeltaT {
 
-    [ExportMetadata("Name", "DeltaT Control")]
-    [ExportMetadata("Description", "Sets PlaneWave DeltaT heater state")]
+    [ExportMetadata("Name", "DeltaT Control (PWI3)")]
+    [ExportMetadata("Description", "Sets PlaneWave DeltaT heater state via PWI3")]
     [ExportMetadata("Icon", "DeltaT_SVG")]
     [ExportMetadata("Category", "PlaneWave Tools")]
     [Export(typeof(ISequenceItem))]
