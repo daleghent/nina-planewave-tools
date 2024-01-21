@@ -114,7 +114,7 @@ namespace DaleGhent.NINA.PlaneWaveTools.M3 {
         }
 
         public override string ToString() {
-            return $"Category: {Category}, Item: {nameof(M3Control)}, M3Port: {M3Port}";
+            return $"Category: {Category}, Item: {Name}, M3Port: {M3Port}";
         }
 
         public IList<string> Issues { get; set; } = new ObservableCollection<string>();

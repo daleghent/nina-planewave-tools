@@ -103,7 +103,7 @@ namespace DaleGhent.NINA.PlaneWaveTools.Fans {
         }
 
         public override string ToString() {
-            return $"Category: {Category}, Item: {nameof(FanControl)}, FanState: {FanState}";
+            return $"Category: {Category}, Item: {Name}, FanState: {FanState}";
         }
 
         public IList<string> Issues { get; set; } = new ObservableCollection<string>();

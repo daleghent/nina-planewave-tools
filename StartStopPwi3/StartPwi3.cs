@@ -90,7 +90,7 @@ namespace DaleGhent.NINA.PlaneWaveTools.StartStopPwi3 {
         }
 
         public override string ToString() {
-            return $"Category: {Category}, Item: {nameof(StartPwi3)}";
+            return $"Category: {Category}, Item: {Name}";
         }
 
         public IList<string> Issues { get; set; } = new ObservableCollection<string>();

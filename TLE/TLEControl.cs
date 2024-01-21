@@ -156,7 +156,7 @@ namespace DaleGhent.NINA.PlaneWaveTools.TLE {
         }
 
         public override string ToString() {
-            return $"Category: {Category}, Item: {nameof(TLEControl)}";
+            return $"Category: {Category}, Item: {Name}";
         }
 
         public IList<string> Issues { get; set; } = new ObservableCollection<string>();

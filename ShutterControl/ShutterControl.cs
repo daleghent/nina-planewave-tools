@@ -138,7 +138,7 @@ namespace DaleGhent.NINA.PlaneWaveTools.ShutterControl {
         }
 
         public override string ToString() {
-            return $"Category: {Category}, Item: {nameof(ShutterControl)}, ShutterAction: {ItemLists.ShutterActions[ShutterAction]}";
+            return $"Category: {Category}, Item: {Name}, ShutterAction: {ItemLists.ShutterActions[ShutterAction]}";
         }
 
         public IList<string> Issues { get; set; } = new ObservableCollection<string>();

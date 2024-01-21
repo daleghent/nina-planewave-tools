@@ -109,7 +109,7 @@ namespace DaleGhent.NINA.PlaneWaveTools.DeltaT {
         }
 
         public override string ToString() {
-            return $"Category: {Category}, Item: {nameof(DeltaTControl)}, DeltaTHeater: {DeltaTHeaters[DeltaTHeater]}, DeltaTHeaterMode: {DeltaTHeaterModes[DeltaTHeaterMode]}";
+            return $"Category: {Category}, Item: {Name}, DeltaTHeater: {DeltaTHeaters[DeltaTHeater]}, DeltaTHeaterMode: {DeltaTHeaterModes[DeltaTHeaterMode]}";
         }
 
         public IList<string> Issues { get; set; } = new ObservableCollection<string>();

@@ -133,7 +133,7 @@ namespace DaleGhent.NINA.PlaneWaveTools.AxisControl {
         }
 
         public override string ToString() {
-            return $"Category: {Category}, Item: {nameof(SetAxisState)}, Axis: {AxisNames[Axis]}, AxisState: {AxisStates[AxisState]}, ConnectMount: {ConnectMount}";
+            return $"Category: {Category}, Item: {Name}, Axis: {AxisNames[Axis]}, AxisState: {AxisStates[AxisState]}, ConnectMount: {ConnectMount}";
         }
 
         public IList<string> Issues { get; set; } = new ObservableCollection<string>();
