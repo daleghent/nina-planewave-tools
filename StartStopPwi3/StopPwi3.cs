@@ -1,7 +1,7 @@
 ﻿#region "copyright"
 
 /*
-    Copyright Dale Ghent <daleg@elemental.org>
+    Copyright (c) 2024 Dale Ghent <daleg@elemental.org>
 
     This Source Code Form is subject to the terms of the Mozilla Public
     License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -24,7 +24,6 @@ using System.Threading;
 using System.Threading.Tasks;
 
 namespace DaleGhent.NINA.PlaneWaveTools.StartStopPwi3 {
-
     [ExportMetadata("Name", "Stop PWI3")]
     [ExportMetadata("Description", "Stops PWI3")]
     [ExportMetadata("Icon", "PWI3_SVG")]
@@ -32,7 +31,6 @@ namespace DaleGhent.NINA.PlaneWaveTools.StartStopPwi3 {
     [Export(typeof(ISequenceItem))]
     [JsonObject(MemberSerialization.OptIn)]
     public class StopPwi3 : SequenceItem, IValidatable {
-
         [ImportingConstructor]
         public StopPwi3() {
         }

@@ -1,4 +1,16 @@
-﻿using System.Reflection;
+﻿#region "copyright"
+
+/*
+    Copyright (c) 2024 Dale Ghent <daleg@elemental.org>
+
+    This Source Code Form is subject to the terms of the Mozilla Public
+    License, v. 2.0. If a copy of the MPL was not distributed with this
+    file, You can obtain one at http://mozilla.org/MPL/2.0/
+*/
+
+#endregion "copyright"
+
+using System.Reflection;
 using System.Runtime.InteropServices;
 
 // [MANDATORY] The following GUID is used as a unique identifier of the plugin
@@ -57,20 +69,25 @@ using System.Runtime.InteropServices;
 * PWI >= 4.1
 * PlaneWave Shutter Control >= 1.12.0
 
-Support for PWI 3.x is deprecated as of plugin verison 2.5 and the instructions related to it will be removed in a future version. Fan and Delta-T controls are now available in PWI 4.1.
+Support for PWI 3.x is deprecated as of PlaneWave Tools 2.5.0 and the instructions that use PWI3 will be removed in a future version. System fan and heater control is available as of PWI 4.1.
 
 # Sequence Instructions #
 
-* Start PWI3, Stop PWI3 - Starts and stops the PWI3.exe application
 * Start PWI4, Stop PWI4 - Starts and stops the PWI4.exe application
 * Axis Control - Enable or disable mount axes
-* Fan Control - Turns the OTA fans on or off
-* DeltaT Control - Sets the per-heater operating modes of the Delta T heater controller
+* Fan Control (PWI4) - Turns the fans on or off
+* Heater Control (PWI4) - Sets the power level of individual heaters
 * M3 Control - Sets the postions of the M3 Nasmyth port mirror
 * Shutter Control - Controls CDK700 and PW1000 shutters via the PlaneWave Shutter Control app
 * TLE Follow, Set Tracking - Programs the mount to follow a two-line element ephemeris definition and start tracking along it
 
-Open to ideas for additional controls!
+## Undergoing Deprecation ##
+
+The following PWI3-related instructions are considered deprecated and may be removed in a future version of this plugin.
+
+* Start PWI3, Stop PWI3 - Starts and stops the PWI3.exe application
+* DeltaT Control (PWI3) - Sets the per-heater operating modes of the Delta T heater controller
+* Fan Control (PWI3) - Turns the OTA fans on or off
 
 # Getting help #
 

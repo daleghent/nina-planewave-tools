@@ -1,13 +1,11 @@
 #region "copyright"
 
 /*
-    Copyright © 2016 - 2024 Stefan Berg <isbeorn86+NINA@googlemail.com> and the N.I.N.A. contributors
-
-    This file is part of N.I.N.A. - Nighttime Imaging 'N' Astronomy.
+    Copyright (c) 2024 Dale Ghent <daleg@elemental.org>
 
     This Source Code Form is subject to the terms of the Mozilla Public
     License, v. 2.0. If a copy of the MPL was not distributed with this
-    file, You can obtain one at http://mozilla.org/MPL/2.0/.
+    file, You can obtain one at http://mozilla.org/MPL/2.0/
 */
 
 #endregion "copyright"
@@ -18,7 +16,6 @@ using System.Reflection;
 using System.Windows.Markup;
 
 namespace DaleGhent.NINA.PlaneWaveTools.Utility {
-
     public class EnumBindingSourceExtension : MarkupExtension {
         private Type _enumType;
 
@@ -61,7 +58,6 @@ namespace DaleGhent.NINA.PlaneWaveTools.Utility {
     }
 
     public class EnumDescriptionTypeConverter(Type type) : EnumConverter(type) {
-
         public override object ConvertTo(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType) {
             if (destinationType == typeof(string)) {
                 FieldInfo fi = value?.GetType().GetField(value.ToString());

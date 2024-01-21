@@ -1,10 +1,9 @@
 ﻿<!--
-    Copyright Dale Ghent <daleg@elemental.org>
+    Copyright (c) 2024 Dale Ghent <daleg@elemental.org>
 
     This Source Code Form is subject to the terms of the Mozilla Public
     License, v. 2.0. If a copy of the MPL was not distributed with this
-    file, You can obtain one at http://mozilla.org/MPL/2.0/
--->
+    file, You can obtain one at http://mozilla.org/MPL/2.0/-->
 <ResourceDictionary
     x:Class="DaleGhent.NINA.PlaneWaveTools.Fans.FanControlTemplate"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -35,7 +34,7 @@
     <DataTemplate x:Key="DaleGhent.NINA.PlaneWaveTools.Fans.FanControl_Mini">
         <mini:MiniSequenceItem>
             <mini:MiniSequenceItem.SequenceItemContent>
-                <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
+                <StackPanel Margin="10,0,0,0" Orientation="Horizontal">
                     <TextBlock VerticalAlignment="Center" Text="{Binding FanState, Converter={StaticResource BoolToLabelConverter}, ConverterParameter=LblOn|LblOff}" />
                 </StackPanel>
             </mini:MiniSequenceItem.SequenceItemContent>

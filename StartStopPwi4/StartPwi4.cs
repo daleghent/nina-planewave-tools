@@ -1,7 +1,7 @@
 ﻿#region "copyright"
 
 /*
-    Copyright Dale Ghent <daleg@elemental.org>
+    Copyright (c) 2024 Dale Ghent <daleg@elemental.org>
 
     This Source Code Form is subject to the terms of the Mozilla Public
     License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -28,7 +28,6 @@ using System.Threading;
 using System.Threading.Tasks;
 
 namespace DaleGhent.NINA.PlaneWaveTools.StartStopPwi4 {
-
     [ExportMetadata("Name", "Start PWI4")]
     [ExportMetadata("Description", "Starts PWI4")]
     [ExportMetadata("Icon", "PWI4_SVG")]
@@ -36,7 +35,6 @@ namespace DaleGhent.NINA.PlaneWaveTools.StartStopPwi4 {
     [Export(typeof(ISequenceItem))]
     [JsonObject(MemberSerialization.OptIn)]
     public class StartPwi4 : SequenceItem, IValidatable, INotifyPropertyChanged {
-
         [ImportingConstructor]
         public StartPwi4() {
             Pwi4IpAddress = Properties.Settings.Default.Pwi4IpAddress;

@@ -1,7 +1,7 @@
 ﻿#region "copyright"
 
 /*
-    Copyright Dale Ghent <daleg@elemental.org>
+    Copyright (c) 2024 Dale Ghent <daleg@elemental.org>
 
     This Source Code Form is subject to the terms of the Mozilla Public
     License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -16,9 +16,7 @@ using System.Xml;
 using System.Xml.Serialization;
 
 namespace DaleGhent.NINA.PlaneWaveTools.Utility {
-
     public class Pwi3Status {
-
         public Pwi3Status() {
         }
 
@@ -33,7 +31,6 @@ namespace DaleGhent.NINA.PlaneWaveTools.Utility {
 
         [XmlRoot(ElementName = "focuser")]
         public class FocuserConfig {
-
             [XmlElement(ElementName = "max_position")]
             public int MaxPosition { get; set; }
 
@@ -46,7 +43,6 @@ namespace DaleGhent.NINA.PlaneWaveTools.Utility {
 
         [XmlRoot(ElementName = "focuser")]
         public class FocuserStatus {
-
             [XmlIgnore]
             public bool Connected { get; set; }
 
@@ -128,7 +124,6 @@ namespace DaleGhent.NINA.PlaneWaveTools.Utility {
 
         [XmlRoot(ElementName = "rotator")]
         public class RotatorConfig {
-
             [XmlElement(ElementName = "max_position")]
             public int MaxPosition { get; set; }
 
@@ -141,7 +136,6 @@ namespace DaleGhent.NINA.PlaneWaveTools.Utility {
 
         [XmlRoot(ElementName = "rotator")]
         public class RotatorStatus {
-
             [XmlIgnore]
             public bool Connected { get; set; }
 
@@ -166,7 +160,6 @@ namespace DaleGhent.NINA.PlaneWaveTools.Utility {
 
         [XmlRoot(ElementName = "mount")]
         public class MountStatus {
-
             [XmlIgnore]
             public bool Connected { get; set; }
 
@@ -245,7 +238,6 @@ namespace DaleGhent.NINA.PlaneWaveTools.Utility {
 
         [XmlRoot(ElementName = "temperature")]
         public class Temperature {
-
             [XmlElement(ElementName = "primary")]
             public double Primary { get; set; } = double.NaN;
 
@@ -270,7 +262,6 @@ namespace DaleGhent.NINA.PlaneWaveTools.Utility {
 
         [XmlRoot(ElementName = "config")]
         public class Config {
-
             [XmlElement(ElementName = "focuser")]
             public FocuserConfig Focuser { get; set; }
 
@@ -280,7 +271,6 @@ namespace DaleGhent.NINA.PlaneWaveTools.Utility {
 
         [XmlRoot(ElementName = "status")]
         public class Status {
-
             [XmlElement(ElementName = "focuser")]
             public FocuserStatus FocuserStatus { get; set; }
 
@@ -299,7 +289,6 @@ namespace DaleGhent.NINA.PlaneWaveTools.Utility {
 
         [XmlRoot(ElementName = "system")]
         public class System {
-
             [XmlIgnore]
             public DateTime Utc { get; set; }
 

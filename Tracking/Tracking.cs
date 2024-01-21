@@ -1,7 +1,7 @@
 ﻿#region "copyright"
 
 /*
-    Copyright Dale Ghent <daleg@elemental.org>
+    Copyright (c) 2024 Dale Ghent <daleg@elemental.org>
 
     This Source Code Form is subject to the terms of the Mozilla Public
     License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -26,7 +26,6 @@ using System.Threading;
 using System.Threading.Tasks;
 
 namespace DaleGhent.NINA.PlaneWaveTools.Tracking {
-
     [ExportMetadata("Name", "Set Tracking")]
     [ExportMetadata("Description", "Start or stop tracking")]
     [ExportMetadata("Icon", "SpeedometerSVG")]
@@ -34,7 +33,6 @@ namespace DaleGhent.NINA.PlaneWaveTools.Tracking {
     [Export(typeof(ISequenceItem))]
     [JsonObject(MemberSerialization.OptIn)]
     public class Tracking : SequenceItem, IValidatable, INotifyPropertyChanged {
-
         [ImportingConstructor]
         public Tracking() {
             Pwi4IpAddress = Properties.Settings.Default.Pwi4IpAddress;
