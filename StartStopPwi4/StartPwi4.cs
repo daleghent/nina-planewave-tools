@@ -1,7 +1,7 @@
 ﻿#region "copyright"
 
 /*
-    Copyright Dale Ghent <daleg@elemental.org>
+    Copyright (c) 2024 Dale Ghent <daleg@elemental.org>
 
     This Source Code Form is subject to the terms of the Mozilla Public
     License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -28,7 +28,6 @@ using System.Threading;
 using System.Threading.Tasks;
 
 namespace DaleGhent.NINA.PlaneWaveTools.StartStopPwi4 {
-
     [ExportMetadata("Name", "Start PWI4")]
     [ExportMetadata("Description", "Starts PWI4")]
     [ExportMetadata("Icon", "PWI4_SVG")]
@@ -36,7 +35,6 @@ namespace DaleGhent.NINA.PlaneWaveTools.StartStopPwi4 {
     [Export(typeof(ISequenceItem))]
     [JsonObject(MemberSerialization.OptIn)]
     public class StartPwi4 : SequenceItem, IValidatable, INotifyPropertyChanged {
-
         [ImportingConstructor]
         public StartPwi4() {
             Pwi4IpAddress = Properties.Settings.Default.Pwi4IpAddress;
@@ -90,7 +88,7 @@ namespace DaleGhent.NINA.PlaneWaveTools.StartStopPwi4 {
         }
 
         public override string ToString() {
-            return $"Category: {Category}, Item: {nameof(StartPwi4)}";
+            return $"Category: {Category}, Item: {Name}";
         }
 
         public IList<string> Issues { get; set; } = new ObservableCollection<string>();
@@ -129,15 +127,15 @@ namespace DaleGhent.NINA.PlaneWaveTools.StartStopPwi4 {
 
         private void SettingsChanged(object sender, PropertyChangedEventArgs e) {
             switch (e.PropertyName) {
-                case "Pwi4ExePath":
+                case nameof(Pwi4ExePath):
                     Pwi4ExePath = Properties.Settings.Default.Pwi4ExePath;
                     break;
 
-                case "Pwi4IpAddress":
+                case nameof(Pwi4IpAddress):
                     Pwi4IpAddress = Properties.Settings.Default.Pwi4IpAddress;
                     break;
 
-                case "Pwi4Port":
+                case nameof(Pwi4Port):
                     Pwi4Port = Properties.Settings.Default.Pwi4Port;
                     break;
             }

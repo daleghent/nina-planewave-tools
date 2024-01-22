@@ -1,7 +1,7 @@
 ﻿#region "copyright"
 
 /*
-    Copyright Dale Ghent <daleg@elemental.org>
+    Copyright (c) 2024 Dale Ghent <daleg@elemental.org>
 
     This Source Code Form is subject to the terms of the Mozilla Public
     License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -32,7 +32,6 @@ using System.Threading;
 using System.Threading.Tasks;
 
 namespace DaleGhent.NINA.PlaneWaveTools.ShutterControl {
-
     [ExportMetadata("Name", "Shutter Control")]
     [ExportMetadata("Description", "Controls the PlaneWave mirror shutter")]
     [ExportMetadata("Icon", "BahtinovSVG")]
@@ -138,7 +137,7 @@ namespace DaleGhent.NINA.PlaneWaveTools.ShutterControl {
         }
 
         public override string ToString() {
-            return $"Category: {Category}, Item: {nameof(ShutterControl)}, ShutterAction: {ItemLists.ShutterActions[ShutterAction]}";
+            return $"Category: {Category}, Item: {Name}, ShutterAction: {ItemLists.ShutterActions[ShutterAction]}";
         }
 
         public IList<string> Issues { get; set; } = new ObservableCollection<string>();

@@ -1,10 +1,9 @@
 ﻿<!--
-    Copyright Dale Ghent <daleg@elemental.org>
+    Copyright (c) 2024 Dale Ghent <daleg@elemental.org>
 
     This Source Code Form is subject to the terms of the Mozilla Public
     License, v. 2.0. If a copy of the MPL was not distributed with this
-    file, You can obtain one at http://mozilla.org/MPL/2.0/
--->
+    file, You can obtain one at http://mozilla.org/MPL/2.0/-->
 <ResourceDictionary
     x:Class="DaleGhent.NINA.PlaneWaveTools.StartStopPwi3.StartStopPwi3Template"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -21,22 +20,18 @@
     </GeometryGroup>
 
     <DataTemplate DataType="{x:Type local:StartPwi3}">
-        <nina:SequenceBlockView>
-        </nina:SequenceBlockView>
+        <nina:SequenceBlockView />
     </DataTemplate>
 
     <DataTemplate x:Key="DaleGhent.NINA.PlaneWaveTools.StartStopPwi3.StartPwi3_Mini">
-        <mini:MiniSequenceItem>
-        </mini:MiniSequenceItem>
+        <mini:MiniSequenceItem />
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type local:StopPwi3}">
-        <nina:SequenceBlockView>
-        </nina:SequenceBlockView>
+        <nina:SequenceBlockView />
     </DataTemplate>
 
     <DataTemplate x:Key="DaleGhent.NINA.PlaneWaveTools.StartStopPwi3.StopPwi3_Mini">
-        <mini:MiniSequenceItem>
-        </mini:MiniSequenceItem>
+        <mini:MiniSequenceItem />
     </DataTemplate>
 </ResourceDictionary>

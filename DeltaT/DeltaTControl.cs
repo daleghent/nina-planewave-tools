@@ -1,7 +1,7 @@
 ﻿#region "copyright"
 
 /*
-    Copyright Dale Ghent <daleg@elemental.org>
+    Copyright (c) 2024 Dale Ghent <daleg@elemental.org>
 
     This Source Code Form is subject to the terms of the Mozilla Public
     License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -25,9 +25,8 @@ using System.Threading;
 using System.Threading.Tasks;
 
 namespace DaleGhent.NINA.PlaneWaveTools.DeltaT {
-
-    [ExportMetadata("Name", "DeltaT Control")]
-    [ExportMetadata("Description", "Sets PlaneWave DeltaT heater state")]
+    [ExportMetadata("Name", "DeltaT Control (PWI3)")]
+    [ExportMetadata("Description", "Sets PlaneWave DeltaT heater state via PWI3")]
     [ExportMetadata("Icon", "DeltaT_SVG")]
     [ExportMetadata("Category", "PlaneWave Tools")]
     [Export(typeof(ISequenceItem))]
@@ -109,7 +108,7 @@ namespace DaleGhent.NINA.PlaneWaveTools.DeltaT {
         }
 
         public override string ToString() {
-            return $"Category: {Category}, Item: {nameof(DeltaTControl)}, DeltaTHeater: {DeltaTHeaters[DeltaTHeater]}, DeltaTHeaterMode: {DeltaTHeaterModes[DeltaTHeaterMode]}";
+            return $"Category: {Category}, Item: {Name}, DeltaTHeater: {DeltaTHeaters[DeltaTHeater]}, DeltaTHeaterMode: {DeltaTHeaterModes[DeltaTHeaterMode]}";
         }
 
         public IList<string> Issues { get; set; } = new ObservableCollection<string>();

@@ -1,7 +1,7 @@
 ﻿#region "copyright"
 
 /*
-    Copyright Dale Ghent <daleg@elemental.org>
+    Copyright (c) 2024 Dale Ghent <daleg@elemental.org>
 
     This Source Code Form is subject to the terms of the Mozilla Public
     License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -27,7 +27,7 @@ using System.Threading.Tasks;
 
 namespace DaleGhent.NINA.PlaneWaveTools.Fans {
 
-    [ExportMetadata("Name", "Fan Control")]
+    [ExportMetadata("Name", "Fan Control (PWI3)")]
     [ExportMetadata("Description", "Turns OTA cooling fans on or off via PWI3")]
     [ExportMetadata("Icon", "FanControl_SVG")]
     [ExportMetadata("Category", "PlaneWave Tools")]
@@ -103,7 +103,7 @@ namespace DaleGhent.NINA.PlaneWaveTools.Fans {
         }
 
         public override string ToString() {
-            return $"Category: {Category}, Item: {nameof(FanControl)}, FanState: {FanState}";
+            return $"Category: {Category}, Item: {Name}, FanState: {FanState}";
         }
 
         public IList<string> Issues { get; set; } = new ObservableCollection<string>();

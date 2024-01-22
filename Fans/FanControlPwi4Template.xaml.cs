@@ -10,14 +10,14 @@
 
 #endregion "copyright"
 
-namespace DaleGhent.NINA.PlaneWaveTools.ShutterControl {
-    internal enum ShutterStatusEnum {
-        Open = 0,
-        Closed,
-        Opening,
-        Closing,
-        Errored,
-        Stopped,
-        StatusError = 255
+using System.ComponentModel.Composition;
+using System.Windows;
+
+namespace DaleGhent.NINA.PlaneWaveTools.Fans {
+    [Export(typeof(ResourceDictionary))]
+    public partial class FanControlPwi4Template : ResourceDictionary {
+        public FanControlPwi4Template() {
+            InitializeComponent();
+        }
     }
 }

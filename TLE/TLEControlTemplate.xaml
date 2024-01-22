@@ -1,10 +1,9 @@
 ﻿<!--
-    Copyright Dale Ghent <daleg@elemental.org>
+    Copyright (c) 2024 Dale Ghent <daleg@elemental.org>
 
     This Source Code Form is subject to the terms of the Mozilla Public
     License, v. 2.0. If a copy of the MPL was not distributed with this
-    file, You can obtain one at http://mozilla.org/MPL/2.0/
--->
+    file, You can obtain one at http://mozilla.org/MPL/2.0/-->
 <ResourceDictionary
     x:Class="DaleGhent.NINA.PlaneWaveTools.TLE.TLEControlTemplate"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -20,11 +19,19 @@
                     <TextBlock VerticalAlignment="Center" Text="Satellite" />
                     <StackPanel Orientation="Horizontal">
                         <TextBlock VerticalAlignment="Center" Text="Line1" />
-                        <TextBox MinWidth="200" Margin="10,0,0,0" VerticalAlignment="Center" Text="{Binding Line1}" />
+                        <TextBox
+                            MinWidth="200"
+                            Margin="10,0,0,0"
+                            VerticalAlignment="Center"
+                            Text="{Binding Line1}" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock VerticalAlignment="Center" Text="Line2" />
-                        <TextBox MinWidth="200" Margin="10,0,0,0" VerticalAlignment="Center" Text="{Binding Line2}" />
+                        <TextBox
+                            MinWidth="200"
+                            Margin="10,0,0,0"
+                            VerticalAlignment="Center"
+                            Text="{Binding Line2}" />
                     </StackPanel>
                 </StackPanel>
             </nina:SequenceBlockView.SequenceItemContent>
@@ -34,8 +41,11 @@
     <DataTemplate x:Key="DaleGhent.NINA.PlaneWaveTools.TLE.TLEControl_Mini">
         <mini:MiniSequenceItem>
             <mini:MiniSequenceItem.SequenceItemContent>
-                <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
-                    <TextBlock VerticalAlignment="Center" Margin="5,0,5,0" Text="Follow tle" />
+                <StackPanel Margin="10,0,0,0" Orientation="Horizontal">
+                    <TextBlock
+                        Margin="5,0,5,0"
+                        VerticalAlignment="Center"
+                        Text="Follow tle" />
                 </StackPanel>
             </mini:MiniSequenceItem.SequenceItemContent>
         </mini:MiniSequenceItem>

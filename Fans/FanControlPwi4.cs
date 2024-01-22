@@ -20,66 +20,63 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
-using System.ComponentModel.Composition.Primitives;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace DaleGhent.NINA.PlaneWaveTools.Tracking {
-    [ExportMetadata("Name", "Set Tracking")]
-    [ExportMetadata("Description", "Start or stop tracking")]
-    [ExportMetadata("Icon", "SpeedometerSVG")]
+namespace DaleGhent.NINA.PlaneWaveTools.Fans {
+
+    [ExportMetadata("Name", "Fan Control (PWI4)")]
+    [ExportMetadata("Description", "Turns cooling fans on or off via PWI4")]
+    [ExportMetadata("Icon", "FanControlPwi4_SVG")]
     [ExportMetadata("Category", "PlaneWave Tools")]
     [Export(typeof(ISequenceItem))]
     [JsonObject(MemberSerialization.OptIn)]
-    public class Tracking : SequenceItem, IValidatable, INotifyPropertyChanged {
+    public class FanControlPwi4 : SequenceItem, IValidatable, INotifyPropertyChanged {
+        private bool fanState = false;
+
         [ImportingConstructor]
-        public Tracking() {
+        public FanControlPwi4() {
             Pwi4IpAddress = Properties.Settings.Default.Pwi4IpAddress;
             Pwi4Port = Properties.Settings.Default.Pwi4Port;
 
             Properties.Settings.Default.PropertyChanged += SettingsChanged;
         }
 
-        private bool _track = true;
-
         [JsonProperty]
-        public bool Track {
-            get => _track;
+        public bool FanState {
+            get => fanState;
             set {
-                _track = value;
+                fanState = value;
                 RaisePropertyChanged();
             }
         }
 
+        private FanControlPwi4(FanControlPwi4 copyMe) : this() {
+            CopyMetaData(copyMe);
+        }
+
         public override async Task Execute(IProgress<ApplicationStatus> progress, CancellationToken ct) {
-            try {
-                if (Track) {
-                    await StartTracking(progress, ct);
-                } else {
-                    await StopTracking(progress, ct);
-                }
-            } catch {
-                throw;
-            } finally {
-                progress?.Report(new ApplicationStatus() { Status = string.Empty });
+            var fanUrl = $"/fans/{(fanState ? "on" : "off")}";
+
+            var response = await Utilities.HttpRequestAsync(Pwi4IpAddress, Pwi4Port, fanUrl, HttpMethod.Get, string.Empty, ct);
+
+            if (response.StatusCode != System.Net.HttpStatusCode.OK) {
+                var error = await response.Content.ReadAsStringAsync(ct);
+                throw new SequenceEntityFailedException($"Could not set fan state to {(fanState ? "On" : "Off")}: {error.Trim()}");
             }
 
             return;
         }
 
-        private Tracking(Tracking copyMe) : this() {
-            CopyMetaData(copyMe);
-        }
-
         public override object Clone() {
-            return new Tracking(this) {
-                Track = Track,
+            return new FanControlPwi4(this) {
+                FanState = FanState,
             };
         }
 
         public override string ToString() {
-            return $"Category: {Category}, Item: {nameof(Tracking)}";
+            return $"Category: {Category}, Item: {Name}, FanState: {(fanState ? "On" : "Off")}";
         }
 
         public IList<string> Issues { get; set; } = new ObservableCollection<string>();
@@ -113,6 +110,7 @@ namespace DaleGhent.NINA.PlaneWaveTools.Tracking {
             }
 
         end:
+
             if (i != Issues) {
                 Issues = i;
                 RaisePropertyChanged(nameof(Issues));
@@ -123,26 +121,6 @@ namespace DaleGhent.NINA.PlaneWaveTools.Tracking {
 
         private string Pwi4IpAddress { get; set; }
         private ushort Pwi4Port { get; set; }
-
-        private async Task<bool> StopTracking(IProgress<ApplicationStatus> progress, CancellationToken ct) {
-            // Send API call to stop tracking
-            string url = "/mount/tracking_off";
-
-            progress?.Report(new ApplicationStatus() { Status = $"Stop tracking" });
-            var response = await Utilities.HttpRequestAsync(Pwi4IpAddress, Pwi4Port, url, HttpMethod.Get, string.Empty, ct);
-
-            return response.IsSuccessStatusCode;
-        }
-
-        private async Task<bool> StartTracking(IProgress<ApplicationStatus> progress, CancellationToken ct) {
-            // Send API call to stop tracking
-            string url = "/mount/tracking_on";
-
-            progress?.Report(new ApplicationStatus() { Status = $"Start tracking" });
-            var response = await Utilities.HttpRequestAsync(Pwi4IpAddress, Pwi4Port, url, HttpMethod.Get, string.Empty, ct);
-
-            return response.IsSuccessStatusCode;
-        }
 
         private void SettingsChanged(object sender, PropertyChangedEventArgs e) {
             switch (e.PropertyName) {

@@ -1,7 +1,7 @@
 ﻿#region "copyright"
 
 /*
-    Copyright Dale Ghent <daleg@elemental.org>
+    Copyright (c) 2024 Dale Ghent <daleg@elemental.org>
 
     This Source Code Form is subject to the terms of the Mozilla Public
     License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -13,7 +13,6 @@
 using DaleGhent.NINA.PlaneWaveTools.Utility;
 using Newtonsoft.Json;
 using NINA.Core.Model;
-using NINA.Core.Utility;
 using NINA.Sequencer.SequenceItem;
 using NINA.Sequencer.Validations;
 using System;
@@ -26,7 +25,6 @@ using System.Threading;
 using System.Threading.Tasks;
 
 namespace DaleGhent.NINA.PlaneWaveTools.AxisControl {
-
     [ExportMetadata("Name", "Set Axis State")]
     [ExportMetadata("Description", "Sets PlaneWave mount axis state via PWI4")]
     [ExportMetadata("Icon", "AltAz_SVG")]
@@ -134,7 +132,7 @@ namespace DaleGhent.NINA.PlaneWaveTools.AxisControl {
         }
 
         public override string ToString() {
-            return $"Category: {Category}, Item: {nameof(SetAxisState)}, Axis: {AxisNames[Axis]}, AxisState: {AxisStates[AxisState]}, ConnectMount: {ConnectMount}";
+            return $"Category: {Category}, Item: {Name}, Axis: {AxisNames[Axis]}, AxisState: {AxisStates[AxisState]}, ConnectMount: {ConnectMount}";
         }
 
         public IList<string> Issues { get; set; } = new ObservableCollection<string>();
@@ -181,11 +179,11 @@ namespace DaleGhent.NINA.PlaneWaveTools.AxisControl {
 
         private void SettingsChanged(object sender, PropertyChangedEventArgs e) {
             switch (e.PropertyName) {
-                case "Pwi4IpAddress":
+                case nameof(Pwi4IpAddress):
                     Pwi4IpAddress = Properties.Settings.Default.Pwi4IpAddress;
                     break;
 
-                case "Pwi4Port":
+                case nameof(Pwi4Port):
                     Pwi4Port = Properties.Settings.Default.Pwi4Port;
                     break;
             }
