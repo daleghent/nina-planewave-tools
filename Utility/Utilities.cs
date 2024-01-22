@@ -25,7 +25,9 @@ using System.Threading;
 using System.Threading.Tasks;
 
 namespace DaleGhent.NINA.PlaneWaveTools.Utility {
+
     public partial class Utilities {
+
         public static async Task<HttpResponseMessage> HttpRequestAsync(string host, ushort port, string url, HttpMethod method, string body, CancellationToken ct) {
             var uri = new Uri($"http://{host}:{port}{url}");
 
@@ -40,30 +42,35 @@ namespace DaleGhent.NINA.PlaneWaveTools.Utility {
             }
 
             Logger.Debug($"Request URL: {request.Method} {request.RequestUri}");
-            if (request.Method != HttpMethod.Get && request.Method != HttpMethod.Head) {
-                Logger.Trace($"Request body:{Environment.NewLine}{request.Content?.ReadAsStringAsync(ct).Result}");
+            if (request.Method != HttpMethod.Get
+                    && request.Method != HttpMethod.Delete
+                    && request.Method != HttpMethod.Trace
+                    && request.Method != HttpMethod.Options
+                    && request.Method != HttpMethod.Head) {
+                var requestContent = await (request.Content?.ReadAsStringAsync(ct) ?? Task.FromResult(string.Empty));
+                Logger.Trace($"Request body:{Environment.NewLine}{requestContent}");
             }
 
-            var client = new HttpClient();
+            using var client = new HttpClient();
             HttpResponseMessage response = null;
             int i = 1;
 
-            try {
-                response = await client.SendAsync(request, ct);
-            } catch (WebException ex) {
-                while (i < 4) {
-                    await Task.Delay(TimeSpan.FromSeconds(1), ct);
-                    Logger.Error($"HTTP request to {request.RequestUri} failed: {ex.Message}. Retry attempt {i}");
-
+            while (i < 4) {
+                try {
                     response = await client.SendAsync(request, ct);
+                    break;
+                } catch (WebException ex) {
+                    Logger.Error($"HTTP request to {request.RequestUri} failed: {ex.Message}. Retry attempt {i}");
                     i++;
+                    if (i < 4) {
+                        await Task.Delay(TimeSpan.FromSeconds(1), ct);
+                    }
                 }
             }
 
-            client.Dispose();
-
+            var responseContent = await (response.Content?.ReadAsStringAsync(ct) ?? Task.FromResult(string.Empty));
             Logger.Debug($"Response status code: {response.StatusCode}");
-            Logger.Trace($"Response body:{Environment.NewLine}{response.Content?.ReadAsStringAsync(ct).Result}");
+            Logger.Trace($"Response body:{Environment.NewLine}{responseContent}");
 
             return response;
         }
@@ -87,18 +94,20 @@ namespace DaleGhent.NINA.PlaneWaveTools.Utility {
             var response = await HttpRequestAsync(host, port, "/status", HttpMethod.Get, string.Empty, ct);
             var status = await response.Content.ReadAsStringAsync(ct);
 
-            var dic = StatusRegex().Matches(status).Cast<Match>().ToDictionary(x => x.Groups[1].Value.Trim(), x => x.Groups[2].Value.Trim());
+            var dic = StatusRegex()
+                .Matches(status)
+                .Cast<Match>()
+                .ToDictionary(x =>
+                    x.Groups[1].Value.Trim(), x => x.Groups[2].Value.Trim()
+                );
+
             Logger.Trace(string.Join(Environment.NewLine, dic.Select(pair => $"{pair.Key} => {pair.Value}")));
 
             return dic;
         }
 
-        public static bool Pwi4CheckMountConnected(string host, ushort port, CancellationToken ct) {
-            var status = new Dictionary<string, string>();
-
-            Task.Run(async () => {
-                status = await Pwi4GetStatus(host, port, ct);
-            }, ct).Wait(ct);
+        public static async Task<bool> Pwi4CheckMountConnected(string host, ushort port, CancellationToken ct) {
+            var status = await Task.Run(() => Pwi4GetStatus(host, port, ct));
 
             return Pwi4BoolStringToBoolean(status["mount.is_connected"]);
         }
@@ -109,10 +118,9 @@ namespace DaleGhent.NINA.PlaneWaveTools.Utility {
 
         public static async Task<bool> TestTcpPort(string host, ushort port) {
             bool success = false;
-            Socket s = null;
 
+            using var s = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             try {
-                s = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                 await s.ConnectAsync(host, port);
                 s.Disconnect(true);
                 success = true;
@@ -120,7 +128,6 @@ namespace DaleGhent.NINA.PlaneWaveTools.Utility {
                 throw;
             } finally {
                 s.Close();
-                s.Dispose();
             }
 
             return success;
