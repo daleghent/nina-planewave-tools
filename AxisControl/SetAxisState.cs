@@ -25,6 +25,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 namespace DaleGhent.NINA.PlaneWaveTools.AxisControl {
+
     [ExportMetadata("Name", "Set Axis State")]
     [ExportMetadata("Description", "Sets PlaneWave mount axis state via PWI4")]
     [ExportMetadata("Icon", "AltAz_SVG")]
@@ -81,7 +82,7 @@ namespace DaleGhent.NINA.PlaneWaveTools.AxisControl {
         public override async Task Execute(IProgress<ApplicationStatus> progress, CancellationToken ct) {
             string url;
 
-            if (!Utilities.Pwi4CheckMountConnected(Pwi4IpAddress, Pwi4Port, ct) && ConnectMount) {
+            if (!await Utilities.Pwi4CheckMountConnected(Pwi4IpAddress, Pwi4Port, ct) && ConnectMount) {
                 try {
                     url = "/mount/connect";
                     var response = await Utilities.HttpRequestAsync(Pwi4IpAddress, Pwi4Port, url, HttpMethod.Get, string.Empty, ct);
