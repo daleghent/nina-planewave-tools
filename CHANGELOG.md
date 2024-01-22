@@ -1,5 +1,8 @@
 ﻿# PlaneWave Tools
 
+## 2.7.0.0 - 2024-01-21
+* Changes to backend utility class to fix retrying PWI4 API queries upon failure, plus some additional touch-ups. Contributed by Stefan Berg.
+
 ## 2.6.0.0 - 2024-01-21
 **NOTICE:** As of this release, the PWI3-specific instructions (**Start/Stop PWI3**, **Fan Control (PWI3)**, and **Delta-T Control (PWI3)**) are deprecated and will be removed in a future release. Please switch to using the PWI4-based replacements as soon as possible. PWI 4.1.0 and later contains the mount/OTA fan and heater controls that prior versions of PWI 4.0 lacked.
 
