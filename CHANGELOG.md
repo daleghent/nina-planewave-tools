@@ -1,5 +1,25 @@
 ﻿# PlaneWave Tools
 
+## 2.6.0.0 - 2024-01-21
+**NOTICE:** As of this release, the PWI3-specific instructions (**Start/Stop PWI3**, **Fan Control (PWI3)**, and **Delta-T Control (PWI3)**) are deprecated and will be removed in a future release. Please switch to using the PWI4-based replacements as soon as possible. PWI 4.1.0 and later contains the mount/OTA fan and heater controls that prior versions of PWI 4.0 lacked.
+
+The two following instructions were introduced to permit fan and heater control via PWI 4.1.0 and later:
+* Added **Fan Control (PWI4)**
+* Added **Heater Control (PWI4)**
+
+The two following instructions were renamed to denote that they are specific to PWI3:
+* Renamed **Fan Control** to **Fan Control (PWI3)**
+* Renamed **Delta-T Control** to **Delta-T Control (PWI3)**
+
+Other changes:
+* **M3 Control**: M3 status check was made more efficient to avoid an extra call to the PWI4 API
+* Plugin framework retargeted to .NET 8
+* Migrated file dialogs to CommunityToolkit.Mvvm
+* Minimum supported NINA version is now 3.0 Beta 1
+
+## 2.4.0.0 - 2.5.0.0
+* Unreleased builds
+
 ## 2.3.0.0 - 2023-10-03
 * Fixed parsing of boolean key:value pairs in the PWI4 API status response
 * Enhanced validation of M3 device presence in the **M3 Control** instruction

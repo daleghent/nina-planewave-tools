@@ -18,8 +18,8 @@ using System.Runtime.InteropServices;
 
 // [MANDATORY] The assembly versioning
 //Should be incremented for each new release build of a plugin
-[assembly: AssemblyVersion("2.5.0.0")]
-[assembly: AssemblyFileVersion("2.5.0.0")]
+[assembly: AssemblyVersion("2.6.0.0")]
+[assembly: AssemblyFileVersion("2.6.0.0")]
 
 // [MANDATORY] The name of your plugin
 [assembly: AssemblyTitle("PlaneWave Tools")]
@@ -69,7 +69,7 @@ using System.Runtime.InteropServices;
 * PWI >= 4.1
 * PlaneWave Shutter Control >= 1.12.0
 
-Support for PWI 3.x is deprecated as of PlaneWave Tools 2.5.0 and the instructions that use PWI3 will be removed in a future version. System fan and heater control is available as of PWI 4.1.
+Support for PWI 3.x is deprecated as of PlaneWave Tools 2.6.0 and the instructions that use PWI3 will be removed in a future version. System fan and heater control is available as of PWI 4.1.
 
 # Sequence Instructions #
 
