@@ -148,7 +148,7 @@
                                     Margin="5,0,0,0"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
-                                    Command="{Binding Pwi3ExePathDialogCommand}">
+                                    Command="{Binding OpenPwi3ExePathDialogCommand}">
                                     <Path
                                         Margin="4,17,4,4"
                                         Data="{StaticResource DotsSVG}"
@@ -225,7 +225,7 @@
                                     Margin="5,0,0,0"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
-                                    Command="{Binding Pwi4ExePathDialogCommand}">
+                                    Command="{Binding OpenPwi4ExePathDialogCommand}">
                                     <Path
                                         Margin="4,17,4,4"
                                         Data="{StaticResource DotsSVG}"
@@ -302,7 +302,7 @@
                                     Margin="5,0,0,0"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
-                                    Command="{Binding PwscExePathDialogCommand}">
+                                    Command="{Binding OpenPwscExePathDialogCommand}">
                                     <Path
                                         Margin="4,17,4,4"
                                         Data="{StaticResource DotsSVG}"

@@ -1,7 +1,7 @@
 ﻿#region "copyright"
 
 /*
-    Copyright Dale Ghent <daleg@elemental.org>
+    Copyright (c) 2024 Dale Ghent <daleg@elemental.org>
 
     This Source Code Form is subject to the terms of the Mozilla Public
     License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -10,6 +10,7 @@
 
 #endregion "copyright"
 
+using CommunityToolkit.Mvvm.Input;
 using NINA.Core.Utility;
 using NINA.Plugin;
 using NINA.Plugin.Interfaces;
@@ -18,12 +19,11 @@ using System;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Runtime.CompilerServices;
-using System.Windows.Input;
 
 namespace DaleGhent.NINA.PlaneWaveTools {
 
     [Export(typeof(IPluginManifest))]
-    public class PlaneWaveTools : PluginBase, ISettings, INotifyPropertyChanged {
+    public partial class PlaneWaveTools : PluginBase, ISettings, INotifyPropertyChanged {
 
         [ImportingConstructor]
         public PlaneWaveTools() {
@@ -36,10 +36,6 @@ namespace DaleGhent.NINA.PlaneWaveTools {
             if (string.IsNullOrEmpty(Pwi3ClientId) || string.IsNullOrWhiteSpace(Pwi3ClientId)) {
                 Pwi3ClientId = Guid.NewGuid().ToString().Replace("-", string.Empty).Substring(0, 8);
             }
-
-            Pwi3ExePathDialogCommand = new RelayCommand(OpenPwi3ExePathDialog);
-            Pwi4ExePathDialogCommand = new RelayCommand(OpenPwi4ExePathDialog);
-            PwscExePathDialogCommand = new RelayCommand(OpenPwscExePathDialog);
         }
 
         public string Pwi3ExePath {
@@ -150,6 +146,7 @@ namespace DaleGhent.NINA.PlaneWaveTools {
             }
         }
 
+        [RelayCommand]
         private void OpenPwi3ExePathDialog(object obj) {
             Microsoft.Win32.OpenFileDialog dialog = new() {
                 FileName = string.Empty,
@@ -162,6 +159,7 @@ namespace DaleGhent.NINA.PlaneWaveTools {
             }
         }
 
+        [RelayCommand]
         private void OpenPwi4ExePathDialog(object obj) {
             Microsoft.Win32.OpenFileDialog dialog = new() {
                 FileName = string.Empty,
@@ -174,6 +172,7 @@ namespace DaleGhent.NINA.PlaneWaveTools {
             }
         }
 
+        [RelayCommand]
         private void OpenPwscExePathDialog(object obj) {
             Microsoft.Win32.OpenFileDialog dialog = new() {
                 FileName = string.Empty,
@@ -185,10 +184,6 @@ namespace DaleGhent.NINA.PlaneWaveTools {
                 PwscExePath = dialog.FileName;
             }
         }
-
-        public ICommand Pwi3ExePathDialogCommand { get; private set; }
-        public ICommand Pwi4ExePathDialogCommand { get; private set; }
-        public ICommand PwscExePathDialogCommand { get; private set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
