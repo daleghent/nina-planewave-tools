@@ -85,7 +85,14 @@ namespace DaleGhent.NINA.PlaneWaveTools.HeaterControl {
         }
 
         public override async Task Execute(IProgress<ApplicationStatus> progress, CancellationToken ct) {
-            string url = $"/heaters/set?role={(short)Heater}&power={HeaterPower}";
+            var heaterId = Heater switch {
+                HeaterType.M1Heater => "m1",
+                HeaterType.M2Heater => "m2",
+                HeaterType.M3Heater => "m3",
+                _ => throw new SequenceEntityFailedException($"Unknown heater type \"{HeaterByName}\""),
+            };
+
+            string url = $"/heaters/set?role={heaterId}&power={HeaterPower}";
 
             var response = await Utilities.HttpRequestAsync(Pwi4IpAddress, Pwi4Port, url, HttpMethod.Get, string.Empty, ct);
 
