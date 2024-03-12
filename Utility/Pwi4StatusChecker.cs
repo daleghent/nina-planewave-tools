@@ -15,7 +15,7 @@ namespace DaleGhent.NINA.PlaneWaveTools.Utility {
         private static readonly Task pollTask;
 
         static Pwi4StatusChecker() {
-            timer = new PeriodicTimer(TimeSpan.FromSeconds(1));
+            timer = new PeriodicTimer(TimeSpan.FromSeconds(5));
             pollCts = new CancellationTokenSource();
             pollTask = Task.Run(() => Poll(pollCts.Token));
         }
