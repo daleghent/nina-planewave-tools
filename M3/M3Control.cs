@@ -57,7 +57,7 @@ namespace DaleGhent.NINA.PlaneWaveTools.M3 {
 
         public override async Task Execute(IProgress<ApplicationStatus> progress, CancellationToken ct) {
             try {
-                short portStatus = GetM3PortStatus(ct);
+                short portStatus = await GetM3PortStatus(ct);
 
                 if (portStatus == 0) {
                     throw new SequenceEntityFailedException($"M3 was asked to move to port {M3Port} but it either doesn't exist or is already in motion!");
@@ -88,7 +88,7 @@ namespace DaleGhent.NINA.PlaneWaveTools.M3 {
                     }
 
                     await Task.Delay(TimeSpan.FromSeconds(waitSeconds), ct);
-                    portStatus = GetM3PortStatus(ct);
+                    portStatus = await GetM3PortStatus(ct);
 
                     i++;
                 } while (portStatus != M3Port);
@@ -121,37 +121,16 @@ namespace DaleGhent.NINA.PlaneWaveTools.M3 {
 
         public bool Validate() {
             var i = new List<string>();
-            var status = new Dictionary<string, string>();
 
-            Task.Run(async () => {
-                try {
-                    status = await Utilities.Pwi4GetStatus(Pwi4IpAddress, Pwi4Port, CancellationToken.None);
-                } catch (HttpRequestException) {
-                    i.Add("Could not communicate with PWI4");
-                } catch (Exception ex) {
-                    i.Add($"{ex.Message}");
+            var connected = Pwi4StatusChecker.IsConnected;
+            if (!connected) {
+                i.Add(Pwi4StatusChecker.NotConnectedReason);
+            } else {
+                if (!Pwi4StatusChecker.M3PortExists) {
+                    i.Add("M3 ports do not exist on this system");
                 }
-            }).Wait();
-
-            if (i.Count > 0) {
-                goto end;
             }
 
-            if (!status.ContainsKey("mount.is_connected")) {
-                i.Add("Unable to determine mount connection status");
-                goto end;
-            }
-
-            if (!Utilities.Pwi4BoolStringToBoolean(status["mount.is_connected"])) {
-                i.Add("PWI4 is not connected to the mount");
-                goto end;
-            }
-
-            if (!M3PortExists(status)) {
-                i.Add("M3 ports do not exist on this system");
-            }
-
-        end:
             if (i != Issues) {
                 Issues = i;
                 RaisePropertyChanged(nameof(Issues));
@@ -163,20 +142,14 @@ namespace DaleGhent.NINA.PlaneWaveTools.M3 {
         private string Pwi4IpAddress { get; set; }
         private ushort Pwi4Port { get; set; }
 
-        private short GetM3PortStatus(CancellationToken ct) {
+        private async Task<short> GetM3PortStatus(CancellationToken ct) {
             Dictionary<string, string> status = [];
 
-            Task.Run(async () => {
-                status = await Utilities.Pwi4GetStatus(Pwi4IpAddress, Pwi4Port, ct);
-            }, ct).Wait(ct);
+            status = await Task.Run(() => Utilities.Pwi4GetStatus(Pwi4IpAddress, Pwi4Port, ct), ct);
 
             return !short.TryParse(status["m3.port"], CultureInfo.InvariantCulture, out short port)
                 ? throw new SequenceEntityFailedException("Unable to determine M3 port status")
                 : port;
-        }
-
-        private static bool M3PortExists(Dictionary<string, string> status) {
-            return short.Parse(status["m3.exists"], CultureInfo.InvariantCulture) != 0;
         }
 
         private void SettingsChanged(object sender, PropertyChangedEventArgs e) {
