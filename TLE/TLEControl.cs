@@ -28,6 +28,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 namespace DaleGhent.NINA.PlaneWaveTools.TLE {
+
     [ExportMetadata("Name", "TLE Follow")]
     [ExportMetadata("Description", "Start following a satellite")]
     [ExportMetadata("Icon", "PlatesolveAndRotateSVG")]
@@ -35,6 +36,7 @@ namespace DaleGhent.NINA.PlaneWaveTools.TLE {
     [Export(typeof(ISequenceItem))]
     [JsonObject(MemberSerialization.OptIn)]
     public class TLEControl : SequenceItem, IValidatable, INotifyPropertyChanged {
+
         [ImportingConstructor]
         public TLEControl() {
             Pwi4IpAddress = Properties.Settings.Default.Pwi4IpAddress;
@@ -105,11 +107,7 @@ namespace DaleGhent.NINA.PlaneWaveTools.TLE {
                 _tracking = _timeout = DateTime.Now;
 
                 do {
-                    Dictionary<string, string> status = new();
-
-                    Task.Run(async () => {
-                        status = await Utilities.Pwi4GetStatus(Pwi4IpAddress, Pwi4Port, ct);
-                    }, ct).Wait(ct);
+                    Dictionary<string, string> status = await Task.Run(() => Utilities.Pwi4GetStatus(Pwi4IpAddress, Pwi4Port, ct), ct);
 
                     // Check altitude and stop below 5 degrees
                     _ = double.TryParse(status["mount.altitude_degs"], CultureInfo.InvariantCulture, out double altitude);
@@ -161,37 +159,16 @@ namespace DaleGhent.NINA.PlaneWaveTools.TLE {
 
         public bool Validate() {
             var i = new List<string>();
-            var status = new Dictionary<string, string>();
 
             if (string.IsNullOrEmpty(Line1) || string.IsNullOrEmpty(Line2)) {
                 i.Add($"TLE information is incomplete");
             }
 
-            Task.Run(async () => {
-                try {
-                    status = await Utilities.Pwi4GetStatus(Pwi4IpAddress, Pwi4Port, CancellationToken.None);
-                } catch (HttpRequestException) {
-                    i.Add("Could not communicate with PWI4");
-                } catch (Exception ex) {
-                    i.Add($"{ex.Message}");
-                }
-            }).Wait();
-
-            if (i.Count > 0) {
-                goto end;
+            var connected = Pwi4StatusChecker.IsConnected;
+            if (!connected) {
+                i.Add(Pwi4StatusChecker.NotConnectedReason);
             }
 
-            if (!status.ContainsKey("mount.is_connected")) {
-                i.Add("Unable to determine mount connection status");
-                goto end;
-            }
-
-            if (!Utilities.Pwi4BoolStringToBoolean(status["mount.is_connected"])) {
-                i.Add("PWI4 is not connected to the mount");
-                goto end;
-            }
-
-        end:
             if (i != Issues) {
                 Issues = i;
                 RaisePropertyChanged(nameof(Issues));

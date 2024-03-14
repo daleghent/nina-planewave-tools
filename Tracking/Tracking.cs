@@ -26,6 +26,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 namespace DaleGhent.NINA.PlaneWaveTools.Tracking {
+
     [ExportMetadata("Name", "Set Tracking")]
     [ExportMetadata("Description", "Start or stop tracking")]
     [ExportMetadata("Icon", "SpeedometerSVG")]
@@ -33,6 +34,7 @@ namespace DaleGhent.NINA.PlaneWaveTools.Tracking {
     [Export(typeof(ISequenceItem))]
     [JsonObject(MemberSerialization.OptIn)]
     public class Tracking : SequenceItem, IValidatable, INotifyPropertyChanged {
+
         [ImportingConstructor]
         public Tracking() {
             Pwi4IpAddress = Properties.Settings.Default.Pwi4IpAddress;
@@ -86,33 +88,12 @@ namespace DaleGhent.NINA.PlaneWaveTools.Tracking {
 
         public bool Validate() {
             var i = new List<string>();
-            var status = new Dictionary<string, string>();
 
-            Task.Run(async () => {
-                try {
-                    status = await Utilities.Pwi4GetStatus(Pwi4IpAddress, Pwi4Port, CancellationToken.None);
-                } catch (HttpRequestException) {
-                    i.Add("Could not communicate with PWI4");
-                } catch (Exception ex) {
-                    i.Add($"{ex.Message}");
-                }
-            }).Wait();
-
-            if (i.Count > 0) {
-                goto end;
+            var connected = Pwi4StatusChecker.IsConnected;
+            if (!connected) {
+                i.Add(Pwi4StatusChecker.NotConnectedReason);
             }
 
-            if (!status.ContainsKey("mount.is_connected")) {
-                i.Add("Unable to determine mount connection status");
-                goto end;
-            }
-
-            if (!Utilities.Pwi4BoolStringToBoolean(status["mount.is_connected"])) {
-                i.Add("PWI4 is not connected to the mount");
-                goto end;
-            }
-
-        end:
             if (i != Issues) {
                 Issues = i;
                 RaisePropertyChanged(nameof(Issues));

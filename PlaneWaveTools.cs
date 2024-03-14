@@ -11,6 +11,7 @@
 #endregion "copyright"
 
 using CommunityToolkit.Mvvm.Input;
+using DaleGhent.NINA.PlaneWaveTools.Utility;
 using NINA.Core.Utility;
 using NINA.Plugin;
 using NINA.Plugin.Interfaces;
@@ -19,6 +20,7 @@ using System;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 
 namespace DaleGhent.NINA.PlaneWaveTools {
 
@@ -189,6 +191,11 @@ namespace DaleGhent.NINA.PlaneWaveTools {
 
         protected void RaisePropertyChanged([CallerMemberName] string propertyName = null) {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public override Task Teardown() {
+            Pwi4StatusChecker.Shutdown();
+            return base.Teardown();
         }
     }
 }
