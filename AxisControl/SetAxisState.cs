@@ -82,7 +82,7 @@ namespace DaleGhent.NINA.PlaneWaveTools.AxisControl {
         public override async Task Execute(IProgress<ApplicationStatus> progress, CancellationToken ct) {
             string url;
 
-            if (!await Utilities.Pwi4CheckMountConnected(Pwi4IpAddress, Pwi4Port, ct) && ConnectMount) {
+            if (!Pwi4StatusChecker.IsConnected && ConnectMount) {
                 try {
                     url = "/mount/connect";
                     var response = await Utilities.HttpRequestAsync(Pwi4IpAddress, Pwi4Port, url, HttpMethod.Get, string.Empty, ct);
@@ -141,11 +141,12 @@ namespace DaleGhent.NINA.PlaneWaveTools.AxisControl {
         public bool Validate() {
             var i = new List<string>();
 
-            var connected = Pwi4StatusChecker.IsConnected;
-            if (!connected) {
+            if (!Pwi4StatusChecker.Pwi4IsRunning) {
                 i.Add(Pwi4StatusChecker.NotConnectedReason);
+                goto end;
             }
 
+        end:
             if (i != Issues) {
                 Issues = i;
                 RaisePropertyChanged(nameof(Issues));

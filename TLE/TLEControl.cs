@@ -160,15 +160,20 @@ namespace DaleGhent.NINA.PlaneWaveTools.TLE {
         public bool Validate() {
             var i = new List<string>();
 
+            if (!Pwi4StatusChecker.Pwi4IsRunning) {
+                i.Add(Pwi4StatusChecker.NotConnectedReason);
+                goto end;
+            }
+
             if (string.IsNullOrEmpty(Line1) || string.IsNullOrEmpty(Line2)) {
                 i.Add($"TLE information is incomplete");
             }
 
-            var connected = Pwi4StatusChecker.IsConnected;
-            if (!connected) {
+            if (!Pwi4StatusChecker.IsConnected) {
                 i.Add(Pwi4StatusChecker.NotConnectedReason);
             }
 
+        end:
             if (i != Issues) {
                 Issues = i;
                 RaisePropertyChanged(nameof(Issues));
@@ -176,9 +181,6 @@ namespace DaleGhent.NINA.PlaneWaveTools.TLE {
 
             return i.Count == 0;
         }
-
-        private string Pwi4IpAddress { get; set; }
-        private ushort Pwi4Port { get; set; }
 
         private async Task<bool> StopTracking(IProgress<ApplicationStatus> progress, CancellationToken ct) {
             // Send API call to stop tracking
@@ -189,6 +191,9 @@ namespace DaleGhent.NINA.PlaneWaveTools.TLE {
 
             return response.IsSuccessStatusCode;
         }
+
+        private string Pwi4IpAddress { get; set; }
+        private ushort Pwi4Port { get; set; }
 
         private void SettingsChanged(object sender, PropertyChangedEventArgs e) {
             switch (e.PropertyName) {

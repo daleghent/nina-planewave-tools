@@ -10,6 +10,7 @@
 
 #endregion "copyright"
 
+using DaleGhent.NINA.PlaneWaveTools.Enum;
 using DaleGhent.NINA.PlaneWaveTools.Utility;
 using Newtonsoft.Json;
 using NINA.Core.Model;
@@ -32,6 +33,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 namespace DaleGhent.NINA.PlaneWaveTools.ShutterControl {
+
     [ExportMetadata("Name", "Shutter Control")]
     [ExportMetadata("Description", "Controls the PlaneWave mirror shutter")]
     [ExportMetadata("Icon", "BahtinovSVG")]
@@ -114,7 +116,12 @@ namespace DaleGhent.NINA.PlaneWaveTools.ShutterControl {
             }
 
             do {
-                await Task.Delay(TimeSpan.FromSeconds(2), ct);
+                if (shutterStatus == ShutterStatusEnum.Errored) {
+                    progress?.Report(new ApplicationStatus { Status = string.Empty });
+                    throw new SequenceEntityFailedException("Shutter is in an errored state");
+                }
+
+                await Task.Delay(TimeSpan.FromSeconds(1), ct);
 
                 shutterStatus = await GetShutterStatus(ct);
                 progress?.Report(new ApplicationStatus { Status = $"Shutter status: {shutterStatus}" });

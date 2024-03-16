@@ -84,11 +84,16 @@ namespace DaleGhent.NINA.PlaneWaveTools.Fans {
         public bool Validate() {
             var i = new List<string>();
 
-            var connected = Pwi4StatusChecker.IsConnected;
-            if (!connected) {
+            if (!Pwi4StatusChecker.Pwi4IsRunning) {
+                i.Add(Pwi4StatusChecker.NotConnectedReason);
+                goto end;
+            }
+
+            if (!Pwi4StatusChecker.IsConnected) {
                 i.Add(Pwi4StatusChecker.NotConnectedReason);
             }
 
+        end:
             if (i != Issues) {
                 Issues = i;
                 RaisePropertyChanged(nameof(Issues));

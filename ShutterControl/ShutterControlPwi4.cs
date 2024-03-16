@@ -10,6 +10,7 @@
 
 #endregion "copyright"
 
+using DaleGhent.NINA.PlaneWaveTools.Enum;
 using DaleGhent.NINA.PlaneWaveTools.Utility;
 using Newtonsoft.Json;
 using NINA.Core.Model;
@@ -26,19 +27,20 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace DaleGhent.NINA.PlaneWaveTools.M3 {
+namespace DaleGhent.NINA.PlaneWaveTools.ShutterControl {
 
-    [ExportMetadata("Name", "M3 Control")]
-    [ExportMetadata("Description", "Switches Nasmyth port via PWI4")]
+    [ExportMetadata("Name", "Shutter Control (PWI4)")]
+    [ExportMetadata("Description", "Controls the PlaneWave mirror shutter via PWI4")]
     [ExportMetadata("Icon", "BahtinovSVG")]
     [ExportMetadata("Category", "PlaneWave Tools")]
     [Export(typeof(ISequenceItem))]
     [JsonObject(MemberSerialization.OptIn)]
-    public class M3Control : SequenceItem, IValidatable, INotifyPropertyChanged {
-        private short m3Port = 1;
+    public partial class ShutterControlPwi4 : SequenceItem, IValidatable, INotifyPropertyChanged {
+        private readonly Version minPwi4Version = Version.Parse("4.1.3");
+        private ShutterAction shutterAction = ShutterAction.Open;
 
         [ImportingConstructor]
-        public M3Control() {
+        public ShutterControlPwi4() {
             Pwi4IpAddress = Properties.Settings.Default.Pwi4IpAddress;
             Pwi4Port = Properties.Settings.Default.Pwi4Port;
 
@@ -46,44 +48,53 @@ namespace DaleGhent.NINA.PlaneWaveTools.M3 {
         }
 
         [JsonProperty]
-        public short M3Port {
-            get => m3Port;
+        public ShutterAction ShutterAction {
+            get => shutterAction;
             set {
-                m3Port = value;
+                shutterAction = value;
                 RaisePropertyChanged();
             }
         }
 
+        public string ShutterActionByName => ShutterAction.GetDescriptionAttr();
+
         public override async Task Execute(IProgress<ApplicationStatus> progress, CancellationToken ct) {
             int waitSeconds = 1;
-            int waitAttempts = 90;
+            int waitAttempts = 120;
             int i = 0;
 
             try {
-                var m3Postion = GetM3Position();
+                var shutterStatus = GetShutterStatus();
 
-                if (m3Postion == 0) {
-                    throw new SequenceEntityFailedException($"M3 was asked to move to port {M3Port} but it either doesn't exist or is already in motion!");
+                if (shutterStatus == ShutterStatusEnum.Errored) {
+                    throw new SequenceEntityFailedException("Shutter is in an errored state");
                 }
 
-                if (m3Postion == M3Port) {
-                    Logger.Info($"M3 port is already at position {M3Port}");
+                if (shutterStatus == (ShutterStatusEnum)shutterAction) {
+                    Logger.Info($"Shutter is already at position {shutterAction}");
                     return;
                 }
 
-                await SendM3Command(ct);
+                await SendShutterCommand(shutterAction, ct);
+                await Task.Delay(TimeSpan.FromSeconds(waitSeconds), ct);
+                shutterStatus = GetShutterStatus();
 
                 do {
                     if (i >= waitAttempts) {
-                        throw new SequenceEntityFailedException($"{Name} waited too long to set M3 port to {M3Port}. Verify that the M3 unit is operating correctly");
+                        throw new SequenceEntityFailedException($"{Name} waited too long to set shutter to {(ShutterStatusEnum)shutterAction}. Verify that the shutter is operating correctly");
                     }
 
-                    progress?.Report(new ApplicationStatus { Status = $"Moving M3 to port {M3Port}" });
+                    if (shutterStatus == ShutterStatusEnum.Errored) {
+                        throw new SequenceEntityFailedException("Shutter is in an errored state");
+                    }
+
+                    progress?.Report(new ApplicationStatus { Status = $"Shutter status: {shutterStatus}" });
+
                     await Task.Delay(TimeSpan.FromSeconds(waitSeconds), ct);
 
-                    m3Postion = GetM3Position();
-                    i++;
-                } while (m3Postion != M3Port && !ct.IsCancellationRequested);
+                    shutterStatus = GetShutterStatus();
+                    ++i;
+                } while (shutterStatus != (ShutterStatusEnum)shutterAction && !ct.IsCancellationRequested);
             } catch {
                 throw;
             } finally {
@@ -93,20 +104,18 @@ namespace DaleGhent.NINA.PlaneWaveTools.M3 {
             return;
         }
 
-        public static IList<short> M3Ports => ItemLists.M3Ports;
-
-        private M3Control(M3Control copyMe) : this() {
+        private ShutterControlPwi4(ShutterControlPwi4 copyMe) : this() {
             CopyMetaData(copyMe);
         }
 
         public override object Clone() {
-            return new M3Control(this) {
-                M3Port = M3Port,
+            return new ShutterControlPwi4(this) {
+                ShutterAction = ShutterAction,
             };
         }
 
         public override string ToString() {
-            return $"Category: {Category}, Item: {Name}, M3Port: {M3Port}";
+            return $"Category: {Category}, Item: {Name}, ShutterAction: {ShutterAction}";
         }
 
         public IList<string> Issues { get; set; } = new ObservableCollection<string>();
@@ -119,12 +128,18 @@ namespace DaleGhent.NINA.PlaneWaveTools.M3 {
                 goto end;
             }
 
-            if (!Pwi4StatusChecker.IsConnected) {
-                i.Add(Pwi4StatusChecker.NotConnectedReason);
-            } else {
-                if (!M3Present()) {
-                    i.Add("M3 ports do not exist on this system");
-                }
+            if (Pwi4StatusChecker.Pwi4Version < minPwi4Version) {
+                i.Add($"PWI4 version is too old for this function. Please update to at least {minPwi4Version}");
+                goto end;
+            }
+
+            if (!ShutterConnected()) {
+                i.Add("PWI4 is not connected to a shutter controller");
+                goto end;
+            }
+
+            if (GetShutterStatus() == ShutterStatusEnum.Errored) {
+                i.Add("Shutter is in an errored state. Possible hardware issue.");
             }
 
         end:
@@ -136,8 +151,10 @@ namespace DaleGhent.NINA.PlaneWaveTools.M3 {
             return i.Count == 0;
         }
 
-        private async Task SendM3Command(CancellationToken ct) {
-            string url = $"/m3/goto?port={M3Port}";
+        private async Task SendShutterCommand(ShutterAction shutterAction, CancellationToken ct) {
+            const string baseUrl = "/mirrorcover";
+            string url = shutterAction == ShutterAction.Open ? $"{baseUrl}/open" : $"{baseUrl}/close";
+
             var response = await Utilities.HttpRequestAsync(Pwi4IpAddress, Pwi4Port, url, HttpMethod.Get, string.Empty, ct);
 
             if (!response.IsSuccessStatusCode) {
@@ -145,12 +162,12 @@ namespace DaleGhent.NINA.PlaneWaveTools.M3 {
             }
         }
 
-        private static short GetM3Position() {
-            return Pwi4StatusChecker.GetShort("m3.port") ?? throw new SequenceEntityFailedException("Could not determine M3 port position");
+        private static ShutterStatusEnum GetShutterStatus() {
+            return (ShutterStatusEnum)Pwi4StatusChecker.GetShort("mirrorcover.overall_state");
         }
 
-        private static bool M3Present() {
-            return Pwi4StatusChecker.GetBool("m3.exists") ?? throw new SequenceEntityFailedException("Could not determine M3 presence");
+        private static bool ShutterConnected() {
+            return Pwi4StatusChecker.GetBool("mirrorcover.is_connected") ?? throw new SequenceEntityFailedException("Could not determine if shutter is connected");
         }
 
         private string Pwi4IpAddress { get; set; }

@@ -34,6 +34,7 @@ namespace DaleGhent.NINA.PlaneWaveTools.HeaterControl {
     [Export(typeof(ISequenceItem))]
     [JsonObject(MemberSerialization.OptIn)]
     public class HeaterControl : SequenceItem, IValidatable, INotifyPropertyChanged {
+        private readonly Version minPwi4Version = Version.Parse("4.1.0");
         private HeaterType heater = HeaterType.M1Heater;
         private short heaterPower = 0;
 
@@ -85,22 +86,7 @@ namespace DaleGhent.NINA.PlaneWaveTools.HeaterControl {
         }
 
         public override async Task Execute(IProgress<ApplicationStatus> progress, CancellationToken ct) {
-            var heaterId = Heater switch {
-                HeaterType.M1Heater => "m1",
-                HeaterType.M2Heater => "m2",
-                HeaterType.M3Heater => "m3",
-                _ => throw new SequenceEntityFailedException($"Unknown heater type \"{HeaterByName}\""),
-            };
-
-            string url = $"/heaters/set?role={heaterId}&power={HeaterPower}";
-
-            var response = await Utilities.HttpRequestAsync(Pwi4IpAddress, Pwi4Port, url, HttpMethod.Get, string.Empty, ct);
-
-            if (response.StatusCode != System.Net.HttpStatusCode.OK) {
-                var error = await response.Content.ReadAsStringAsync(ct);
-                throw new SequenceEntityFailedException($"Could not set heater \"{HeaterByName}\" to {HeaterPower}%: {error.Trim()}");
-            }
-
+            await SendHeaterCommand(ct);
             return;
         }
 
@@ -120,17 +106,44 @@ namespace DaleGhent.NINA.PlaneWaveTools.HeaterControl {
         public bool Validate() {
             var i = new List<string>();
 
+            if (!Pwi4StatusChecker.Pwi4IsRunning) {
+                i.Add(Pwi4StatusChecker.NotConnectedReason);
+                goto end;
+            }
+
+            if (Pwi4StatusChecker.Pwi4Version < minPwi4Version) {
+                i.Add($"PWI4 version is too old for this function. Please update to at least {minPwi4Version}");
+                goto end;
+            }
+
             var connected = Pwi4StatusChecker.IsConnected;
             if (!connected) {
                 i.Add(Pwi4StatusChecker.NotConnectedReason);
             }
 
+        end:
             if (i != Issues) {
                 Issues = i;
                 RaisePropertyChanged(nameof(Issues));
             }
 
             return i.Count == 0;
+        }
+
+        private async Task SendHeaterCommand(CancellationToken ct) {
+            var heaterId = Heater switch {
+                HeaterType.M1Heater => "m1",
+                HeaterType.M2Heater => "m2",
+                HeaterType.M3Heater => "m3",
+                _ => throw new SequenceEntityFailedException($"Unknown heater type \"{HeaterByName}\""),
+            };
+
+            string url = $"/heaters/set?role={heaterId}&power={HeaterPower}";
+            var response = await Utilities.HttpRequestAsync(Pwi4IpAddress, Pwi4Port, url, HttpMethod.Get, string.Empty, ct);
+
+            if (!response.IsSuccessStatusCode) {
+                throw new SequenceEntityFailedException($"PWI4 returned status {response.StatusCode} for {url}");
+            }
         }
 
         private string Pwi4IpAddress { get; set; }

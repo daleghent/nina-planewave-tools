@@ -113,7 +113,7 @@ namespace DaleGhent.NINA.PlaneWaveTools.Utility {
         }
 
         public static bool Pwi4BoolStringToBoolean(string pwi4BoolString) {
-            return pwi4BoolString.Equals("true", StringComparison.OrdinalIgnoreCase);
+            return pwi4BoolString.Equals("true", StringComparison.OrdinalIgnoreCase) || pwi4BoolString.Equals("1");
         }
 
         public static async Task<bool> TestTcpPort(string host, ushort port) {
