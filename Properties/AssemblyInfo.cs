@@ -18,8 +18,8 @@ using System.Runtime.InteropServices;
 
 // [MANDATORY] The assembly versioning
 //Should be incremented for each new release build of a plugin
-[assembly: AssemblyVersion("2.7.0.0")]
-[assembly: AssemblyFileVersion("2.7.0.0")]
+[assembly: AssemblyVersion("2.8.0.0")]
+[assembly: AssemblyFileVersion("2.8.0.0")]
 
 // [MANDATORY] The name of your plugin
 [assembly: AssemblyTitle("PlaneWave Tools")]
@@ -66,10 +66,9 @@ using System.Runtime.InteropServices;
 
 # Requirements #
 
-* PWI >= 4.1
-* PlaneWave Shutter Control >= 1.12.0
-
-Support for PWI 3.x is deprecated as of PlaneWave Tools 2.6.0 and the instructions that use PWI3 will be removed in a future version. System fan and heater control is available as of PWI 4.1.
+* PWI >= 4.1.3
+* Support for PWI 3.x is deprecated as of PlaneWave Tools 2.6.0 and the instructions that use PWI3 will be removed in a future version. System fan and heater control is available as of PWI 4.1.
+* Support for the standalone PlaneWave Shutter Control app is deprecated as of PlaneWave Tools 2.8.0 and the **Shutter Control** that use it will be removed in a future version. Shutter control was added in PWI 4.1.13.
 
 # Sequence Instructions #
 
@@ -78,16 +77,17 @@ Support for PWI 3.x is deprecated as of PlaneWave Tools 2.6.0 and the instructio
 * Fan Control (PWI4) - Turns the fans on or off
 * Heater Control (PWI4) - Sets the power level of individual heaters
 * M3 Control - Sets the postions of the M3 Nasmyth port mirror
-* Shutter Control - Controls CDK700 and PW1000 shutters via the PlaneWave Shutter Control app
+* Shutter Control (PWI4) - Controls CDK and PW1000 mirror shutters via PWI4
 * TLE Follow, Set Tracking - Programs the mount to follow a two-line element ephemeris definition and start tracking along it
 
 ## Undergoing Deprecation ##
 
-The following PWI3-related instructions are considered deprecated and may be removed in a future version of this plugin.
+The following instructions are considered deprecated and may be removed in a future version of this plugin.
 
 * Start PWI3, Stop PWI3 - Starts and stops the PWI3.exe application
 * DeltaT Control (PWI3) - Sets the per-heater operating modes of the Delta T heater controller
 * Fan Control (PWI3) - Turns the OTA fans on or off
+* Shutter Control - Controls CDK700 and PW1000 shutters via the PlaneWave Shutter Control app
 
 # Getting help #
 
