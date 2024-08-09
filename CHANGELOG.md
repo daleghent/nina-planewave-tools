@@ -1,5 +1,8 @@
 ﻿# PlaneWave Tools
 
+## 2.8.1.0 - 2024-08-09
+* Fixed a bug concerning PWI4 version parsing
+
 ## 2.8.0.0 - 2024-03-16
 * Added the **Shutter Control (PWI4)** instruction to control CDK and PW1000 mirror shutters via PWI4. PWI4 version 4.1.3 added support for controlling shutters. This functionality replaces the separate *PlaneWave Shutter Control* app.
 * Internal functions that query PWI4's status API have been made more efficient through the use of caching. Contributed by Stefan Berg.
