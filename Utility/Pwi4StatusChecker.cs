@@ -70,9 +70,17 @@ namespace DaleGhent.NINA.PlaneWaveTools.Utility {
                         NotConnectedReason = "Unable to determine mount connection status";
                     }
 
+                    // Get the PWI4 version
                     try {
-                        if (Status.TryGetValue("pwi4.version", out var pwi4Version)) {
+                        if (Status.TryGetValue("pwi4.version_field[0]", out var pwi4VerMajor) &&
+                            Status.TryGetValue("pwi4.version_field[1]", out var pwi4VerMinor) &&
+                            Status.TryGetValue("pwi4.version_field[2]", out var pwi4VerPatch) &&
+                            Status.TryGetValue("pwi4.version_field[3]", out var pwi4VerBuild)) {
+                            Pwi4Version = Version.Parse($"{pwi4VerMajor}.{pwi4VerMinor}.{pwi4VerPatch}.{pwi4VerBuild}");
+                        } else if (Status.TryGetValue("pwi4.version", out var pwi4Version)) {
                             Pwi4Version = Version.Parse(pwi4Version);
+                        } else {
+                            Pwi4Version = Version.Parse("0.0.0.0");
                         }
                     } catch { }
                 } catch (HttpRequestException) {
