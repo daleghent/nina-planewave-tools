@@ -1,5 +1,8 @@
 ﻿# PlaneWave Tools
 
+## 2.9.0.0 - 2024-08-17
+* Added **Load Model** instruction. This loads a specified PointXP model file into PWI4 to use as the active mount model.
+
 ## 2.8.1.0 - 2024-08-09
 * Fixed a bug concerning PWI4 version parsing
 
