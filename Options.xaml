@@ -13,151 +13,8 @@
     <DataTemplate x:Key="PlaneWave Tools_Options">
         <TabControl TabStripPlacement="Top">
 
-            <!--
-            <TabItem Header="DeltaT Settings" Name="DeltaT">
-                <StackPanel Orientation="Vertical" Margin="0,10,0,0">
-
-                    <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
-                        <TextBlock
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Right"
-                            Width="175">
-                            <TextBlock.Text>Default primary power level</TextBlock.Text>
-                            <TextBlock.ToolTip>The default power level for the primary backplate heater</TextBlock.ToolTip>
-                        </TextBlock>
-                        <ninactrl:UnitTextBox
-                            Margin="5,0,0,0"
-                            Width="50"
-                            VerticalAlignment="Center"
-                            VerticalContentAlignment="Center"
-                            Unit="%">
-                            <TextBox.Text>
-                                <Binding Path="DeltaTDefaultPrimaryPowerLevel" />
-                            </TextBox.Text>
-                        </ninactrl:UnitTextBox>
-                    </StackPanel>
-
-                    <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
-                        <TextBlock
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Right"
-                            Width="175">
-                            <TextBlock.Text>Default secondary power level</TextBlock.Text>
-                            <TextBlock.ToolTip>The default power level for the secondary mirror heater</TextBlock.ToolTip>
-                        </TextBlock>
-                        <ninactrl:UnitTextBox
-                            Margin="5,0,0,0"
-                            Width="50"
-                            VerticalAlignment="Center"
-                            VerticalContentAlignment="Center"
-                            Unit="%">
-                            <TextBox.Text>
-                                <Binding Path="DeltaTDefaultSecondaryPowerLevel" />
-                            </TextBox.Text>
-                        </ninactrl:UnitTextBox>
-                    </StackPanel>
-                </StackPanel>
-            </TabItem>
-            -->
-
             <TabItem Name="Global" Header="Global Settings">
                 <StackPanel Margin="0,10,0,0" Orientation="Vertical">
-
-                    <StackPanel Margin="0,0,0,5" Orientation="Horizontal">
-                        <TextBlock
-                            Width="110"
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Center">
-                            <TextBlock.Text>Client ID</TextBlock.Text>
-                            <TextBlock.ToolTip>Plugin client ID</TextBlock.ToolTip>
-                        </TextBlock>
-                        <TextBox
-                            Width="75"
-                            Margin="5,0,0,0"
-                            VerticalAlignment="Center"
-                            VerticalContentAlignment="Center">
-                            <TextBox.Text>
-                                <Binding Path="Pwi3ClientId" />
-                            </TextBox.Text>
-                        </TextBox>
-                    </StackPanel>
-
-                    <GroupBox Header="PWI3">
-                        <StackPanel Margin="0,0,0,5" Orientation="Vertical">
-                            <StackPanel Margin="0,0,0,5" Orientation="Horizontal">
-                                <TextBlock
-                                    Width="110"
-                                    HorizontalAlignment="Right"
-                                    VerticalAlignment="Center">
-                                    <TextBlock.Text>PWI3 host</TextBlock.Text>
-                                    <TextBlock.ToolTip>PWI3 hostname or IP</TextBlock.ToolTip>
-                                </TextBlock>
-                                <TextBox
-                                    Width="400"
-                                    Margin="5,0,0,0"
-                                    VerticalAlignment="Center"
-                                    VerticalContentAlignment="Center">
-                                    <TextBox.Text>
-                                        <Binding Path="Pwi3IpAddress" />
-                                    </TextBox.Text>
-                                </TextBox>
-                            </StackPanel>
-
-                            <StackPanel Margin="0,0,0,5" Orientation="Horizontal">
-                                <TextBlock
-                                    Width="110"
-                                    HorizontalAlignment="Right"
-                                    VerticalAlignment="Center">
-                                    <TextBlock.Text>PWI3 port</TextBlock.Text>
-                                    <TextBlock.ToolTip>PWI3 port</TextBlock.ToolTip>
-                                </TextBlock>
-                                <TextBox
-                                    Width="75"
-                                    Margin="5,0,0,0"
-                                    VerticalAlignment="Center"
-                                    VerticalContentAlignment="Center">
-                                    <TextBox.Text>
-                                        <Binding Path="Pwi3Port" />
-                                    </TextBox.Text>
-                                </TextBox>
-                            </StackPanel>
-
-                            <StackPanel Margin="0,0,0,5" Orientation="Horizontal">
-                                <TextBlock Width="110" VerticalAlignment="Center">
-                                    <TextBlock.Text>PWI3 location</TextBlock.Text>
-                                    <TextBlock.ToolTip>The location of PWI3.exe if it is somewhere other than its default location</TextBlock.ToolTip>
-                                </TextBlock>
-
-                                <TextBox
-                                    Width="500"
-                                    Margin="5,0,0,0"
-                                    VerticalAlignment="Center"
-                                    VerticalContentAlignment="Center">
-                                    <TextBox.Text>
-                                        <Binding Path="Pwi3ExePath" UpdateSourceTrigger="LostFocus">
-                                            <Binding.ValidationRules>
-                                                <rules:FileExistsRule />
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </TextBox.Text>
-                                </TextBox>
-
-                                <Button
-                                    Width="30"
-                                    Height="30"
-                                    Margin="5,0,0,0"
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Center"
-                                    Command="{Binding OpenPwi3ExePathDialogCommand}">
-                                    <Path
-                                        Margin="4,17,4,4"
-                                        Data="{StaticResource DotsSVG}"
-                                        Fill="{StaticResource ButtonForegroundBrush}"
-                                        Stretch="Uniform" />
-                                </Button>
-                            </StackPanel>
-                        </StackPanel>
-                    </GroupBox>
 
                     <GroupBox Header="PWI4">
                         <StackPanel Margin="0,0,0,5" Orientation="Vertical">
@@ -226,6 +83,113 @@
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
                                     Command="{Binding OpenPwi4ExePathDialogCommand}">
+                                    <Path
+                                        Margin="4,17,4,4"
+                                        Data="{StaticResource DotsSVG}"
+                                        Fill="{StaticResource ButtonForegroundBrush}"
+                                        Stretch="Uniform" />
+                                </Button>
+                            </StackPanel>
+                        </StackPanel>
+                    </GroupBox>
+
+                    <StackPanel>
+                        <TextBlock
+                            Margin="0,10,0,10"
+                            TextWrapping="Wrap"
+                            FontStyle="Italic">
+                            <TextBlock.Text>
+                                The PWI3 and Shutter Control applications are deprecated in favor of using PWI 4.1.0 and newer. Support for these apps will be removed in a future release when full feature partiy is achieved in PWI4.
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </StackPanel>
+
+                    <GroupBox Header="PWI3">
+                        <StackPanel Margin="0,0,0,5" Orientation="Vertical">
+                            <StackPanel Margin="0,0,0,5" Orientation="Horizontal">
+                                <TextBlock
+                                    Width="110"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center">
+                                    <TextBlock.Text>PWI3 host</TextBlock.Text>
+                                    <TextBlock.ToolTip>PWI3 hostname or IP</TextBlock.ToolTip>
+                                </TextBlock>
+                                <TextBox
+                                    Width="400"
+                                    Margin="5,0,0,0"
+                                    VerticalAlignment="Center"
+                                    VerticalContentAlignment="Center">
+                                    <TextBox.Text>
+                                        <Binding Path="Pwi3IpAddress" />
+                                    </TextBox.Text>
+                                </TextBox>
+                            </StackPanel>
+
+                            <StackPanel Margin="0,0,0,5" Orientation="Horizontal">
+                                <TextBlock
+                                    Width="110"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center">
+                                    <TextBlock.Text>PWI3 port</TextBlock.Text>
+                                    <TextBlock.ToolTip>PWI3 port</TextBlock.ToolTip>
+                                </TextBlock>
+                                <TextBox
+                                    Width="75"
+                                    Margin="5,0,0,0"
+                                    VerticalAlignment="Center"
+                                    VerticalContentAlignment="Center">
+                                    <TextBox.Text>
+                                        <Binding Path="Pwi3Port" />
+                                    </TextBox.Text>
+                                </TextBox>
+                            </StackPanel>
+
+                            <StackPanel Margin="0,0,0,5" Orientation="Horizontal">
+                                <TextBlock
+                                    Width="110"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center">
+                                    <TextBlock.Text>Client ID</TextBlock.Text>
+                                    <TextBlock.ToolTip>Plugin client ID</TextBlock.ToolTip>
+                                </TextBlock>
+                                <TextBox
+                                    Width="75"
+                                    Margin="5,0,0,0"
+                                    VerticalAlignment="Center"
+                                    VerticalContentAlignment="Center">
+                                    <TextBox.Text>
+                                        <Binding Path="Pwi3ClientId" />
+                                    </TextBox.Text>
+                                </TextBox>
+                            </StackPanel>
+
+                            <StackPanel Margin="0,0,0,5" Orientation="Horizontal">
+                                <TextBlock Width="110" VerticalAlignment="Center">
+                                    <TextBlock.Text>PWI3 location</TextBlock.Text>
+                                    <TextBlock.ToolTip>The location of PWI3.exe if it is somewhere other than its default location</TextBlock.ToolTip>
+                                </TextBlock>
+
+                                <TextBox
+                                    Width="500"
+                                    Margin="5,0,0,0"
+                                    VerticalAlignment="Center"
+                                    VerticalContentAlignment="Center">
+                                    <TextBox.Text>
+                                        <Binding Path="Pwi3ExePath" UpdateSourceTrigger="LostFocus">
+                                            <Binding.ValidationRules>
+                                                <rules:FileExistsRule />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+
+                                <Button
+                                    Width="30"
+                                    Height="30"
+                                    Margin="5,0,0,0"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Command="{Binding OpenPwi3ExePathDialogCommand}">
                                     <Path
                                         Margin="4,17,4,4"
                                         Data="{StaticResource DotsSVG}"
