@@ -1,5 +1,8 @@
 ﻿# PlaneWave Tools
 
+## 2.9.1.0 - 2024-12-27
+* Removed mount connection check in Fan Control (PWI4) and Heater Control instructions. This permits use of these instructions with OTAs that aren't on a PlaneWavemont, and there is no clear connection status for the EFA and Delta-T/Series5 controllers anyhow.
+
 ## 2.9.0.0 - 2024-08-17
 * Added **Load Model** instruction. This loads a specified PointXP model file into PWI4 to use as the active mount model.
 
