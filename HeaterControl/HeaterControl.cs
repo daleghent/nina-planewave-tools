@@ -116,11 +116,6 @@ namespace DaleGhent.NINA.PlaneWaveTools.HeaterControl {
                 goto end;
             }
 
-            var connected = Pwi4StatusChecker.IsConnected;
-            if (!connected) {
-                i.Add(Pwi4StatusChecker.NotConnectedReason);
-            }
-
         end:
             if (i != Issues) {
                 Issues = i;

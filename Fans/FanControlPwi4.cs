@@ -89,10 +89,6 @@ namespace DaleGhent.NINA.PlaneWaveTools.Fans {
                 goto end;
             }
 
-            if (!Pwi4StatusChecker.IsConnected) {
-                i.Add(Pwi4StatusChecker.NotConnectedReason);
-            }
-
         end:
             if (i != Issues) {
                 Issues = i;
