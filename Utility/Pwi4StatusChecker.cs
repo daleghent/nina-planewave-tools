@@ -33,6 +33,12 @@ namespace DaleGhent.NINA.PlaneWaveTools.Utility {
             pollTask = Task.Run(() => Poll(pollCts.Token));
         }
 
+        public static void Initialize() {
+            // This method intentionally does nothing.
+            // Its purpose is to force the static constructor to run,
+            // which starts the background polling task.
+        }
+
         // Common items that any instruction might ask about
 
         public static Version Pwi4Version { get; private set; } = null;
@@ -43,7 +49,7 @@ namespace DaleGhent.NINA.PlaneWaveTools.Utility {
         private static Dictionary<string, string> Status { get; set; } = null;
 
         private static async Task Poll(CancellationToken token) {
-            while (await timer.WaitForNextTickAsync(token) && !token.IsCancellationRequested) {
+            do {
                 try {
                     var pwi4 = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(Settings.Default.Pwi4ExePath));
 
@@ -72,16 +78,13 @@ namespace DaleGhent.NINA.PlaneWaveTools.Utility {
 
                     // Get the PWI4 version
                     try {
-                        if (Status.TryGetValue("pwi4.version_field[0]", out var pwi4VerMajor) &&
+                        Pwi4Version =
+                            Status.TryGetValue("pwi4.version_field[0]", out var pwi4VerMajor) &&
                             Status.TryGetValue("pwi4.version_field[1]", out var pwi4VerMinor) &&
                             Status.TryGetValue("pwi4.version_field[2]", out var pwi4VerPatch) &&
-                            Status.TryGetValue("pwi4.version_field[3]", out var pwi4VerBuild)) {
-                            Pwi4Version = Version.Parse($"{pwi4VerMajor}.{pwi4VerMinor}.{pwi4VerPatch}.{pwi4VerBuild}");
-                        } else if (Status.TryGetValue("pwi4.version", out var pwi4Version)) {
-                            Pwi4Version = Version.Parse(pwi4Version);
-                        } else {
-                            Pwi4Version = Version.Parse("0.0.0.0");
-                        }
+                            Status.TryGetValue("pwi4.version_field[3]", out var pwi4VerBuild)
+                            ? Version.Parse($"{pwi4VerMajor}.{pwi4VerMinor}.{pwi4VerPatch}.{pwi4VerBuild}")
+                            : Version.Parse("0.0.0.0");
                     } catch { }
                 } catch (HttpRequestException) {
                     NotConnectedReason = "Could not communicate with PWI4";
@@ -92,7 +95,7 @@ namespace DaleGhent.NINA.PlaneWaveTools.Utility {
                     IsConnected = false;
                     Pwi4Version = null;
                 }
-            }
+            } while (await timer.WaitForNextTickAsync(token) && !token.IsCancellationRequested);
         }
 
         public static bool? GetBool(string key) {

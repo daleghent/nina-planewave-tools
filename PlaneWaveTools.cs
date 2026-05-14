@@ -38,6 +38,9 @@ namespace DaleGhent.NINA.PlaneWaveTools {
             if (string.IsNullOrEmpty(Pwi3ClientId) || string.IsNullOrWhiteSpace(Pwi3ClientId)) {
                 Pwi3ClientId = Guid.NewGuid().ToString().Replace("-", string.Empty).Substring(0, 8);
             }
+
+            // Force PWI4 status checker polling to start immediately
+            Pwi4StatusChecker.Initialize();
         }
 
         public string Pwi3ExePath {
