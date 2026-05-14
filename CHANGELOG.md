@@ -1,5 +1,8 @@
 ﻿# PlaneWave Tools
 
+## 2.9.2.0 - 2026-05-14
+* Adjusted initialization of the PWI4 status check loop to allow for cases when PWI4 is not already running at the time of plugin startup.
+
 ## 2.9.1.0 - 2024-12-27
 * Removed mount connection check in Fan Control (PWI4) and Heater Control instructions. This permits use of these instructions with OTAs that aren't on a PlaneWavemont, and there is no clear connection status for the EFA and Delta-T/Series5 controllers anyhow.
 
